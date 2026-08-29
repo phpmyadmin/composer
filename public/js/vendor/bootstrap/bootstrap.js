@@ -2133,14 +2133,13 @@ function preventOverflow(_ref) {
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
+/* empty/unused harmony star reexport */
+/* empty/unused harmony star reexport */
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createPopper: function() { return /* binding */ createPopper; },
-/* harmony export */   defaultModifiers: function() { return /* binding */ defaultModifiers; },
-/* harmony export */   detectOverflow: function() { return /* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_1__["default"]; },
-/* harmony export */   popperGenerator: function() { return /* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_0__.popperGenerator; }
+/* harmony export */   defaultModifiers: function() { return /* binding */ defaultModifiers; }
 /* harmony export */ });
 /* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@popperjs/core/lib/createPopper.js");
-/* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
 /* harmony import */ var _modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/eventListeners.js");
 /* harmony import */ var _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/popperOffsets.js");
 /* harmony import */ var _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/computeStyles.js");
@@ -2163,24 +2162,15 @@ var createPopper = /*#__PURE__*/(0,_createPopper_js__WEBPACK_IMPORTED_MODULE_0__
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
+/* empty/unused harmony star reexport */
+/* empty/unused harmony star reexport */
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   applyStyles: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.applyStyles; },
-/* harmony export */   arrow: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.arrow; },
-/* harmony export */   computeStyles: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.computeStyles; },
 /* harmony export */   createPopper: function() { return /* binding */ createPopper; },
-/* harmony export */   createPopperLite: function() { return /* reexport safe */ _popper_lite_js__WEBPACK_IMPORTED_MODULE_11__.createPopper; },
-/* harmony export */   defaultModifiers: function() { return /* binding */ defaultModifiers; },
-/* harmony export */   detectOverflow: function() { return /* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_1__["default"]; },
-/* harmony export */   eventListeners: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.eventListeners; },
-/* harmony export */   flip: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.flip; },
-/* harmony export */   hide: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.hide; },
-/* harmony export */   offset: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.offset; },
-/* harmony export */   popperGenerator: function() { return /* reexport safe */ _createPopper_js__WEBPACK_IMPORTED_MODULE_0__.popperGenerator; },
-/* harmony export */   popperOffsets: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.popperOffsets; },
-/* harmony export */   preventOverflow: function() { return /* reexport safe */ _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__.preventOverflow; }
+/* harmony export */   defaultModifiers: function() { return /* binding */ defaultModifiers; }
 /* harmony export */ });
+/* empty/unused harmony star reexport */
+/* empty/unused harmony star reexport */
 /* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@popperjs/core/lib/createPopper.js");
-/* harmony import */ var _createPopper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/@popperjs/core/lib/utils/detectOverflow.js");
 /* harmony import */ var _modifiers_eventListeners_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/eventListeners.js");
 /* harmony import */ var _modifiers_popperOffsets_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/popperOffsets.js");
 /* harmony import */ var _modifiers_computeStyles_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/computeStyles.js");
@@ -2190,8 +2180,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modifiers_preventOverflow_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/preventOverflow.js");
 /* harmony import */ var _modifiers_arrow_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/arrow.js");
 /* harmony import */ var _modifiers_hide_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/hide.js");
-/* harmony import */ var _popper_lite_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("./node_modules/@popperjs/core/lib/popper-lite.js");
-/* harmony import */ var _modifiers_index_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("./node_modules/@popperjs/core/lib/modifiers/index.js");
 
 
 

@@ -100,7 +100,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strFormEmpty, false, 'error');
       return false;
     }
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyingDatabase, false);
+    ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyingDatabase, false);
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
@@ -188,7 +188,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/database/operations.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

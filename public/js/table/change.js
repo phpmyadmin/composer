@@ -787,7 +787,7 @@ function addNewContinueInsertionFields(event) {
     }
   }
   // Add all the required datepickers back
-  (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDateTimePicker)();
+  ;(0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.addDateTimePicker)();
 }
 function changeValueFieldType(elem, searchIndex) {
   const fieldsValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#fieldID_' + searchIndex);
@@ -823,7 +823,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/table/change.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

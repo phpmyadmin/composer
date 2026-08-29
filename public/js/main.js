@@ -152,7 +152,7 @@ function teardownFunctions() {
  */
 function onloadFunctions() {
   return function () {
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadIdleEvent)();
+    ;(0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadIdleEvent)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'input:checkbox.checkall', (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.getCheckAllCheckboxEventHandler)());
     (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.addDateTimePicker)();
     /**
@@ -161,7 +161,7 @@ function onloadFunctions() {
     if ((0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.userAgent)().match(/(iphone|ipod|ipad)/i)) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[type=text]').attr('autocapitalize', 'off').attr('autocorrect', 'off');
     }
-    (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadSqlQueryEditEvents)();
+    ;(0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadSqlQueryEditEvents)();
     (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadCreateTableEvents)();
     (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadChangePasswordEvents)();
     (0,_functions_ts__WEBPACK_IMPORTED_MODULE_1__.onloadEnumSetEditorMessage)();
@@ -742,7 +742,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/main.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

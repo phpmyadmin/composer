@@ -359,7 +359,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
           for (let $row = $firstrow; $row.length > 0; $row = $row.next()) {
             $row.find('td').eq(1).text($row.index() + 1).end().removeClass('odd even').addClass($row.index() % 2 === 0 ? 'odd' : 'even');
           }
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+          ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
         }
       });
     });
@@ -433,7 +433,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/table/structure.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

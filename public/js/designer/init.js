@@ -3052,7 +3052,7 @@ const addObject = function (dbName, tableName, colName, dbTableNameUrl) {
     sum = sum + 1;
     // make orderby
   }
-  (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strObjectsCreated, sum));
+  ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)((0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_10__.sprintf)(window.Messages.strObjectsCreated, sum));
   // output sum new objects created
   const existingDiv = document.getElementById('ab');
   existingDiv.innerHTML = _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.display(init, _history_ts__WEBPACK_IMPORTED_MODULE_7__.DesignerHistory.historyArray.length);
@@ -3431,7 +3431,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/designer/init.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

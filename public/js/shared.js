@@ -113,7 +113,7 @@ const ajaxShowMessage = function () {
   if (msg !== window.Messages.strLoading) {
     $retval.css('background-image', 'none');
   }
-  (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_2__["default"])($retval);
+  ;(0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_2__["default"])($retval);
   return $retval;
 };
 /**
@@ -500,7 +500,7 @@ const AJAX = {
     if (typeof data === 'undefined' || data === null) {
       return;
     }
-    (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)(AJAX.$msgbox);
+    ;(0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxRemoveMessage)(AJAX.$msgbox);
     _navigation_ts__WEBPACK_IMPORTED_MODULE_1__.Navigation.update(_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.set('token', data.new_token));
     AJAX.scriptHandler.load([]);
     if (data.displayMessage) {
@@ -543,7 +543,7 @@ const AJAX = {
         }, 'slow');
       }
     }
-    (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(msg, false);
+    ;(0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(msg, false);
     // bind for php error reporting forms (popup)
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_ignore_errors_popup').on('click', function () {
       (0,_functions_ignorePhpErrors_ts__WEBPACK_IMPORTED_MODULE_7__.ignorePhpErrors)();
@@ -709,7 +709,7 @@ const AJAX = {
             }, 'slow');
           }
         }
-        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(msg, false);
+        ;(0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(msg, false);
         // bind for php error reporting forms (popup)
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_ignore_errors_popup').on('click', function () {
           (0,_functions_ignorePhpErrors_ts__WEBPACK_IMPORTED_MODULE_7__.ignorePhpErrors)();
@@ -1005,7 +1005,7 @@ const AJAX = {
         if (state === 'rejected' || state === 'timeout') {
           details += '<div>' + (0,_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(window.Messages.strErrorConnection) + '</div>';
         }
-        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + details, false, 'error');
+        ;(0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strErrorProcessingRequest + details, false, 'error');
         AJAX.active = false;
         AJAX.xhr = null;
       }
@@ -3584,7 +3584,7 @@ function onloadCreateTableEvents() {
       if (!checkReservedWordColumns($form)) {
         return;
       }
-      (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
+      ;(0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       // User wants to submit the form
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
         if (typeof data === 'undefined' || data.success !== true) {
@@ -4321,7 +4321,7 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
         if (callbackFailure) {
           callbackFailure();
         }
-        (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($error, false);
+        ;(0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)($error, false);
       }
     }); // end $.post()
   });
@@ -4332,7 +4332,7 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
       return;
     }
-    (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
+    ;(0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
     // Show dialog if the request was successful
     modal.modal('show');
     // FIXME data may be undefiend
@@ -4352,7 +4352,7 @@ function indexRenameDialog(url, title, callbackSuccess) {
   indexDialogModal('index.php?route=/table/indexes/rename', url, title, callbackSuccess, callbackFailure);
 }
 function showIndexEditDialog($outer) {
-  (0,_indexes_checkIndexType_ts__WEBPACK_IMPORTED_MODULE_11__["default"])();
+  ;(0,_indexes_checkIndexType_ts__WEBPACK_IMPORTED_MODULE_11__["default"])();
   (0,_indexes_checkIndexName_ts__WEBPACK_IMPORTED_MODULE_12__["default"])('index_frm');
   const $indexColumns = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_columns');
   $indexColumns.find('tbody').sortable({
@@ -4720,7 +4720,7 @@ function onloadCodeMirrorEditor() {
       $elm.trigger('focus').on('blur', updateQueryParameters);
     }
   }
-  (0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('body'));
+  ;(0,_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('body'));
 }
 function teardownCodeMirrorEditor() {
   if (!window.codeMirrorEditor) {
@@ -5118,7 +5118,7 @@ function getPostData() {
   }
   return dataPost;
 }
-(jquery__WEBPACK_IMPORTED_MODULE_0___default().fn).confirm = confirmDialog;
+;(jquery__WEBPACK_IMPORTED_MODULE_0___default().fn).confirm = confirmDialog;
 (jquery__WEBPACK_IMPORTED_MODULE_0___default().fn).sortTable = sortTable;
 (jquery__WEBPACK_IMPORTED_MODULE_0___default().fn).getPostData = getPostData;
 window.pmaConfirmLink = confirmLink;
@@ -7354,7 +7354,7 @@ const ResizeHandler = function () {
     if (width === 0 && panelWidth === 0) {
       panelWidth = 240;
     }
-    (0,_navigation_updateNavigationWidthConfig_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(panelWidth);
+    ;(0,_navigation_updateNavigationWidthConfig_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(panelWidth);
     event.data.resize_handler.setWidth(panelWidth);
     event.data.resize_handler.panelWidth = width;
   };

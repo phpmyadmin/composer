@@ -312,7 +312,7 @@ function drawChart() {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#saveChart').attr('href', currentChart.toBase64Image());
     }
   } catch (err) {
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(err.message, false);
+    ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(err.message, false);
   }
 }
 function getSelectedSeries() {
@@ -536,7 +536,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/table/chart.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

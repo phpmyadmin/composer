@@ -48,7 +48,7 @@ function exportPrivilegesModalHandler(data, msgbox) {
     });
     return;
   }
-  (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
+  ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
 }
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
@@ -121,7 +121,7 @@ const AccountLocking = {
         button.title = window.Messages.strUnlockAccount;
         button.dataset.isLocked = 'true';
       }
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
     });
   }
 };
@@ -224,7 +224,7 @@ const RevokeUser = {
           $dropUsersDbCheckbox.prop('checked', false);
         }
       }
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strRemovingSelectedUsers);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strRemovingSelectedUsers);
       const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
@@ -512,7 +512,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/server/privileges.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

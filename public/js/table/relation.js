@@ -108,7 +108,7 @@ const getDropdownValues = function ($dropdown) {
     data: params,
     dataType: 'json',
     success: function (data) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
       if (typeof data !== 'undefined' && data.success) {
         // if the changed dropdown is a database selector
         if (foreignTable === null) {
@@ -227,7 +227,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/table/relation.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

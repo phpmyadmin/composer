@@ -140,7 +140,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
       values.displayAllColumns = true;
     }
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($searchForm.attr('action'), values, function (data) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
       if (typeof data !== 'undefined' && data.success === true) {
         if (typeof data.sql_query !== 'undefined') {
           // zero rows
@@ -165,7 +165,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
       } else {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').html(data.error);
       }
-      (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter'));
+      ;(0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_5__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter'));
     }); // end $.post()
   });
   // Following section is related to the 'function based search' for geometry data types.
@@ -314,7 +314,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/table/select.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

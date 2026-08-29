@@ -185,7 +185,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   // Timepicker is loaded on demand so we need to initialize
   // datetime fields from the 'load log' dialog
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#logAnalyseDialog').find('.datetimefield').each(function () {
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+    ;(0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.addDatepicker)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
   });
   /** ** Monitor charting implementation ****/
   /* Saves the previous ajax response for differential values */
@@ -2051,7 +2051,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/server/status/monitor.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

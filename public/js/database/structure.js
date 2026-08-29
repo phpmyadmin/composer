@@ -84,7 +84,7 @@ function fetchRealRowCount($target) {
           $target.parent().text(response.real_row_count);
         }
         // Adjust the 'Sum' displayed at the bottom.
-        (0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_9__["default"])();
+        ;(0,_modules_functions_adjustTotals_ts__WEBPACK_IMPORTED_MODULE_9__["default"])();
       } else {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strErrorRealRowCount);
       }
@@ -300,7 +300,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/database/structure.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

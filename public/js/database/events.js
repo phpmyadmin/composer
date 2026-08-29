@@ -108,13 +108,13 @@ const DatabaseEvents = {
         'ajax_request': true
       }, showExport);
     }
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+    ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
     function showExport(data) {
       if (data.success !== true) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
         return;
       }
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
       const eventsExportTextarea = '<textarea id="eventsExportTextarea" cols="40" rows="15" class="form-control" aria-label="' + window.Messages.strEvent + '"></textarea>';
       const eventsExportModal = document.getElementById('eventsExportModal');
       eventsExportModal.addEventListener('shown.bs.modal', function () {
@@ -160,7 +160,7 @@ const DatabaseEvents = {
         return;
       }
       // We have successfully fetched the editor form
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
       let isEditMode = false;
       function eventsEditorModalSaveEventHandler() {
         // Move the data from the codemirror editor back to the
@@ -182,7 +182,7 @@ const DatabaseEvents = {
               return;
             }
             // Item created successfully
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+            ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
             (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.slidingMessage)(data.message);
             bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance('#eventsEditorModal').hide();
             // If we are in 'edit' mode, we must
@@ -373,7 +373,7 @@ const DatabaseEvents = {
           });
         }
         // Get rid of the "Loading" message
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+        ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
         // Show the query that we just executed
         (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.slidingMessage)(data.sql_query);
         _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
@@ -549,7 +549,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/database/events.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

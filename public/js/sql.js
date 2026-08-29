@@ -528,7 +528,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(window.Messages.strFormEmpty, false, 'error');
       return false;
     }
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
+    ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action'), 'ajax_request=1' + argsep + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize(), function (data) {
       if (data.success) {
@@ -818,7 +818,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
           } else {
             url = 'index.php?route=/server/sql';
           }
-          (0,_modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_11__["default"])(url);
+          ;(0,_modules_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_11__["default"])(url);
           _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.callback = () => {
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').show().html(data.message);
             (0,_modules_sql_highlight_ts__WEBPACK_IMPORTED_MODULE_7__["default"])(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter'));
@@ -840,7 +840,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
           scrollTop: jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).height()
         }, 200);
       }
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxRemoveMessage)($msgbox);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxRemoveMessage)($msgbox);
     }); // end $.post()
   }); // end SQL Query submit
   /**
@@ -1193,7 +1193,7 @@ function buildProfilingChart() {
   if (!(chartData && 'labels' in chartData && 'data' in chartData)) {
     return;
   }
-  (0,_modules_functions_createProfilingChart_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('profilingChartCanvas', chartData, 'bottom');
+  ;(0,_modules_functions_createProfilingChart_ts__WEBPACK_IMPORTED_MODULE_6__["default"])('profilingChartCanvas', chartData, 'bottom');
 }
 /**
  * initialize profiling data tables
@@ -1261,7 +1261,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/sql.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

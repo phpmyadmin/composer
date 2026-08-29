@@ -122,13 +122,13 @@ const DatabaseRoutines = {
         'ajax_request': true
       }, showExport);
     }
-    (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+    ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
     function showExport(data) {
       if (data.success !== true) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
         return;
       }
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
       const routinesExportTextarea = '<textarea id="routinesExportTextarea" cols="40" rows="15" class="form-control" aria-label="' + window.Messages.strRoutine + '"></textarea>';
       const routinesExportModal = document.getElementById('routinesExportModal');
       routinesExportModal.addEventListener('shown.bs.modal', function () {
@@ -174,7 +174,7 @@ const DatabaseRoutines = {
         return;
       }
       // We have successfully fetched the editor form
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
       let isEditMode = false;
       const routinesEditorModalSaveEventHandler = function () {
         // Move the data from the codemirror editor back to the
@@ -198,7 +198,7 @@ const DatabaseRoutines = {
             return;
           }
           // Item created successfully
-          (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+          ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
           (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.slidingMessage)(data.message);
           bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance('#routinesEditorModal').hide();
           const tableId = '#' + data.tableType + 'Table';
@@ -391,7 +391,7 @@ const DatabaseRoutines = {
           });
         }
         // Get rid of the "Loading" message
-        (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+        ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
         // Show the query that we just executed
         (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.slidingMessage)(data.sql_query);
         _modules_navigation_ts__WEBPACK_IMPORTED_MODULE_4__.Navigation.reload();
@@ -718,7 +718,7 @@ const DatabaseRoutines = {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
         return;
       }
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+      ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
       // If 'data.dialog' is true we show a dialog with a form
       // to get the input parameters for routine, otherwise
       // we just show the results of the query
@@ -787,7 +787,7 @@ const DatabaseRoutines = {
               return;
             }
             // Routine executed successfully
-            (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
+            ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
             (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.slidingMessage)(data.message);
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.rte_form').off('keyup');
             modal.hide();
@@ -889,7 +889,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["bootstrap","shared"], function() { return __webpack_exec__("./resources/js/database/routines.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

@@ -14,7 +14,7 @@ function registerDatePickerTranslations() {
   if (!(jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker)) {
     return;
   }
-  (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).regional[''].closeText = window.Messages.strCalendarClose;
+  ;(jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).regional[''].closeText = window.Messages.strCalendarClose;
   (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).regional[''].prevText = window.Messages.strCalendarPrevious;
   (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).regional[''].nextText = window.Messages.strCalendarNext;
   (jquery__WEBPACK_IMPORTED_MODULE_0___default().datepicker).regional[''].currentText = window.Messages.strCalendarCurrent;
@@ -35,7 +35,7 @@ function registerTimePickerTranslations() {
   if (!(jquery__WEBPACK_IMPORTED_MODULE_0___default().timepicker)) {
     return;
   }
-  (jquery__WEBPACK_IMPORTED_MODULE_0___default().timepicker).regional[''].timeText = window.Messages.strCalendarTime;
+  ;(jquery__WEBPACK_IMPORTED_MODULE_0___default().timepicker).regional[''].timeText = window.Messages.strCalendarTime;
   (jquery__WEBPACK_IMPORTED_MODULE_0___default().timepicker).regional[''].hourText = window.Messages.strCalendarHour;
   (jquery__WEBPACK_IMPORTED_MODULE_0___default().timepicker).regional[''].minuteText = window.Messages.strCalendarMinute;
   (jquery__WEBPACK_IMPORTED_MODULE_0___default().timepicker).regional[''].secondText = window.Messages.strCalendarSecond;
@@ -59,7 +59,7 @@ module.exports = jQuery;
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
-/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+/******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(moduleId); }
 /******/ __webpack_require__.O(0, ["shared"], function() { return __webpack_exec__("./resources/js/datetimepicker.ts"); });
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }

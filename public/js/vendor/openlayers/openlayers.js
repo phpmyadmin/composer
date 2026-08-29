@@ -3219,7 +3219,7 @@ class Map extends _Object_js__WEBPACK_IMPORTED_MODULE_8__["default"] {
             this,
           ),
         ];
-        if (targetElement instanceof HTMLElement) {
+        if (!(0,_dom_js__WEBPACK_IMPORTED_MODULE_17__.isCanvas)(targetElement)) {
           const rootNode = targetElement.getRootNode();
           if (rootNode instanceof ShadowRoot) {
             this.resizeObserver_.observe(rootNode.host);
@@ -5221,7 +5221,7 @@ class Tile extends _events_Target_js__WEBPACK_IMPORTED_MODULE_3__["default"] {
    * @api
    */
   load() {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_4__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_4__.abstract)();
   }
 
   /**
@@ -9135,7 +9135,7 @@ class Attribution extends _Control_js__WEBPACK_IMPORTED_MODULE_5__["default"] {
       return;
     }
 
-    (0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.removeChildren)(this.ulElement_);
+    ;(0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.removeChildren)(this.ulElement_);
 
     // append the attributions
     for (let i = 0, ii = attributions.length; i < ii; ++i) {
@@ -12017,6 +12017,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
+ * @typedef {import('./expression.js').ValueType} ValueType
+ */
+
+/**
  * @fileoverview This module includes functions to build expressions for evaluation on the CPU.
  * Building is composed of two steps: parsing and compiling.  The parsing step takes an encoded
  * expression and returns an instance of one of the expression classes.  The compiling step takes
@@ -12084,7 +12088,7 @@ function newEvaluationContext() {
 
 /**
  * @param {import('./expression.js').EncodedExpression} encoded The encoded expression.
- * @param {number} type The expected type.
+ * @param {ValueType} type The expected type.
  * @param {import('./expression.js').ParsingContext} context The parsing context.
  * @return {ExpressionEvaluator} The expression evaluator.
  */
@@ -12820,6 +12824,10 @@ __webpack_require__.r(__webpack_exports__);
  * @api
  */
 
+/**
+ * @typedef {number} ValueType
+ */
+
 let numTypes = 0;
 const NoneType = 0;
 const BooleanType = 1 << numTypes++;
@@ -12842,7 +12850,7 @@ const typeNames = {
 const namedTypes = Object.keys(typeNames).map(Number).sort(_array_js__WEBPACK_IMPORTED_MODULE_0__.ascending);
 
 /**
- * @param {number} type The type.
+ * @param {ValueType} type The type.
  * @return {boolean} The type is one of the specific types (not any or a union type).
  */
 function isSpecific(type) {
@@ -12851,7 +12859,7 @@ function isSpecific(type) {
 
 /**
  * Get a string representation for a type.
- * @param {number} type The type.
+ * @param {ValueType} type The type.
  * @return {string} The type name.
  */
 function typeName(type) {
@@ -12871,8 +12879,8 @@ function typeName(type) {
 }
 
 /**
- * @param {number} broad The broad type.
- * @param {number} specific The specific type.
+ * @param {ValueType} broad The broad type.
+ * @param {ValueType} specific The specific type.
  * @return {boolean} The broad type includes the specific type.
  */
 function includesType(broad, specific) {
@@ -12880,8 +12888,8 @@ function includesType(broad, specific) {
 }
 
 /**
- * @param {number} oneType One type.
- * @param {number} otherType Another type.
+ * @param {ValueType} oneType One type.
+ * @param {ValueType} otherType Another type.
  * @return {boolean} The set of types overlap (share a common specific type)
  */
 function overlapsType(oneType, otherType) {
@@ -12889,8 +12897,8 @@ function overlapsType(oneType, otherType) {
 }
 
 /**
- * @param {number} type The type.
- * @param {number} expected The expected type.
+ * @param {ValueType} type The type.
+ * @param {ValueType} expected The expected type.
  * @return {boolean} The given type is exactly the expected type.
  */
 function isType(type, expected) {
@@ -12903,7 +12911,7 @@ function isType(type, expected) {
 
 class LiteralExpression {
   /**
-   * @param {number} type The value type.
+   * @param {ValueType} type The value type.
    * @param {LiteralValue} value The literal value.
    */
   constructor(type, value) {
@@ -12919,7 +12927,7 @@ class LiteralExpression {
 
 class CallExpression {
   /**
-   * @param {number} type The return type.
+   * @param {ValueType} type The return type.
    * @param {string} operator The operator.
    * @param {...Expression} args The arguments.
    */
@@ -12936,25 +12944,28 @@ class CallExpression {
 
 /**
  * @typedef {Object} ParsingContext
- * @property {Set<string>} variables Variables referenced with the 'var' operator.
- * @property {Set<string>} properties Properties referenced with the 'get' operator.
+ * @property {Map<string, ValueType>} variables Variables referenced with the 'var' operator; key is name, value is type.
+ * @property {Map<string, ValueType>} properties Properties referenced with the 'get' operator; key is name, value is type.
  * @property {boolean} featureId The style uses the feature id.
  * @property {boolean} geometryType The style uses the feature geometry type.
  * @property {boolean} mCoordinate The style uses the M coordinate of geometries
  * @property {boolean} mapState The style uses the map state (view state or time elapsed).
+ * @property {import('../style/flat.js').StyleVariables} [inputVariables] Variable values (i.e. style variables) given as input during parsing to help with type narrowing
  */
 
 /**
+ * @param {import('../style/flat.js').StyleVariables} [inputVariables] Variable values (i.e. style variables) given as input during parsing to help with type narrowing
  * @return {ParsingContext} A new parsing context.
  */
-function newParsingContext() {
+function newParsingContext(inputVariables) {
   return {
-    variables: new Set(),
-    properties: new Set(),
+    variables: new Map(),
+    properties: new Map(),
     featureId: false,
     geometryType: false,
     mCoordinate: false,
     mapState: false,
+    inputVariables,
   };
 }
 
@@ -12964,7 +12975,7 @@ function newParsingContext() {
 
 /**
  * @param {EncodedExpression} encoded The encoded expression.
- * @param {number} expectedType The expected type.
+ * @param {ValueType} expectedType The expected type.
  * @param {ParsingContext} context The parsing context.
  * @return {Expression} The parsed expression result.
  */
@@ -13125,7 +13136,7 @@ const Ops = {
  */
 const parsers = {
   [Ops.Get]: createCallExpressionParser(hasArgsCount(1, Infinity), withGetArgs),
-  [Ops.Var]: createCallExpressionParser(hasArgsCount(1, 1), withVarArgs),
+  [Ops.Var]: createVarExpressionParser(),
   [Ops.Has]: createCallExpressionParser(hasArgsCount(1, Infinity), withGetArgs),
   [Ops.Id]: createCallExpressionParser(usesFeatureId, withNoArgs),
   [Ops.Concat]: createCallExpressionParser(
@@ -13151,11 +13162,11 @@ const parsers = {
   ),
   [Ops.Equal]: createCallExpressionParser(
     hasArgsCount(2, 2),
-    withArgsOfType(AnyType),
+    withArgsOfIdenticalType(),
   ),
   [Ops.NotEqual]: createCallExpressionParser(
     hasArgsCount(2, 2),
-    withArgsOfType(AnyType),
+    withArgsOfIdenticalType(),
   ),
   [Ops.GreaterThan]: createCallExpressionParser(
     hasArgsCount(2, 2),
@@ -13288,7 +13299,7 @@ const parsers = {
 };
 
 /**
- * @typedef {function(Array<EncodedExpression>, number, ParsingContext):Array<Expression>|void} ArgValidator
+ * @typedef {function(Array<EncodedExpression>, ValueType, ParsingContext):Array<Expression>|void} ArgValidator
  *
  * An argument validator applies various checks to an encoded expression arguments and
  * returns the parsed arguments if any.  The second argument is the return type of the call expression.
@@ -13318,23 +13329,81 @@ function withGetArgs(encoded, returnType, context) {
       }
     }
     if (i === 0) {
-      context.properties.add(String(key));
+      context.properties.set(String(key), returnType);
     }
   }
   return args;
 }
 
 /**
- * @type {ArgValidator}
+ * This special expression parser reads style variables present in the context to narrow down
+ * the expected return type of the 'var' operator
+ * @return {Parser} The parser.
  */
-function withVarArgs(encoded, returnType, context) {
-  const name = encoded[1];
-  if (typeof name !== 'string') {
-    throw new Error('expected a string argument for var operation');
-  }
-  context.variables.add(name);
+function createVarExpressionParser() {
+  return function (encoded, returnType, context) {
+    const name = encoded[1];
+    if (typeof name !== 'string') {
+      throw new Error('expected a string argument for var operation');
+    }
+    let type = returnType;
 
-  return [new LiteralExpression(StringType, name)];
+    const variableValue = context.inputVariables?.[name];
+    if (variableValue !== undefined) {
+      const parsedInput = parse(variableValue, AnyType, context);
+      if (!(parsedInput instanceof LiteralExpression)) {
+        throw new Error(
+          `style variables should only be literal values (no expressions!), variable name: ${name}`,
+        );
+      }
+      let parsedType = parsedInput.type;
+
+      // special cases (because variables are not embedded in expressions and as such are harder to figure out their types)
+      // * if the variable is a string (e.g. 'blue') and we know that the expected type is not
+      //   StringType but ColorType, assume that the variable is indeed a color and not a string
+      // * if the variable is 2-elements a number array and we know that the expected type is SizeType
+      //   and not NumberArrayType, assume that the variable is indeed a size
+      if (
+        typeof variableValue === 'string' &&
+        overlapsType(type, ColorType) &&
+        !overlapsType(type, StringType)
+      ) {
+        parsedType = ColorType;
+      } else if (
+        Array.isArray(variableValue) &&
+        variableValue.length === 2 &&
+        overlapsType(type, SizeType) &&
+        !overlapsType(type, NumberArrayType)
+      ) {
+        parsedType = SizeType;
+      }
+
+      type &= parsedType;
+      if (type === NoneType) {
+        throw new Error(
+          `the type expected from the var operator (${typeName(returnType)}) did not have any overlap with the type of the corresponding style variables (${typeName(parsedType)}), variable name: ${name}`,
+        );
+      }
+    }
+
+    if (context.variables.has(name)) {
+      const existingType = context.variables.get(name);
+      type &= existingType;
+      if (type === NoneType) {
+        throw new Error(
+          `a new type expected from the var operator (${typeName(returnType)}) did not have any overlap with the previous type expected for it (${typeName(existingType)}), variable name: ${name}`,
+        );
+      }
+    }
+
+    context.variables.set(name, type);
+
+    return new CallExpression(
+      type,
+      'var',
+      new LiteralExpression(StringType, name),
+    );
+  };
 }
 
 /**
@@ -13421,7 +13490,7 @@ function withArgsOfReturnType(encoded, returnType, context) {
 }
 
 /**
- * @param {number} argType The argument type.
+ * @param {ValueType} argType The argument type.
  * @return {ArgValidator} The argument validator
  */
 function withArgsOfType(argType) {
@@ -13433,6 +13502,36 @@ function withArgsOfType(argType) {
     const args = new Array(argCount);
     for (let i = 0; i < argCount; ++i) {
       const expression = parse(encoded[i + 1], argType, context);
+      args[i] = expression;
+    }
+    return args;
+  };
+}
+
+/**
+ * @return {ArgValidator} The argument validator
+ */
+function withArgsOfIdenticalType() {
+  return function (encoded, returnType, context) {
+    const operation = encoded[0];
+    const argCount = encoded.length - 1;
+    /**
+     * @type {Array<Expression>}
+     */
+    const args = new Array(argCount);
+    let commonType = AnyType;
+    for (let i = 0; i < argCount; ++i) {
+      const expression = parse(encoded[i + 1], commonType, context);
+      commonType &= expression.type;
+    }
+    if (commonType === NoneType) {
+      throw new Error(
+        `no common type was found among the arguments of ${operation}`,
+      );
+    }
+    // second loop to compile actual args
+    for (let i = 0; i < argCount; ++i) {
+      const expression = parse(encoded[i + 1], commonType, context);
       args[i] = expression;
     }
     return args;
@@ -13471,16 +13570,31 @@ function hasEvenArgs(encoded, returnType, context) {
 function withMatchArgs(encoded, returnType, context) {
   const argsCount = encoded.length - 1;
 
-  const inputType = StringType | NumberType | BooleanType;
-
-  const input = parse(encoded[1], inputType, context);
-
   const fallback = parse(encoded[encoded.length - 1], returnType, context);
 
+  let inputType = StringType | NumberType | BooleanType;
   const args = new Array(argsCount - 2);
+
+  // first round to determine input type
   for (let i = 0; i < argsCount - 2; i += 2) {
     try {
-      const match = parse(encoded[i + 2], input.type, context);
+      const match = parse(encoded[i + 2], inputType, context);
+      inputType &= match.type;
+    } catch (err) {
+      throw new Error(
+        `failed to parse argument ${i + 1} of match expression: ${err.message}`,
+      );
+    }
+    if (inputType === NoneType) {
+      throw new Error(
+        `no common type was found among the arguments of match expression`,
+      );
+    }
+  }
+
+  for (let i = 0; i < argsCount - 2; i += 2) {
+    try {
+      const match = parse(encoded[i + 2], inputType, context);
       args[i] = match;
     } catch (err) {
       throw new Error(
@@ -13496,6 +13610,8 @@ function withMatchArgs(encoded, returnType, context) {
       );
     }
   }
+
+  const input = parse(encoded[1], inputType, context);
 
   return [input, ...args, fallback];
 }
@@ -13604,7 +13720,7 @@ function withInArgs(encoded, returnType, context) {
     );
   }
   /**
-   * @type {number}
+   * @type {ValueType}
    */
   let needleType;
 
@@ -13710,7 +13826,7 @@ function createCallExpressionParser(...validators) {
 
 /**
  * @param {Array} encoded The encoded expression.
- * @param {number} returnType The expected return type of the call expression.
+ * @param {ValueType} returnType The expected return type of the call expression.
  * @param {ParsingContext} context The parsing context.
  * @return {Expression} The parsed expression.
  */
@@ -13794,6 +13910,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getBottomRight: function() { return /* binding */ getBottomRight; },
 /* harmony export */   getCenter: function() { return /* binding */ getCenter; },
 /* harmony export */   getCorner: function() { return /* binding */ getCorner; },
+/* harmony export */   getDifference: function() { return /* binding */ getDifference; },
 /* harmony export */   getEnlargedArea: function() { return /* binding */ getEnlargedArea; },
 /* harmony export */   getForViewAndSize: function() { return /* binding */ getForViewAndSize; },
 /* harmony export */   getHeight: function() { return /* binding */ getHeight; },
@@ -13810,6 +13927,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   isEmpty: function() { return /* binding */ isEmpty; },
 /* harmony export */   returnOrUpdate: function() { return /* binding */ returnOrUpdate; },
 /* harmony export */   scaleFromCenter: function() { return /* binding */ scaleFromCenter; },
+/* harmony export */   subtractExtents: function() { return /* binding */ subtractExtents; },
 /* harmony export */   wrapAndSliceX: function() { return /* binding */ wrapAndSliceX; },
 /* harmony export */   wrapX: function() { return /* binding */ wrapX; }
 /* harmony export */ });
@@ -14446,6 +14564,73 @@ function getIntersection(extent1, extent2, dest) {
 }
 
 /**
+ * Get the difference between two extents, i.e. the area(s) of `extent1` that
+ * are not covered by `extent2`.  Returns an array of between 0 and 4 extents.
+ *
+ * When the extents do not intersect the returned array contains `extent1` as
+ * its only element.  When `extent2` completely contains `extent1` the returned
+ * array is empty.  Otherwise up to four non-overlapping extents are returned
+ * that together cover exactly the parts of `extent1` outside `extent2`.
+ *
+ * The decomposition used is:
+ *
+ * ```
+ * ┌────┬─────────┬────┐  ← y2
+ * │    │   top   │    │
+ * │    ├─────────┤    │  ← iy2
+ * │left│ (gone)  │right│
+ * │    ├─────────┤    │  ← iy1
+ * │    │ bottom  │    │
+ * └────┴─────────┴────┘  ← y1
+ * x1  ix1       ix2   x2
+ * ```
+ *
+ * The left and right strips span the full height of `extent1` while the top
+ * and bottom strips are clamped horizontally to the intersection, so the four
+ * rectangles tile perfectly without overlap or gaps.
+ *
+ * @param {Extent} extent1 Extent to subtract from.
+ * @param {Extent} extent2 Extent to subtract.
+ * @return {Array<Extent>} Remaining extents (0–4 elements).
+ * @api
+ */
+function getDifference(extent1, extent2) {
+  if (!intersects(extent1, extent2)) {
+    return [extent1.slice()];
+  }
+  if (containsExtent(extent2, extent1)) {
+    return [];
+  }
+
+  const [x1, y1, x2, y2] = extent1;
+  const ix1 = Math.max(x1, extent2[0]);
+  const iy1 = Math.max(y1, extent2[1]);
+  const ix2 = Math.min(x2, extent2[2]);
+  const iy2 = Math.min(y2, extent2[3]);
+
+  const result = [];
+
+  // Left strip  (full height of extent1)
+  if (ix1 > x1) {
+    result.push([x1, y1, ix1, y2]);
+  }
+  // Right strip (full height of extent1)
+  if (ix2 < x2) {
+    result.push([ix2, y1, x2, y2]);
+  }
+  // Bottom strip (between the left and right strips)
+  if (iy1 > y1) {
+    result.push([ix1, y1, ix2, iy1]);
+  }
+  // Top strip (between the left and right strips)
+  if (iy2 < y2) {
+    result.push([ix1, iy2, ix2, y2]);
+  }
+
+  return result;
+}
+
+/**
  * @param {Extent} extent Extent.
  * @return {number} Margin.
  */
@@ -14736,6 +14921,27 @@ function wrapAndSliceX(extent, projection, multiWorld) {
   }
 
   return [extent];
+}
+
+/**
+ * Subtract several rectangles from a base rectangle. Returns a set of disjoint
+ * rectangles that together cover the base rectangle minus the union of the
+ * subtracted rectangles, by repeatedly applying {@link module:ol/extent.getDifference}.
+ * @param {Extent} base Base rectangle.
+ * @param {Array<Extent>} subtract Rectangles to subtract.
+ * @return {Array<Extent>} Remainder rectangles.
+ */
+function subtractExtents(base, subtract) {
+  let remainder = [base];
+  for (let i = 0, ii = subtract.length; i < ii && remainder.length > 0; ++i) {
+    /** @type {Array<Extent>} */
+    const next = [];
+    for (let j = 0, jj = remainder.length; j < jj; ++j) {
+      next.push(...getDifference(remainder[j], subtract[i]));
+    }
+    remainder = next;
+  }
+  return remainder;
 }
 
 
@@ -16853,7 +17059,7 @@ class Geometry extends _Object_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
    * @api
    */
   rotate(angle, anchor) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
   }
 
   /**
@@ -16867,7 +17073,7 @@ class Geometry extends _Object_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
    * @api
    */
   scale(sx, sy, anchor) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
   }
 
   /**
@@ -16914,7 +17120,7 @@ class Geometry extends _Object_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
    * Called with a flat array of geometry coordinates.
    */
   applyTransform(transformFn) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
   }
 
   /**
@@ -16936,7 +17142,7 @@ class Geometry extends _Object_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
    * @api
    */
   translate(deltaX, deltaY) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_5__.abstract)();
   }
 
   /**
@@ -17123,7 +17329,7 @@ class GeometryCollection extends _Geometry_js__WEBPACK_IMPORTED_MODULE_3__["defa
    * @override
    */
   computeExtent(extent) {
-    (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.createOrUpdateEmpty)(extent);
+    ;(0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.createOrUpdateEmpty)(extent);
     const geometries = this.geometries_;
     for (let i = 0, ii = geometries.length; i < ii; ++i) {
       (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.extend)(extent, geometries[i].getExtent());
@@ -17447,7 +17653,7 @@ class LineString extends _SimpleGeometry_js__WEBPACK_IMPORTED_MODULE_2__["defaul
    * @api
    */
   appendCoordinate(coordinate) {
-    (0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(this.flatCoordinates, coordinate);
+    ;(0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(this.flatCoordinates, coordinate);
     this.changed();
   }
 
@@ -17705,10 +17911,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _flat_closest_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/geom/flat/closest.js");
 /* harmony import */ var _flat_deflate_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/geom/flat/deflate.js");
 /* harmony import */ var _flat_inflate_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/geom/flat/inflate.js");
-/* harmony import */ var _flat_simplify_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/ol/geom/flat/simplify.js");
+/* harmony import */ var _flat_intersectsextent_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/ol/geom/flat/intersectsextent.js");
+/* harmony import */ var _flat_simplify_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./node_modules/ol/geom/flat/simplify.js");
 /**
  * @module ol/geom/LinearRing
  */
+
 
 
 
@@ -17846,7 +18054,7 @@ class LinearRing extends _SimpleGeometry_js__WEBPACK_IMPORTED_MODULE_1__["defaul
   getSimplifiedGeometryInternal(squaredTolerance) {
     /** @type {Array<number>} */
     const simplifiedFlatCoordinates = [];
-    simplifiedFlatCoordinates.length = (0,_flat_simplify_js__WEBPACK_IMPORTED_MODULE_6__.douglasPeucker)(
+    simplifiedFlatCoordinates.length = (0,_flat_simplify_js__WEBPACK_IMPORTED_MODULE_7__.douglasPeucker)(
       this.flatCoordinates,
       0,
       this.flatCoordinates.length,
@@ -17869,14 +18077,21 @@ class LinearRing extends _SimpleGeometry_js__WEBPACK_IMPORTED_MODULE_1__["defaul
   }
 
   /**
-   * Test if the geometry and the passed extent intersect.
+   * Test if the geometry and the passed extent intersect. A linear ring is
+   * treated as a line string for this test.
    * @param {import("../extent.js").Extent} extent Extent.
    * @return {boolean} `true` if the geometry and the extent intersect.
    * @api
    * @override
    */
   intersectsExtent(extent) {
-    return false;
+    return (0,_flat_intersectsextent_js__WEBPACK_IMPORTED_MODULE_6__.intersectsLineString)(
+      this.flatCoordinates,
+      0,
+      this.flatCoordinates.length,
+      this.stride,
+      extent,
+    );
   }
 
   /**
@@ -18009,7 +18224,7 @@ class MultiLineString extends _SimpleGeometry_js__WEBPACK_IMPORTED_MODULE_3__["d
    * @api
    */
   appendLineString(lineString) {
-    (0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(this.flatCoordinates, lineString.getFlatCoordinates().slice());
+    ;(0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(this.flatCoordinates, lineString.getFlatCoordinates().slice());
     this.ends_.push(this.flatCoordinates.length);
     this.changed();
   }
@@ -18358,7 +18573,7 @@ class MultiPoint extends _SimpleGeometry_js__WEBPACK_IMPORTED_MODULE_4__["defaul
    * @api
    */
   appendPoint(point) {
-    (0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(this.flatCoordinates, point.getFlatCoordinates());
+    ;(0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(this.flatCoordinates, point.getFlatCoordinates());
     this.changed();
   }
 
@@ -18627,7 +18842,7 @@ class MultiPolygon extends _SimpleGeometry_js__WEBPACK_IMPORTED_MODULE_4__["defa
         for (let j = 0, jj = ends.length; j < jj; ++j) {
           ends[j] += offset;
         }
-        (0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(flatCoordinates, polygon.getFlatCoordinates());
+        ;(0,_array_js__WEBPACK_IMPORTED_MODULE_0__.extend)(flatCoordinates, polygon.getFlatCoordinates());
         thisEndss.push(ends);
       }
       layout =
@@ -19888,7 +20103,7 @@ class SimpleGeometry extends _Geometry_js__WEBPACK_IMPORTED_MODULE_2__["default"
    * @param {import("./Geometry.js").GeometryLayout} [layout] Layout.
    */
   setCoordinates(coordinates, layout) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
   }
 
   /**
@@ -20191,6 +20406,171 @@ function linearRingss(flatCoordinates, offset, endss, stride) {
     offset = ends[ends.length - 1];
   }
   return flatCenters;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/ol/geom/flat/clip.js":
+/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   clipFlatLineStrings: function() { return /* binding */ clipFlatLineStrings; }
+/* harmony export */ });
+/**
+ * @module ol/geom/flat/clip
+ */
+
+/**
+ * Start parameter of the portion of the last clipped segment that is inside the
+ * extent. Set by {@link clipSegment}, read right after a `true` return to avoid
+ * allocating a result array per segment.
+ * @type {number}
+ */
+let clipSegmentStart = 0;
+
+/**
+ * End parameter of the portion of the last clipped segment that is inside the
+ * extent. See {@link clipSegmentStart}.
+ * @type {number}
+ */
+let clipSegmentEnd = 1;
+
+/**
+ * Clip a segment to a rectangular extent. On a `true` return, the inside
+ * portion is `[clipSegmentStart, clipSegmentEnd]` in segment parameters. No
+ * allocations are made, so the result globals must be read before the next
+ * call.
+ * @param {number} minX Minimum X.
+ * @param {number} minY Minimum Y.
+ * @param {number} maxX Maximum X.
+ * @param {number} maxY Maximum Y.
+ * @param {number} x0 Segment start X.
+ * @param {number} y0 Segment start Y.
+ * @param {number} x1 Segment end X.
+ * @param {number} y1 Segment end Y.
+ * @return {boolean} The segment intersects the extent.
+ */
+function clipSegment(minX, minY, maxX, maxY, x0, y0, x1, y1) {
+  const dx = x1 - x0;
+  const dy = y1 - y0;
+  let t0 = 0;
+  let t1 = 1;
+
+  // X slab.
+  if (dx === 0) {
+    if (x0 < minX || x0 > maxX) {
+      return false;
+    }
+  } else {
+    let ta = (minX - x0) / dx;
+    let tb = (maxX - x0) / dx;
+    if (ta > tb) {
+      const tmp = ta;
+      ta = tb;
+      tb = tmp;
+    }
+    if (ta > t0) {
+      t0 = ta;
+    }
+    if (tb < t1) {
+      t1 = tb;
+    }
+    if (t0 > t1) {
+      return false;
+    }
+  }
+
+  // Y slab.
+  if (dy === 0) {
+    if (y0 < minY || y0 > maxY) {
+      return false;
+    }
+  } else {
+    let ta = (minY - y0) / dy;
+    let tb = (maxY - y0) / dy;
+    if (ta > tb) {
+      const tmp = ta;
+      ta = tb;
+      tb = tmp;
+    }
+    if (ta > t0) {
+      t0 = ta;
+    }
+    if (tb < t1) {
+      t1 = tb;
+    }
+    if (t0 > t1) {
+      return false;
+    }
+  }
+
+  clipSegmentStart = t0;
+  clipSegmentEnd = t1;
+  return true;
+}
+
+/**
+ * Clip flat line strings to the given extent. Parts outside the extent are
+ * dropped and a vertex is inserted where a segment crosses the boundary. A line
+ * that leaves and re-enters the extent is split into separate parts so that
+ * positions derived from the result (e.g. labels placed along the line) stay
+ * within the extent. Output coordinates have a stride of 2.
+ * @param {Array<number>} flatCoordinates Flat coordinates.
+ * @param {Array<number>} ends Ends.
+ * @param {number} stride Stride.
+ * @param {import("../../extent.js").Extent} extent Extent to clip to.
+ * @return {{flatCoordinates: Array<number>, ends: Array<number>}} Clipped flat
+ *     coordinates and ends.
+ */
+function clipFlatLineStrings(flatCoordinates, ends, stride, extent) {
+  const minX = extent[0];
+  const minY = extent[1];
+  const maxX = extent[2];
+  const maxY = extent[3];
+  const dest = [];
+  const destEnds = [];
+  let open = false;
+  let lastX, lastY;
+  let offset = 0;
+  for (let e = 0, ee = ends.length; e < ee; ++e) {
+    const end = ends[e];
+    let prevX = flatCoordinates[offset];
+    let prevY = flatCoordinates[offset + 1];
+    let lineHasLast = false;
+    for (let i = offset + stride; i < end; i += stride) {
+      const curX = flatCoordinates[i];
+      const curY = flatCoordinates[i + 1];
+      if (clipSegment(minX, minY, maxX, maxY, prevX, prevY, curX, curY)) {
+        const dx = curX - prevX;
+        const dy = curY - prevY;
+        const ax = prevX + clipSegmentStart * dx;
+        const ay = prevY + clipSegmentStart * dy;
+        const bx = prevX + clipSegmentEnd * dx;
+        const by = prevY + clipSegmentEnd * dy;
+        if (open && lineHasLast && ax === lastX && ay === lastY) {
+          dest.push(bx, by);
+        } else {
+          if (open) {
+            destEnds.push(dest.length);
+          }
+          dest.push(ax, ay, bx, by);
+          open = true;
+        }
+        lastX = bx;
+        lastY = by;
+        lineHasLast = true;
+      }
+      prevX = curX;
+      prevY = curY;
+    }
+    offset = end;
+  }
+  if (open) {
+    destEnds.push(dest.length);
+  }
+  return {flatCoordinates: dest, ends: destEnds};
 }
 
 
@@ -21837,11 +22217,18 @@ function offsetLineVertex(x, y, prevX, prevY, nextX, nextY, offset) {
  *
  * @param {Array<number>} coords Flat offset coordinates (modified in-place).
  * @param {number} stride Coordinate stride (typically 2).
+ * @param {boolean} [closedLine] Whether the original line is closed (first vertex === last vertex).
+ *   When true, the first and last offset segments are not compared against each other to avoid
+ *   false loop detection at the closure point.
  * @return {Array<number>} The cleaned coordinate array.
  */
-function removeOffsetCycles(coords, stride) {
+function removeOffsetCycles(coords, stride, closedLine = false) {
   for (let i = 0, ii = coords.length - 2; i < ii; i += stride) {
-    for (let j = coords.length - 2 * stride; j > i + stride; j -= stride) {
+    const jMax =
+      closedLine && i === 0
+        ? coords.length - 3 * stride
+        : coords.length - 2 * stride;
+    for (let j = jMax; j > i + stride; j -= stride) {
       const p1x = coords[i];
       const p1y = coords[i + 1];
       const p2x = coords[i + stride];
@@ -22773,6 +23160,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+let segmenter;
+/**
+ * @return {Intl.Segmenter} A grapheme segmenter.
+ */
+function getSegmenter() {
+  if (!segmenter) {
+    segmenter = new Intl.Segmenter(undefined, {granularity: 'grapheme'});
+  }
+  return segmenter;
+}
+
 /**
  * @param {Array<number>} flatCoordinates Path to put text on.
  * @param {number} offset Start offset of the `flatCoordinates`.
@@ -22880,7 +23278,8 @@ function drawTextOnPath(
   // rendering across line segments
   text = text.replace(/\n/g, ' '); // ensure rendering in single-line as all calculations below don't handle multi-lines
 
-  for (let i = 0, ii = text.length; i < ii; ) {
+  const segments = Array.from(getSegmenter().segment(text), (s) => s.segment);
+  for (let i = 0, ii = segments.length; i < ii;) {
     advance();
     let angle = Math.atan2(y2 - y1, x2 - x1);
     if (reverse) {
@@ -22899,7 +23298,8 @@ function drawTextOnPath(
     let charLength = 0;
     for (; i < ii; ++i) {
       const index = reverse ? ii - i - 1 : i;
-      const len = scale * measureAndCacheTextWidth(font, text[index], cache);
+      const len =
+        scale * measureAndCacheTextWidth(font, segments[index], cache);
       if (
         offset + stride < end &&
         segmentM + segmentLength < startM + charLength + len / 2
@@ -22911,9 +23311,9 @@ function drawTextOnPath(
     if (i === iStart) {
       continue;
     }
-    const chars = reverse
-      ? text.substring(ii - iStart, ii - i)
-      : text.substring(iStart, i);
+    const chars = (
+      reverse ? segments.slice(ii - i, ii - iStart) : segments.slice(iStart, i)
+    ).join('');
     interpolate =
       segmentLength === 0
         ? 0
@@ -24841,7 +25241,7 @@ class MouseWheelZoom extends _Interaction_js__WEBPACK_IMPORTED_MODULE_4__["defau
       // view has a zoom constraint, zoom by 1
       delta = delta ? (delta > 0 ? 1 : -1) : 0;
     }
-    (0,_Interaction_js__WEBPACK_IMPORTED_MODULE_4__.zoomByDelta)(
+    ;(0,_Interaction_js__WEBPACK_IMPORTED_MODULE_4__.zoomByDelta)(
       view,
       delta,
       this.lastAnchor_ ? map.getCoordinateFromPixel(this.lastAnchor_) : null,
@@ -25978,7 +26378,7 @@ class BaseLayer extends _Object_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
    * @api
    */
   setOpacity(opacity) {
-    (0,_asserts_js__WEBPACK_IMPORTED_MODULE_1__.assert)(typeof opacity === 'number', 'Layer opacity must be a number');
+    ;(0,_asserts_js__WEBPACK_IMPORTED_MODULE_1__.assert)(typeof opacity === 'number', 'Layer opacity must be a number');
     this.set(_Property_js__WEBPACK_IMPORTED_MODULE_4__["default"].OPACITY, opacity);
   }
 
@@ -26528,20 +26928,11 @@ function toStyleLike(style) {
   if (style instanceof _style_Style_js__WEBPACK_IMPORTED_MODULE_2__["default"]) {
     return style;
   }
-  if (!Array.isArray(style)) {
-    return (0,_render_canvas_style_js__WEBPACK_IMPORTED_MODULE_1__.flatStylesToStyleFunction)([style]);
-  }
-  if (style.length === 0) {
+  if (Array.isArray(style) && style.length === 0) {
     return [];
   }
-
-  const length = style.length;
-  const first = style[0];
-
-  if (first instanceof _style_Style_js__WEBPACK_IMPORTED_MODULE_2__["default"]) {
-    /**
-     * @type {Array<Style>}
-     */
+  if (Array.isArray(style) && style[0] instanceof _style_Style_js__WEBPACK_IMPORTED_MODULE_2__["default"]) {
+    const length = style.length;
     const styles = new Array(length);
     for (let i = 0; i < length; ++i) {
       const candidate = style[i];
@@ -26553,24 +26944,9 @@ function toStyleLike(style) {
     return styles;
   }
 
-  if ('style' in first) {
-    /**
-     * @type {Array<import("../style/flat.js").Rule>}
-     */
-    const rules = new Array(length);
-    for (let i = 0; i < length; ++i) {
-      const candidate = style[i];
-      if (!('style' in candidate)) {
-        throw new Error('Expected a list of rules with a style property');
-      }
-      rules[i] = candidate;
-    }
-    return (0,_render_canvas_style_js__WEBPACK_IMPORTED_MODULE_1__.rulesToStyleFunction)(rules);
-  }
-
-  const flatStyles =
-    /** @type {Array<import("../style/flat.js").FlatStyle>} */ (style);
-  return (0,_render_canvas_style_js__WEBPACK_IMPORTED_MODULE_1__.flatStylesToStyleFunction)(flatStyles);
+  const flatStyleLike =
+    /** @type {import("../style/flat.js").FlatStyleLike} */ (style);
+  return (0,_render_canvas_style_js__WEBPACK_IMPORTED_MODULE_1__.flatStyleLikeToStyleFunction)(flatStyleLike);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (BaseVectorLayer);
@@ -26786,7 +27162,7 @@ class LayerGroup extends _Base_js__WEBPACK_IMPORTED_MODULE_10__["default"] {
     for (const id in this.listenerKeys_) {
       this.listenerKeys_[id].forEach(_events_js__WEBPACK_IMPORTED_MODULE_4__.unlistenByKey);
     }
-    (0,_obj_js__WEBPACK_IMPORTED_MODULE_8__.clear)(this.listenerKeys_);
+    ;(0,_obj_js__WEBPACK_IMPORTED_MODULE_8__.clear)(this.listenerKeys_);
 
     const layersArray = layers.getArray();
     for (let i = 0, ii = layersArray.length; i < ii; i++) {
@@ -27054,6 +27430,8 @@ __webpack_require__.r(__webpack_exports__);
  * @property {import("../Map.js").default|null} [map] Map.
  * @property {RenderFunction} [render] Render function. Takes the frame state as input and is expected to return an
  * HTML element. Will overwrite the default rendering for the layer.
+ * @property {import("./Base.js").BackgroundColor} [background] Background color for the layer. If not specified, no background
+ * will be rendered.
  * @property {Properties} [properties] Arbitrary observable properties. Can be accessed with `#get()` and `#set()`.
  */
 
@@ -28362,7 +28740,7 @@ function identityTransform(input, output) {
  * @api
  */
 function addProjection(projection) {
-  (0,_proj_projections_js__WEBPACK_IMPORTED_MODULE_8__.add)(projection.getCode(), projection);
+  ;(0,_proj_projections_js__WEBPACK_IMPORTED_MODULE_8__.add)(projection.getCode(), projection);
   (0,_proj_transforms_js__WEBPACK_IMPORTED_MODULE_9__.add)(projection, projection, cloneTransform);
 }
 
@@ -28513,7 +28891,7 @@ function addEquivalentTransforms(
 ) {
   projections1.forEach(function (projection1) {
     projections2.forEach(function (projection2) {
-      (0,_proj_transforms_js__WEBPACK_IMPORTED_MODULE_9__.add)(projection1, projection2, forwardTransform);
+      ;(0,_proj_transforms_js__WEBPACK_IMPORTED_MODULE_9__.add)(projection1, projection2, forwardTransform);
       (0,_proj_transforms_js__WEBPACK_IMPORTED_MODULE_9__.add)(projection2, projection1, inverseTransform);
     });
   });
@@ -28523,7 +28901,7 @@ function addEquivalentTransforms(
  * Clear all cached projections and transforms.
  */
 function clearAllProjections() {
-  (0,_proj_projections_js__WEBPACK_IMPORTED_MODULE_8__.clear)();
+  ;(0,_proj_projections_js__WEBPACK_IMPORTED_MODULE_8__.clear)();
   (0,_proj_transforms_js__WEBPACK_IMPORTED_MODULE_9__.clear)();
 }
 
@@ -31299,28 +31677,43 @@ const registerFont = (function () {
    */
   async function isAvailable(fontSpec) {
     await fontFaceSet.ready;
-    const fontFaces = await fontFaceSet.load(fontSpec);
-    if (fontFaces.length === 0) {
-      return false;
-    }
     const font = (0,_css_js__WEBPACK_IMPORTED_MODULE_1__.getFontParameters)(fontSpec);
     const checkFamily = font.families[0].toLowerCase();
     const checkWeight = font.weight;
-    return fontFaces.some(
+    /** @type {Array<FontFace>} */
+    const matching = [];
+    fontFaceSet.forEach(
       /**
-       * @param {import('../css.js').FontParameters} f Font.
-       * @return {boolean} Font matches.
+       * @param {FontFace} f Font face.
        */
       (f) => {
         const family = f.family.replace(/^['"]|['"]$/g, '').toLowerCase();
         const weight = _css_js__WEBPACK_IMPORTED_MODULE_1__.fontWeights[f.weight] || f.weight;
-        return (
+        if (
           family === checkFamily &&
           f.style === font.style &&
           weight == checkWeight
-        );
+        ) {
+          matching.push(f);
+        }
       },
     );
+    if (matching.length === 0) {
+      return false;
+    }
+    // Load each matching face with `FontFace.load()` instead of querying the
+    // set with `FontFaceSet.load()`. The latter only resolves faces whose
+    // `unicode-range` covers its (default) test string, so subset fonts -
+    // e.g. those served by Google Fonts - would never be detected.
+    const loaded = await Promise.all(
+      matching.map((f) =>
+        f.load().then(
+          () => true, // available
+          () => false, // not available
+        ),
+      ),
+    );
+    return loaded.some((available) => available);
   }
 
   async function check() {
@@ -33010,7 +33403,7 @@ class Executor {
           /** @type {Array<*>} */ (strokeInstruction),
         );
       }
-      (0,_canvas_js__WEBPACK_IMPORTED_MODULE_7__.drawImageOrLabel)(
+      ;(0,_canvas_js__WEBPACK_IMPORTED_MODULE_7__.drawImageOrLabel)(
         context,
         dimensions.canvasTransform,
         opacity,
@@ -33470,6 +33863,7 @@ class Executor {
           declutterMode = instruction[14] || 'declutter';
 
           const textKeepUpright = /** @type {boolean} */ (instruction[15]);
+          const offsetX = /** @type {number} */ (instruction[16]);
           const textState = this.textStates[textKey];
           const font = textState.font;
           const textScale = [
@@ -33519,7 +33913,8 @@ class Executor {
                   label = this.createLabel(chars, textKey, '', strokeKey);
                   anchorX =
                     /** @type {number} */ (part[2]) +
-                    (textScale[0] < 0 ? -strokeWidth : strokeWidth);
+                    (textScale[0] < 0 ? -strokeWidth : strokeWidth) -
+                    offsetX;
                   anchorY =
                     baseline * label.height +
                     ((0.5 - baseline) * 2 * strokeWidth * textScale[1]) /
@@ -33566,7 +33961,7 @@ class Executor {
                   part = parts[c]; // x, y, anchorX, rotation, chunk
                   chars = /** @type {string} */ (part[4]);
                   label = this.createLabel(chars, textKey, fillKey, '');
-                  anchorX = /** @type {number} */ (part[2]);
+                  anchorX = /** @type {number} */ (part[2]) - offsetX;
                   anchorY = baseline * label.height - offsetY;
                   const dimensions = this.calculateImageOrLabelDimensions_(
                     label.width,
@@ -33647,16 +34042,22 @@ class Executor {
           if (lineOffsetPx) {
             const isClosedRing =
               /** @type {boolean|undefined} */ (instruction[4]) ?? false;
+            const isClosedLine =
+              isClosedRing ||
+              (Math.abs(pixelCoordinates[d] - pixelCoordinates[dd - 2]) <
+                1e-6 &&
+                Math.abs(pixelCoordinates[d + 1] - pixelCoordinates[dd - 1]) <
+                  1e-6);
             (0,_geom_flat_lineoffset_js__WEBPACK_IMPORTED_MODULE_3__.offsetLineString)(
               pixelCoordinates,
               d,
               dd,
               2,
               lineOffsetPx,
-              isClosedRing,
+              isClosedLine,
               offsetCoords,
             );
-            (0,_geom_flat_lineoffset_js__WEBPACK_IMPORTED_MODULE_3__.removeOffsetCycles)(offsetCoords, 2);
+            (0,_geom_flat_lineoffset_js__WEBPACK_IMPORTED_MODULE_3__.removeOffsetCycles)(offsetCoords, 2, isClosedLine);
             lineCoords = offsetCoords;
             lineStart = 0;
             lineEnd = lineCoords.length;
@@ -35126,16 +35527,21 @@ class CanvasImmediateRenderer extends _VectorContext_js__WEBPACK_IMPORTED_MODULE
       this.pixelCoordinates_,
     );
     if (Math.abs(strokeOffset) > 0) {
+      const n = pixelCoordinates.length;
+      const isClosedLine =
+        close ||
+        (Math.abs(pixelCoordinates[0] - pixelCoordinates[n - 2]) < 1e-6 &&
+          Math.abs(pixelCoordinates[1] - pixelCoordinates[n - 1]) < 1e-6);
       pixelCoordinates = (0,_geom_flat_lineoffset_js__WEBPACK_IMPORTED_MODULE_4__.offsetLineString)(
         pixelCoordinates,
         0,
-        pixelCoordinates.length,
+        n,
         2,
         strokeOffset,
-        close,
+        isClosedLine,
         pixelCoordinates,
       );
-      (0,_geom_flat_lineoffset_js__WEBPACK_IMPORTED_MODULE_4__.removeOffsetCycles)(pixelCoordinates, 2);
+      (0,_geom_flat_lineoffset_js__WEBPACK_IMPORTED_MODULE_4__.removeOffsetCycles)(pixelCoordinates, 2, isClosedLine);
     }
     context.moveTo(pixelCoordinates[0], pixelCoordinates[1]);
     let length = pixelCoordinates.length;
@@ -36490,15 +36896,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _colorlike_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/ol/colorlike.js");
 /* harmony import */ var _extent_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/ol/extent.js");
-/* harmony import */ var _geom_flat_linechunk_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/ol/geom/flat/linechunk.js");
-/* harmony import */ var _geom_flat_straightchunk_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/geom/flat/straightchunk.js");
-/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/util.js");
-/* harmony import */ var _canvas_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/render/canvas.js");
-/* harmony import */ var _Builder_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/ol/render/canvas/Builder.js");
-/* harmony import */ var _Instruction_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./node_modules/ol/render/canvas/Instruction.js");
+/* harmony import */ var _geom_flat_clip_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/ol/geom/flat/clip.js");
+/* harmony import */ var _geom_flat_linechunk_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/geom/flat/linechunk.js");
+/* harmony import */ var _geom_flat_straightchunk_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/geom/flat/straightchunk.js");
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/util.js");
+/* harmony import */ var _canvas_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("./node_modules/ol/render/canvas.js");
+/* harmony import */ var _Builder_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("./node_modules/ol/render/canvas/Builder.js");
+/* harmony import */ var _Instruction_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("./node_modules/ol/render/canvas/Instruction.js");
 /**
  * @module ol/render/canvas/TextBuilder
  */
+
 
 
 
@@ -36523,7 +36931,7 @@ const TEXT_ALIGN = {
   'bottom': 1,
 };
 
-class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["default"] {
+class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_7__["default"] {
   /**
    * @param {number} tolerance Tolerance.
    * @param {import("../../extent.js").Extent} maxExtent Maximum extent.
@@ -36585,7 +36993,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
      * @type {!Object<string, import("../canvas.js").FillState>}
      */
     this.fillStates = {};
-    this.fillStates[_canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultFillStyle] = {fillStyle: _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultFillStyle};
+    this.fillStates[_canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultFillStyle] = {fillStyle: _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultFillStyle};
 
     /**
      * @private
@@ -36681,7 +37089,8 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
         geometryType == 'Polygon' ||
         geometryType == 'MultiPolygon')
     ) {
-      if (!(0,_extent_js__WEBPACK_IMPORTED_MODULE_1__.intersects)(this.maxExtent, geometry.getExtent())) {
+      const geometryExtent = geometry.getExtent();
+      if (!(0,_extent_js__WEBPACK_IMPORTED_MODULE_1__.intersects)(this.maxExtent, geometryExtent)) {
         return;
       }
       let ends;
@@ -36706,6 +37115,26 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
           ends.push(endss[i][0]);
         }
       }
+      if (
+        (geometryType == 'LineString' || geometryType == 'MultiLineString') &&
+        !(0,_extent_js__WEBPACK_IMPORTED_MODULE_1__.containsExtent)(this.getBufferedMaxExtent(), geometryExtent)
+      ) {
+        // Clip the line to the rendered extent so the label is anchored within
+        // the rendered area instead of along the full geometry, whose center
+        // can lie outside it.
+        const clipped = (0,_geom_flat_clip_js__WEBPACK_IMPORTED_MODULE_2__.clipFlatLineStrings)(
+          flatCoordinates,
+          ends,
+          stride,
+          this.getBufferedMaxExtent(),
+        );
+        flatCoordinates = clipped.flatCoordinates;
+        ends = clipped.ends;
+        stride = 2;
+        if (ends.length === 0) {
+          return;
+        }
+      }
       this.beginGeometry(geometry, feature, index);
       const repeat = textState.repeat;
       const textAlign = repeat ? undefined : textState.textAlign;
@@ -36714,7 +37143,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       for (let o = 0, oo = ends.length; o < oo; ++o) {
         let chunks;
         if (repeat) {
-          chunks = (0,_geom_flat_linechunk_js__WEBPACK_IMPORTED_MODULE_2__.lineChunk)(
+          chunks = (0,_geom_flat_linechunk_js__WEBPACK_IMPORTED_MODULE_3__.lineChunk)(
             repeat * this.resolution,
             flatCoordinates,
             flatOffset,
@@ -36729,7 +37158,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
           let chunkBegin = 0;
           let chunkEnd = chunk.length;
           if (textAlign == undefined) {
-            const range = (0,_geom_flat_straightchunk_js__WEBPACK_IMPORTED_MODULE_3__.matchingChunk)(
+            const range = (0,_geom_flat_straightchunk_js__WEBPACK_IMPORTED_MODULE_4__.matchingChunk)(
               textState.maxAngle,
               chunk,
               0,
@@ -36841,7 +37270,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       // adjust padding for negative scale
       let padding = textState.padding;
       if (
-        padding != _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultPadding &&
+        padding != _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultPadding &&
         (textState.scale[0] < 0 || textState.scale[1] < 0)
       ) {
         let p0 = textState.padding[0];
@@ -36864,7 +37293,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       // render time.
       const pixelRatio = this.pixelRatio;
       this.instructions.push([
-        _Instruction_js__WEBPACK_IMPORTED_MODULE_7__["default"].DRAW_IMAGE,
+        _Instruction_js__WEBPACK_IMPORTED_MODULE_8__["default"].DRAW_IMAGE,
         begin,
         end,
         null,
@@ -36880,8 +37309,8 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
         NaN,
         this.declutterMode_,
         this.declutterImageWithText_,
-        padding == _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultPadding
-          ? _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultPadding
+        padding == _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultPadding
+          ? _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultPadding
           : padding.map(function (p) {
               return p * pixelRatio;
             }),
@@ -36901,10 +37330,10 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
         ? backgroundFill.slice(0)
         : null;
       if (hitDetectionBackgroundFill) {
-        hitDetectionBackgroundFill[1] = _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultFillStyle;
+        hitDetectionBackgroundFill[1] = _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultFillStyle;
       }
       this.hitDetectionInstructions.push([
-        _Instruction_js__WEBPACK_IMPORTED_MODULE_7__["default"].DRAW_IMAGE,
+        _Instruction_js__WEBPACK_IMPORTED_MODULE_8__["default"].DRAW_IMAGE,
         begin,
         end,
         null,
@@ -36926,7 +37355,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
         this.text_,
         this.textKey_,
         this.strokeKey_,
-        this.fillKey_ ? _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultFillStyle : this.fillKey_,
+        this.fillKey_ ? _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultFillStyle : this.fillKey_,
         this.textOffsetX_,
         this.textOffsetY_,
         geometryWidths,
@@ -36962,9 +37391,9 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
     if (!(textKey in this.textStates)) {
       this.textStates[textKey] = {
         font: textState.font,
-        textAlign: textState.textAlign || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultTextAlign,
+        textAlign: textState.textAlign || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultTextAlign,
         justify: textState.justify,
-        textBaseline: textState.textBaseline || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultTextBaseline,
+        textBaseline: textState.textBaseline || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultTextBaseline,
         scale: textState.scale,
       };
     }
@@ -36995,6 +37424,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
     const pixelRatio = this.pixelRatio;
     const baseline = TEXT_ALIGN[textState.textBaseline];
 
+    const offsetX = this.textOffsetX_ * pixelRatio;
     const offsetY = this.textOffsetY_ * pixelRatio;
     const text = this.text_;
     const strokeWidth = strokeState
@@ -37002,7 +37432,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       : 0;
 
     this.instructions.push([
-      _Instruction_js__WEBPACK_IMPORTED_MODULE_7__["default"].DRAW_CHARS,
+      _Instruction_js__WEBPACK_IMPORTED_MODULE_8__["default"].DRAW_CHARS,
       begin,
       end,
       baseline,
@@ -37018,14 +37448,15 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       1,
       this.declutterMode_,
       this.textKeepUpright_,
+      offsetX,
     ]);
     this.hitDetectionInstructions.push([
-      _Instruction_js__WEBPACK_IMPORTED_MODULE_7__["default"].DRAW_CHARS,
+      _Instruction_js__WEBPACK_IMPORTED_MODULE_8__["default"].DRAW_CHARS,
       begin,
       end,
       baseline,
       textState.overflow,
-      fillKey ? _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultFillStyle : fillKey,
+      fillKey ? _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultFillStyle : fillKey,
       textState.maxAngle,
       pixelRatio,
       offsetY,
@@ -37036,6 +37467,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       1 / pixelRatio,
       this.declutterMode_,
       this.textKeepUpright_,
+      offsetX,
     ]);
   }
 
@@ -37060,7 +37492,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
           this.textFillState_ = fillState;
         }
         fillState.fillStyle = (0,_colorlike_js__WEBPACK_IMPORTED_MODULE_0__.asColorLike)(
-          textFillStyle.getColor() || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultFillStyle,
+          textFillStyle.getColor() || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultFillStyle,
         );
       }
 
@@ -37078,23 +37510,23 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
         const lineDashOffset = textStrokeStyle.getLineDashOffset();
         const lineWidth = textStrokeStyle.getWidth();
         const miterLimit = textStrokeStyle.getMiterLimit();
-        strokeState.lineCap = textStrokeStyle.getLineCap() || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultLineCap;
-        strokeState.lineDash = lineDash ? lineDash.slice() : _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultLineDash;
+        strokeState.lineCap = textStrokeStyle.getLineCap() || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultLineCap;
+        strokeState.lineDash = lineDash ? lineDash.slice() : _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultLineDash;
         strokeState.lineDashOffset =
-          lineDashOffset === undefined ? _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultLineDashOffset : lineDashOffset;
-        strokeState.lineJoin = textStrokeStyle.getLineJoin() || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultLineJoin;
+          lineDashOffset === undefined ? _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultLineDashOffset : lineDashOffset;
+        strokeState.lineJoin = textStrokeStyle.getLineJoin() || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultLineJoin;
         strokeState.lineWidth =
-          lineWidth === undefined ? _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultLineWidth : lineWidth;
+          lineWidth === undefined ? _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultLineWidth : lineWidth;
         strokeState.miterLimit =
-          miterLimit === undefined ? _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultMiterLimit : miterLimit;
+          miterLimit === undefined ? _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultMiterLimit : miterLimit;
         strokeState.strokeStyle = (0,_colorlike_js__WEBPACK_IMPORTED_MODULE_0__.asColorLike)(
-          textStrokeStyle.getColor() || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultStrokeStyle,
+          textStrokeStyle.getColor() || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultStrokeStyle,
         );
       }
 
       textState = this.textState_;
-      const font = textStyle.getFont() || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultFont;
-      (0,_canvas_js__WEBPACK_IMPORTED_MODULE_5__.registerFont)(font);
+      const font = textStyle.getFont() || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultFont;
+      (0,_canvas_js__WEBPACK_IMPORTED_MODULE_6__.registerFont)(font);
       const textScale = textStyle.getScaleArray();
       textState.overflow = textStyle.getOverflow();
       textState.font = font;
@@ -37104,10 +37536,10 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       textState.repeat = textStyle.getRepeat();
       textState.justify = textStyle.getJustify();
       textState.textBaseline =
-        textStyle.getTextBaseline() || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultTextBaseline;
+        textStyle.getTextBaseline() || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultTextBaseline;
       textState.backgroundFill = textStyle.getBackgroundFill();
       textState.backgroundStroke = textStyle.getBackgroundStroke();
-      textState.padding = textStyle.getPadding() || _canvas_js__WEBPACK_IMPORTED_MODULE_5__.defaultPadding;
+      textState.padding = textStyle.getPadding() || _canvas_js__WEBPACK_IMPORTED_MODULE_6__.defaultPadding;
       textState.scale = textScale === undefined ? [1, 1] : textScale;
 
       const textOffsetX = textStyle.getOffsetX();
@@ -37127,7 +37559,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
       this.strokeKey_ = strokeState
         ? (typeof strokeState.strokeStyle == 'string'
             ? strokeState.strokeStyle
-            : (0,_util_js__WEBPACK_IMPORTED_MODULE_4__.getUid)(strokeState.strokeStyle)) +
+            : (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.getUid)(strokeState.strokeStyle)) +
           strokeState.lineCap +
           strokeState.lineDashOffset +
           '|' +
@@ -37149,7 +37581,7 @@ class CanvasTextBuilder extends _Builder_js__WEBPACK_IMPORTED_MODULE_6__["defaul
         fillState && fillState.fillStyle
           ? typeof fillState.fillStyle == 'string'
             ? fillState.fillStyle
-            : '|' + (0,_util_js__WEBPACK_IMPORTED_MODULE_4__.getUid)(fillState.fillStyle)
+            : '|' + (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.getUid)(fillState.fillStyle)
           : '';
     }
     this.declutterMode_ = textStyle.getDeclutterMode();
@@ -37196,20 +37628,25 @@ class ZIndexContext {
     this.offset_ = 0;
 
     /**
+     * Name of the method last accessed on the proxy, pushed together with its
+     * arguments when the method is actually called.
+     * @private
+     * @type {string|symbol}
+     */
+    this.pendingMethod_;
+
+    /**
      * @private
      * @type {ZIndexContextProxy}
      */
     this.context_ = /** @type {ZIndexContextProxy} */ (
       new Proxy((0,_dom_js__WEBPACK_IMPORTED_MODULE_0__.getSharedCanvasContext2D)(), {
         get: (target, property) => {
-          if (
-            typeof (/** @type {*} */ ((0,_dom_js__WEBPACK_IMPORTED_MODULE_0__.getSharedCanvasContext2D)())[property]) !==
-            'function'
-          ) {
+          if (typeof (/** @type {*} */ (target)[property]) !== 'function') {
             // we only accept calling functions on the proxy, not accessing properties
             return undefined;
           }
-          this.push_(property);
+          this.pendingMethod_ = property;
           return this.pushMethodArgs_;
         },
         set: (target, property, value) => {
@@ -37234,13 +37671,13 @@ class ZIndexContext {
   }
 
   /**
-   * @private
+   * Pushes the method name captured at access time together with the arguments
+   * passed at call time. Reused across all proxied method calls.
    * @param {...*} args Args.
-   * @return {ZIndexContext} This.
+   * @private
    */
   pushMethodArgs_ = (...args) => {
-    this.push_(args);
-    return this;
+    this.push_(this.pendingMethod_, args);
   };
 
   /**
@@ -37276,11 +37713,9 @@ class ZIndexContext {
         const instructionAtIndex = instructionsAtIndex[++i];
         if (typeof (/** @type {*} */ (context)[property]) === 'function') {
           /** @type {*} */ (context)[property](...instructionAtIndex);
+        } else if (typeof instructionAtIndex === 'function') {
+          /** @type {*} */ (context)[property] = instructionAtIndex(context);
         } else {
-          if (typeof instructionAtIndex === 'function') {
-            /** @type {*} */ (context)[property] = instructionAtIndex(context);
-            continue;
-          }
           /** @type {*} */ (context)[property] = instructionAtIndex;
         }
       }
@@ -37540,6 +37975,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   buildRuleSet: function() { return /* binding */ buildRuleSet; },
 /* harmony export */   buildStyle: function() { return /* binding */ buildStyle; },
+/* harmony export */   flatStyleLikeToStyleFunction: function() { return /* binding */ flatStyleLikeToStyleFunction; },
 /* harmony export */   flatStylesToStyleFunction: function() { return /* binding */ flatStylesToStyleFunction; },
 /* harmony export */   rulesToStyleFunction: function() { return /* binding */ rulesToStyleFunction; }
 /* harmony export */ });
@@ -37618,10 +38054,11 @@ function always(context) {
  * and pass a more complete evaluation context (variables, zoom, time, etc.).
  *
  * @param {Array<import('../../style/flat.js').Rule>} rules The rules.
+ * @param {ParsingContext} [parsingContext] Optional parsing context; will create a new one if not provided
  * @return {import('../../style/Style.js').StyleFunction} A style function.
  */
-function rulesToStyleFunction(rules) {
-  const parsingContext = (0,_expr_expression_js__WEBPACK_IMPORTED_MODULE_2__.newParsingContext)();
+function rulesToStyleFunction(rules, parsingContext) {
+  parsingContext = parsingContext ?? (0,_expr_expression_js__WEBPACK_IMPORTED_MODULE_2__.newParsingContext)();
   const evaluator = buildRuleSet(rules, parsingContext);
   const evaluationContext = (0,_expr_cpu_js__WEBPACK_IMPORTED_MODULE_1__.newEvaluationContext)();
   return function (feature, resolution) {
@@ -37650,10 +38087,11 @@ function rulesToStyleFunction(rules) {
  * and pass a more complete evaluation context (variables, zoom, time, etc.).
  *
  * @param {Array<import('../../style/flat.js').FlatStyle>} flatStyles The flat styles.
+ * @param {ParsingContext} [parsingContext] Optional parsing context; will create a new one if not provided
  * @return {import('../../style/Style.js').StyleFunction} A style function.
  */
-function flatStylesToStyleFunction(flatStyles) {
-  const parsingContext = (0,_expr_expression_js__WEBPACK_IMPORTED_MODULE_2__.newParsingContext)();
+function flatStylesToStyleFunction(flatStyles, parsingContext) {
+  parsingContext = parsingContext ?? (0,_expr_expression_js__WEBPACK_IMPORTED_MODULE_2__.newParsingContext)();
   const length = flatStyles.length;
 
   /**
@@ -37681,6 +38119,11 @@ function flatStylesToStyleFunction(flatStyles) {
         evaluationContext.featureId = null;
       }
     }
+    if (parsingContext.geometryType) {
+      evaluationContext.geometryType = (0,_expr_expression_js__WEBPACK_IMPORTED_MODULE_2__.computeGeometryType)(
+        feature.getGeometry(),
+      );
+    }
     let nonNullCount = 0;
     for (let i = 0; i < length; ++i) {
       const style = evaluators[i](evaluationContext);
@@ -37692,6 +38135,48 @@ function flatStylesToStyleFunction(flatStyles) {
     styles.length = nonNullCount;
     return styles;
   };
+}
+
+/**
+ * This function handles any kind of style that matches the FlatStyleLike type.
+ *
+ * @param {import('../../style/flat.js').FlatStyleLike} flatStyleLike The flat style.
+ * @param {ParsingContext} [parsingContext] Optional parsing context; will create a new one if not provided
+ * @return {import('../../style/Style.js').StyleFunction} A style function.
+ */
+function flatStyleLikeToStyleFunction(flatStyleLike, parsingContext) {
+  parsingContext = parsingContext ?? (0,_expr_expression_js__WEBPACK_IMPORTED_MODULE_2__.newParsingContext)();
+
+  // single FlatStyle
+  if (!Array.isArray(flatStyleLike)) {
+    return flatStylesToStyleFunction([flatStyleLike], parsingContext);
+  }
+
+  const length = flatStyleLike.length;
+  const first = flatStyleLike[0];
+
+  // array of Rule
+  if ('style' in first) {
+    /**
+     * @type {Array<import("../../style/flat.js").Rule>}
+     */
+    const rules = new Array(length);
+    for (let i = 0; i < length; ++i) {
+      const candidate = flatStyleLike[i];
+      if (!('style' in candidate)) {
+        throw new Error('Expected a list of rules with a style property');
+      }
+      rules[i] = candidate;
+    }
+    return rulesToStyleFunction(rules, parsingContext);
+  }
+
+  // array of FlatStyle
+  const flatStyles =
+    /** @type {Array<import("../../style/flat.js").FlatStyle>} */ (
+      flatStyleLike
+    );
+  return flatStylesToStyleFunction(flatStyles, parsingContext);
 }
 
 /**
@@ -39088,7 +39573,7 @@ class CompositeMapRenderer extends _Map_js__WEBPACK_IMPORTED_MODULE_11__["defaul
    * @override
    */
   disposeInternal() {
-    (0,_events_js__WEBPACK_IMPORTED_MODULE_3__.unlistenByKey)(this.fontChangeListenerKey_);
+    ;(0,_events_js__WEBPACK_IMPORTED_MODULE_3__.unlistenByKey)(this.fontChangeListenerKey_);
     this.element_.remove();
     super.disposeInternal();
   }
@@ -39126,8 +39611,20 @@ class CompositeMapRenderer extends _Map_js__WEBPACK_IMPORTED_MODULE_11__["defaul
 
     this.children_.length = 0;
 
+    const map = this.getMap();
+    const mapCanvas = map.getTargetElement();
+    /** @type {CanvasRenderingContext2D|undefined} */
+    let mapContext;
+    if ((0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.isCanvas)(mapCanvas)) {
+      mapContext = /** @type {CanvasRenderingContext2D} */ (
+        mapCanvas.getContext('2d')
+      );
+      mapContext.setTransform(1, 0, 0, 1, 0, 0);
+      mapContext.clearRect(0, 0, mapCanvas.width, mapCanvas.height);
+    }
+
     const renderedLayerStates = [];
-    let previousElement = null;
+    let previousElement = mapContext ? mapCanvas : null;
     for (let i = 0, ii = layerStatesArray.length; i < ii; ++i) {
       const layerState = layerStatesArray[i];
       frameState.layerIndex = i;
@@ -39158,39 +39655,39 @@ class CompositeMapRenderer extends _Map_js__WEBPACK_IMPORTED_MODULE_11__["defaul
 
     (0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.replaceChildren)(this.element_, this.children_);
 
-    const map = this.getMap();
-    const mapCanvas = map.getTargetElement();
-    if ((0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.isCanvas)(mapCanvas)) {
-      // Canvas composition when container is a canvas
-      const mapContext = mapCanvas.getContext('2d');
-      for (const container of this.children_) {
-        const canvas = container.firstElementChild || container;
-        const backgroundColor = container.style.backgroundColor;
-        if (backgroundColor && (!(0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.isCanvas)(canvas) || canvas.width > 0)) {
-          mapContext.fillStyle = backgroundColor;
-          mapContext.fillRect(0, 0, mapCanvas.width, mapCanvas.height);
-        }
-        if ((0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.isCanvas)(canvas) && canvas.width > 0) {
-          mapContext.save();
-          const opacity = container.style.opacity || canvas.style.opacity;
-          mapContext.globalAlpha = opacity === '' ? 1 : Number(opacity);
-          const transform = canvas.style.transform;
-          if (transform) {
-            // Get the transform parameters from the style's transform matrix
-            mapContext.transform(
-              .../** @type {[number, number, number, number, number, number]} */ (
-                (0,_transform_js__WEBPACK_IMPORTED_MODULE_10__.fromString)(transform)
-              ),
-            );
-          } else {
-            const w = parseFloat(canvas.style.width) / canvas.width;
-            const h = parseFloat(canvas.style.height) / canvas.height;
-            mapContext.transform(w, 0, 0, h, 0, 0);
-          }
-          mapContext.drawImage(canvas, 0, 0);
-          mapContext.restore();
-        }
+    for (const container of mapContext ? this.children_ : []) {
+      const canvas = container.firstElementChild || container;
+      const backgroundColor = container.style.backgroundColor;
+      if (backgroundColor && (!(0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.isCanvas)(canvas) || canvas.width > 0)) {
+        mapContext.fillStyle = backgroundColor;
+        mapContext.fillRect(
+          0,
+          0,
+          mapContext.canvas.width,
+          mapContext.canvas.height,
+        );
       }
+      if (!(0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.isCanvas)(canvas) || canvas.width === 0) {
+        continue;
+      }
+      mapContext.save();
+      const opacity = container.style.opacity || canvas.style.opacity;
+      mapContext.globalAlpha = opacity === '' ? 1 : Number(opacity);
+      const transform = canvas.style.transform;
+      if (transform) {
+        // Get the transform parameters from the style's transform matrix
+        mapContext.transform(
+          .../** @type {[number, number, number, number, number, number]} */ (
+            (0,_transform_js__WEBPACK_IMPORTED_MODULE_10__.fromString)(transform)
+          ),
+        );
+      } else {
+        const w = parseFloat(canvas.style.width) / canvas.width;
+        const h = parseFloat(canvas.style.height) / canvas.height;
+        mapContext.transform(w, 0, 0, h, 0, 0);
+      }
+      mapContext.drawImage(canvas, 0, 0);
+      mapContext.restore();
     }
 
     this.dispatchRenderEvent(_render_EventType_js__WEBPACK_IMPORTED_MODULE_8__["default"].POSTCOMPOSE, frameState);
@@ -39283,6 +39780,12 @@ class LayerRenderer extends _Observable_js__WEBPACK_IMPORTED_MODULE_1__["default
      * @protected
      */
     this.maxStaleKeys = maxStaleKeys;
+
+    /**
+     * @type {string}
+     * @protected
+     */
+    this.renderedSourceKey_;
   }
 
   /**
@@ -39299,6 +39802,20 @@ class LayerRenderer extends _Observable_js__WEBPACK_IMPORTED_MODULE_1__["default
     this.staleKeys_.unshift(key);
     if (this.staleKeys_.length > this.maxStaleKeys) {
       this.staleKeys_.length = this.maxStaleKeys;
+    }
+  }
+
+  /**
+   * Remember the previous source key as stale when the key changes.
+   * @param {string} sourceKey The current source key.
+   * @protected
+   */
+  updateStaleKeys(sourceKey) {
+    if (!this.renderedSourceKey_) {
+      this.renderedSourceKey_ = sourceKey;
+    } else if (this.renderedSourceKey_ !== sourceKey) {
+      this.prependStaleKey(this.renderedSourceKey_);
+      this.renderedSourceKey_ = sourceKey;
     }
   }
 
@@ -39495,7 +40012,7 @@ class MapRenderer extends _Disposable_js__WEBPACK_IMPORTED_MODULE_0__["default"]
    * @param {import("../Map.js").FrameState} frameState Frame state.
    */
   dispatchRenderEvent(type, frameState) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_7__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_7__.abstract)();
   }
 
   /**
@@ -39670,7 +40187,7 @@ class MapRenderer extends _Disposable_js__WEBPACK_IMPORTED_MODULE_0__["default"]
    * @param {?import("../Map.js").FrameState} frameState Frame state.
    */
   renderFrame(frameState) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_7__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_7__.abstract)();
   }
 
   /**
@@ -39858,9 +40375,34 @@ class CanvasLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_9__["defaul
    * @param {HTMLElement} target Potential render target.
    * @param {string} transform CSS transform matrix.
    * @param {string} [backgroundColor] Background color.
+   * @param {number} [width] Physical pixel width of the rendering canvas.
+   * @param {number} [height] Physical pixel height of the rendering canvas.
    */
-  useContainer(target, transform, backgroundColor) {
-    // renderer canvas to target canvas
+  useContainer(target, transform, backgroundColor, width, height) {
+    // Render directly into the target canvas when there is no rotation or
+    // offset (no CSS transform needed) and the physical dimensions match.
+    if (
+      (0,_dom_js__WEBPACK_IMPORTED_MODULE_2__.isCanvas)(target) &&
+      this.pixelTransform[1] === 0 &&
+      this.pixelTransform[2] === 0 &&
+      this.pixelTransform[4] === 0 &&
+      this.pixelTransform[5] === 0 &&
+      target.width === width &&
+      target.height === height
+    ) {
+      const targetCanvas = /** @type {HTMLCanvasElement} */ (target);
+      const context = targetCanvas.getContext('2d');
+      if (context) {
+        this.container = target;
+        this.context = context;
+        this.containerReused = true;
+        if (backgroundColor) {
+          context.fillStyle = backgroundColor;
+          context.fillRect(0, 0, targetCanvas.width, targetCanvas.height);
+        }
+        return;
+      }
+    }
     const layerClassName = this.getLayer().getClassName();
     let container, context;
     if (
@@ -39978,7 +40520,8 @@ class CanvasLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_9__["defaul
     (0,_transform_js__WEBPACK_IMPORTED_MODULE_8__.makeInverse)(this.inversePixelTransform, this.pixelTransform);
 
     const canvasTransform = (0,_transform_js__WEBPACK_IMPORTED_MODULE_8__.toString)(this.pixelTransform);
-    this.useContainer(target, canvasTransform, this.getBackground(frameState));
+    const backgroundColor = this.getBackground(frameState);
+    this.useContainer(target, canvasTransform, backgroundColor, width, height);
     if (!this.containerReused) {
       const canvas = this.context.canvas;
       if (canvas.width != width || canvas.height != height) {
@@ -40297,12 +40840,6 @@ class CanvasTileLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_13__["d
      * @type {!Array<import("../../Tile.js").default>}
      */
     this.renderedTiles = [];
-
-    /**
-     * @private
-     * @type {string}
-     */
-    this.renderedSourceKey_;
 
     /**
      * @private
@@ -40750,13 +41287,7 @@ class CanvasTileLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_13__["d
     const z = tileGrid.getZForResolution(viewResolution, tileSource.zDirection);
     const tileResolution = tileGrid.getResolution(z);
 
-    const sourceKey = tileSource.getKey();
-    if (!this.renderedSourceKey_) {
-      this.renderedSourceKey_ = sourceKey;
-    } else if (this.renderedSourceKey_ !== sourceKey) {
-      this.prependStaleKey(this.renderedSourceKey_);
-      this.renderedSourceKey_ = sourceKey;
-    }
+    this.updateStaleKeys(tileSource.getKey());
 
     let frameExtent = frameState.extent;
     const tilePixelRatio = tileSource.getTilePixelRatio(pixelRatio);
@@ -40916,13 +41447,18 @@ class CanvasTileLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_13__["d
 
     this.preRender(context, frameState);
 
-    /** @type {Array<number>} */
     const zs = Object.keys(tilesByZ).map(Number);
     zs.sort(_array_js__WEBPACK_IMPORTED_MODULE_4__.ascending);
 
-    let currentClip;
+    /** @type {Array<import("../../extent.js").Extent>} */
     const clips = [];
+    /** @type {Array<number>} */
     const clipZs = [];
+    // Tiles at the target zoom that are still fading in. They are drawn in a
+    // second pass on top of the (fully drawn) lower-z fallback, so the fade
+    // reads as a coarse-to-fine sharpen instead of revealing the background.
+    /** @type {Array<{tile: import("../../Tile.js").default, x: number, y: number, w: number, h: number, gutter: number}>} */
+    const fadingTiles = [];
     for (let i = zs.length - 1; i >= 0; --i) {
       const currentZ = zs[i];
       const currentTilePixelSize = tileSource.getTilePixelSize(
@@ -40962,52 +41498,60 @@ class CanvasTileLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_13__["d
         const y = Math.round(origin[1] - yIndex * dy);
         const w = nextX - x;
         const h = nextY - y;
-        const transition = zs.length === 1;
+        // Only the target zoom tiles fade in; lower-z fallback tiles are just
+        // gap fillers and must not animate. `inTransition` is false when
+        // transitions are disabled, so this whole path is skipped then.
+        const transition = currentZ === z;
 
-        let contextSaved = false;
+        if (transition && tile.inTransition(uid)) {
+          // Still fading in - defer to the second pass and keep the fallback
+          // beneath it by not adding it to the clips.
+          fadingTiles.push({tile, x, y, w, h, gutter: tileGutter});
+          this.renderedTiles.unshift(tile);
+          this.updateUsedTiles(frameState.usedTiles, tileSource, tile);
+          continue;
+        }
 
-        // Clip mask for regions in this tile that already filled by a higher z tile
-        currentClip = [x, y, x + w, y, x + w, y + h, x, y + h];
-        for (let i = 0, ii = clips.length; i < ii; ++i) {
-          if (!transition && currentZ < clipZs[i]) {
-            const clip = clips[i];
-            if (
-              (0,_extent_js__WEBPACK_IMPORTED_MODULE_5__.intersects)(
-                [x, y, x + w, y + h],
-                [clip[0], clip[3], clip[4], clip[7]],
-              )
-            ) {
-              if (!contextSaved) {
-                context.save();
-                contextSaved = true;
-              }
-              context.beginPath();
-              // counter-clockwise (outer ring) for current tile
-              context.moveTo(currentClip[0], currentClip[1]);
-              context.lineTo(currentClip[2], currentClip[3]);
-              context.lineTo(currentClip[4], currentClip[5]);
-              context.lineTo(currentClip[6], currentClip[7]);
-              // clockwise (inner ring) for higher z tile
-              context.moveTo(clip[6], clip[7]);
-              context.lineTo(clip[4], clip[5]);
-              context.lineTo(clip[2], clip[3]);
-              context.lineTo(clip[0], clip[1]);
-              context.clip();
-            }
+        // Draw only the parts of this tile that are not already covered by a
+        // higher-z tile.
+        const currentRect = [x, y, x + w, y + h];
+        /** @type {Array<import("../../extent.js").Extent>} */
+        const covered = [];
+        for (let j = 0, jj = clips.length; j < jj; ++j) {
+          if (currentZ < clipZs[j] && (0,_extent_js__WEBPACK_IMPORTED_MODULE_5__.intersects)(currentRect, clips[j])) {
+            covered.push(clips[j]);
           }
         }
-        clips.push(currentClip);
+        let clipRects;
+        if (covered.length > 0) {
+          clipRects = (0,_extent_js__WEBPACK_IMPORTED_MODULE_5__.subtractExtents)(currentRect, covered);
+        }
+        clips.push(currentRect);
         clipZs.push(currentZ);
 
-        this.drawTile(tile, frameState, x, y, w, h, tileGutter, transition);
-        if (contextSaved) {
-          context.restore();
-        }
+        this.drawTile(
+          tile,
+          frameState,
+          x,
+          y,
+          w,
+          h,
+          tileGutter,
+          transition,
+          clipRects,
+        );
+
         this.renderedTiles.unshift(tile);
 
         // TODO: decide if this is necessary
         this.updateUsedTiles(frameState.usedTiles, tileSource, tile);
       }
+    }
+
+    // Second pass: draw the fading target zoom tiles on top of the fallback.
+    for (let i = 0, ii = fadingTiles.length; i < ii; ++i) {
+      const {tile, x, y, w, h, gutter} = fadingTiles[i];
+      this.drawTile(tile, frameState, x, y, w, h, gutter, true, undefined);
     }
 
     this.renderedResolution = tileResolution;
@@ -41064,9 +41608,13 @@ class CanvasTileLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_13__["d
    * @param {number} h Height of the tile.
    * @param {number} gutter Tile gutter.
    * @param {boolean} transition Apply an alpha transition.
+   * @param {Array<import("../../extent.js").Extent>} [clipRects] Sub-rectangles
+   *     of the tile to draw. When not provided, the whole tile is drawn; when an
+   *     empty array is provided, nothing is drawn (the tile is fully covered by
+   *     higher-z tiles).
    * @protected
    */
-  drawTile(tile, frameState, x, y, w, h, gutter, transition) {
+  drawTile(tile, frameState, x, y, w, h, gutter, transition, clipRects) {
     let image;
     if (tile instanceof _DataTile_js__WEBPACK_IMPORTED_MODULE_0__["default"]) {
       image = (0,_DataTile_js__WEBPACK_IMPORTED_MODULE_0__.asImageLike)(tile.getData());
@@ -41093,17 +41641,42 @@ class CanvasTileLayerRenderer extends _Layer_js__WEBPACK_IMPORTED_MODULE_13__["d
       context.save();
       context.globalAlpha = alpha;
     }
-    context.drawImage(
-      image,
-      gutter,
-      gutter,
-      image.width - 2 * gutter,
-      image.height - 2 * gutter,
-      x,
-      y,
-      w,
-      h,
-    );
+    const imageWidth = image.width - 2 * gutter;
+    const imageHeight = image.height - 2 * gutter;
+    if (clipRects) {
+      const scaleX = imageWidth / w;
+      const scaleY = imageHeight / h;
+      for (let i = 0, ii = clipRects.length; i < ii; ++i) {
+        const rect = clipRects[i];
+        const rx = rect[0];
+        const ry = rect[1];
+        const rw = rect[2] - rect[0];
+        const rh = rect[3] - rect[1];
+        context.drawImage(
+          image,
+          gutter + (rx - x) * scaleX,
+          gutter + (ry - y) * scaleY,
+          rw * scaleX,
+          rh * scaleY,
+          rx,
+          ry,
+          rw,
+          rh,
+        );
+      }
+    } else {
+      context.drawImage(
+        image,
+        gutter,
+        gutter,
+        imageWidth,
+        imageHeight,
+        x,
+        y,
+        w,
+        h,
+      );
+    }
 
     if (alphaChanged) {
       context.restore();
@@ -44625,6 +45198,37 @@ class Source extends _Object_js__WEBPACK_IMPORTED_MODULE_0__["default"] {
   }
 
   /**
+   * Resolve once the source is ready to be used (its state is `ready`), or
+   * reject if it fails to load (its state is `error`). Sources that configure
+   * asynchronously can use this to expose data (e.g. dimensions) through a
+   * promise instead of the `change` event.
+   * @return {Promise<void>} Resolves when the source is ready.
+   * @protected
+   */
+  ready() {
+    const state = this.getState();
+    if (state === 'ready') {
+      return Promise.resolve();
+    }
+    if (state === 'error') {
+      return Promise.reject(new Error('Source failed to load'));
+    }
+    return new Promise((resolve, reject) => {
+      const onChange = () => {
+        const changedState = this.getState();
+        if (changedState === 'ready') {
+          this.un('change', onChange);
+          resolve();
+        } else if (changedState === 'error') {
+          this.un('change', onChange);
+          reject(new Error('Source failed to load'));
+        }
+      };
+      this.on('change', onChange);
+    });
+  }
+
+  /**
    * Get the state of the source, see {@link import("./Source.js").State} for possible states.
    * @return {import("./Source.js").State} State.
    * @api
@@ -46677,7 +47281,11 @@ class VectorSource extends _Source_js__WEBPACK_IMPORTED_MODULE_16__["default"] {
   hasFeature(feature) {
     const id = feature.getId();
     if (id !== undefined) {
-      return id in this.idIndex_;
+      const indexed = this.idIndex_[String(id)];
+      if (Array.isArray(indexed)) {
+        return indexed.includes(feature);
+      }
+      return indexed === feature;
     }
     return (0,_util_js__WEBPACK_IMPORTED_MODULE_15__.getUid)(feature) in this.uidIndex_;
   }
@@ -46783,20 +47391,28 @@ class VectorSource extends _Source_js__WEBPACK_IMPORTED_MODULE_16__["default"] {
   }
 
   /**
-   * Remove an extent from the list of loaded extents.
-   * @param {import("../extent.js").Extent} extent Extent.
+   * Marks an extent as not loaded, preserving any loaded areas outside it.
+   *
+   * Any previously loaded extent overlapping the given extent is split into its
+   * remaining non-overlapping parts using {@link module:ol/extent~getDifference getDifference()},
+   * which are then re-inserted into the tree.
+   *
+   * @param {import("../extent.js").Extent} extent Extent to mark as not loaded.
    * @api
    */
   removeLoadedExtent(extent) {
     const loadedExtentsRtree = this.loadedExtentsRtree_;
-    const obj = loadedExtentsRtree.forEachInExtent(extent, function (object) {
-      if ((0,_extent_js__WEBPACK_IMPORTED_MODULE_8__.equals)(object.extent, extent)) {
-        return object;
+    const intersectingExtents = [];
+    loadedExtentsRtree.forEachInExtent(extent, function (object) {
+      intersectingExtents.push(object);
+    });
+    intersectingExtents.forEach((intersectingExtent) => {
+      loadedExtentsRtree.remove(intersectingExtent);
+      const remainders = (0,_extent_js__WEBPACK_IMPORTED_MODULE_8__.getDifference)(intersectingExtent.extent, extent);
+      for (const remainder of remainders) {
+        loadedExtentsRtree.insert(remainder, {extent: remainder});
       }
     });
-    if (obj) {
-      loadedExtentsRtree.remove(obj);
-    }
   }
 
   /**
@@ -46910,7 +47526,7 @@ class VectorSource extends _Source_js__WEBPACK_IMPORTED_MODULE_16__["default"] {
    * @api
    */
   setUrl(url) {
-    (0,_asserts_js__WEBPACK_IMPORTED_MODULE_4__.assert)(this.format_, '`format` must be set when `url` is set');
+    ;(0,_asserts_js__WEBPACK_IMPORTED_MODULE_4__.assert)(this.format_, '`format` must be set when `url` is set');
     this.url_ = url;
     this.setLoader((0,_featureloader_js__WEBPACK_IMPORTED_MODULE_9__.xhr)(url, this.format_));
   }
@@ -47751,7 +48367,7 @@ class LRUCache {
    * @param {T} value Value.
    */
   set(key, value) {
-    (0,_asserts_js__WEBPACK_IMPORTED_MODULE_1__.assert)(
+    ;(0,_asserts_js__WEBPACK_IMPORTED_MODULE_1__.assert)(
       !(key in this.entries_),
       'Tried to set a value for a key that is used already',
     );
@@ -47891,7 +48507,7 @@ class PriorityQueue {
    * @return {boolean} The element was added to the queue.
    */
   enqueue(element) {
-    (0,_asserts_js__WEBPACK_IMPORTED_MODULE_0__.assert)(
+    ;(0,_asserts_js__WEBPACK_IMPORTED_MODULE_0__.assert)(
       !(this.keyFunction_(element) in this.queuedElements_),
       'Tried to enqueue an `element` that was already added to the queue',
     );
@@ -48705,7 +49321,7 @@ class Icon extends _Image_js__WEBPACK_IMPORTED_MODULE_6__["default"] {
     if ((cacheKey === undefined || cacheKey.length === 0) && image) {
       cacheKey = /** @type {HTMLImageElement} */ (image).src || (0,_util_js__WEBPACK_IMPORTED_MODULE_4__.getUid)(image);
     }
-    (0,_asserts_js__WEBPACK_IMPORTED_MODULE_1__.assert)(
+    ;(0,_asserts_js__WEBPACK_IMPORTED_MODULE_1__.assert)(
       cacheKey !== undefined && cacheKey.length > 0,
       'A defined and non-empty `src` or `image` must be provided',
     );
@@ -50010,7 +50626,7 @@ class ImageStyle {
    * @param {function(import("../events/Event.js").default): void} listener Listener function.
    */
   listenImageChange(listener) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
   }
 
   /**
@@ -50018,7 +50634,7 @@ class ImageStyle {
    * @abstract
    */
   load() {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
   }
 
   /**
@@ -50026,7 +50642,7 @@ class ImageStyle {
    * @param {function(import("../events/Event.js").default): void} listener Listener function.
    */
   unlistenImageChange(listener) {
-    (0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
+    ;(0,_util_js__WEBPACK_IMPORTED_MODULE_1__.abstract)();
   }
 
   /**
@@ -52396,8 +53012,6 @@ function withinExtentAndZ(tileCoord, tileGrid) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   TileGrid: function() { return /* reexport safe */ _tilegrid_TileGrid_js__WEBPACK_IMPORTED_MODULE_3__["default"]; },
-/* harmony export */   WMTS: function() { return /* reexport safe */ _tilegrid_WMTS_js__WEBPACK_IMPORTED_MODULE_5__["default"]; },
 /* harmony export */   createForExtent: function() { return /* binding */ createForExtent; },
 /* harmony export */   createForProjection: function() { return /* binding */ createForProjection; },
 /* harmony export */   createXYZ: function() { return /* binding */ createXYZ; },
@@ -52405,12 +53019,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getForProjection: function() { return /* binding */ getForProjection; },
 /* harmony export */   wrapX: function() { return /* binding */ wrapX; }
 /* harmony export */ });
+/* empty/unused harmony star reexport */
+/* empty/unused harmony star reexport */
 /* harmony import */ var _extent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/ol/extent.js");
 /* harmony import */ var _proj_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/ol/proj.js");
 /* harmony import */ var _size_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./node_modules/ol/size.js");
-/* harmony import */ var _tilegrid_TileGrid_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./node_modules/ol/tilegrid/TileGrid.js");
-/* harmony import */ var _tilegrid_common_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/tilegrid/common.js");
-/* harmony import */ var _tilegrid_WMTS_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/tilegrid/WMTS.js");
+/* harmony import */ var _tilegrid_TileGrid_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./node_modules/ol/tilegrid/TileGrid.js");
+/* harmony import */ var _tilegrid_common_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("./node_modules/ol/tilegrid/common.js");
 /**
  * @module ol/tilegrid
  */
@@ -52472,7 +53087,7 @@ function createForExtent(extent, maxZoom, tileSize, corner) {
 
   const resolutions = resolutionsFromExtent(extent, maxZoom, tileSize);
 
-  return new _tilegrid_TileGrid_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
+  return new _tilegrid_TileGrid_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
     extent: extent,
     origin: (0,_extent_js__WEBPACK_IMPORTED_MODULE_0__.getCorner)(extent, corner),
     resolutions: resolutions,
@@ -52514,7 +53129,7 @@ function createXYZ(options) {
       xyzOptions.maxResolution,
     ),
   };
-  return new _tilegrid_TileGrid_js__WEBPACK_IMPORTED_MODULE_3__["default"](gridOptions);
+  return new _tilegrid_TileGrid_js__WEBPACK_IMPORTED_MODULE_4__["default"](gridOptions);
 }
 
 /**
@@ -52528,8 +53143,8 @@ function createXYZ(options) {
  * @return {!Array<number>} Resolutions array.
  */
 function resolutionsFromExtent(extent, maxZoom, tileSize, maxResolution) {
-  maxZoom = maxZoom !== undefined ? maxZoom : _tilegrid_common_js__WEBPACK_IMPORTED_MODULE_4__.DEFAULT_MAX_ZOOM;
-  tileSize = (0,_size_js__WEBPACK_IMPORTED_MODULE_2__.toSize)(tileSize !== undefined ? tileSize : _tilegrid_common_js__WEBPACK_IMPORTED_MODULE_4__.DEFAULT_TILE_SIZE);
+  maxZoom = maxZoom !== undefined ? maxZoom : _tilegrid_common_js__WEBPACK_IMPORTED_MODULE_5__.DEFAULT_MAX_ZOOM;
+  tileSize = (0,_size_js__WEBPACK_IMPORTED_MODULE_2__.toSize)(tileSize !== undefined ? tileSize : _tilegrid_common_js__WEBPACK_IMPORTED_MODULE_5__.DEFAULT_TILE_SIZE);
 
   const height = (0,_extent_js__WEBPACK_IMPORTED_MODULE_0__.getHeight)(extent);
   const width = (0,_extent_js__WEBPACK_IMPORTED_MODULE_0__.getWidth)(extent);
@@ -52643,6 +53258,9 @@ const DECIMALS = 5;
  * for which tile requests are made by sources. If the bottom-left corner of
  * an extent is used as `origin` or `origins`, then the `y` value must be
  * negative because OpenLayers tile coordinates use the top left as the origin.
+ * @property {Array<import("../TileRange.js").default>} [tileRanges] Pre-built tile ranges for each
+ * zoom level. When provided, these are used directly as the full tile ranges instead of computing
+ * them from `sizes`. Useful for setting per-level tile index bounds (e.g. from WMTS `TileMatrixSetLimits`).
  * @property {number|import("../size.js").Size} [tileSize] Tile size.
  * Default is `[256, 256]`.
  * @property {Array<number|import("../size.js").Size>} [tileSizes] Tile sizes. If given, the array length
@@ -52661,17 +53279,22 @@ class TileGrid {
    * @param {Options} options Tile grid options.
    */
   constructor(options) {
+    let minZoom = options.minZoom;
+    const resolutions = options.resolutions;
+    if (minZoom === undefined && resolutions) {
+      minZoom = resolutions.findIndex((resolution) => resolution !== undefined);
+    }
     /**
      * @protected
      * @type {number}
      */
-    this.minZoom = options.minZoom !== undefined ? options.minZoom : 0;
+    this.minZoom = minZoom !== undefined ? minZoom : 0;
 
     /**
      * @private
      * @type {!Array<number>}
      */
-    this.resolutions_ = options.resolutions;
+    this.resolutions_ = resolutions;
     (0,_asserts_js__WEBPACK_IMPORTED_MODULE_2__.assert)(
       (0,_array_js__WEBPACK_IMPORTED_MODULE_1__.isSorted)(
         this.resolutions_,
@@ -52738,7 +53361,7 @@ class TileGrid {
       this.origin_ = (0,_extent_js__WEBPACK_IMPORTED_MODULE_3__.getTopLeft)(extent);
     }
 
-    (0,_asserts_js__WEBPACK_IMPORTED_MODULE_2__.assert)(
+    ;(0,_asserts_js__WEBPACK_IMPORTED_MODULE_2__.assert)(
       (!this.origin_ && this.origins_) || (this.origin_ && !this.origins_),
       'Either `origin` or `origins` must be configured, never both',
     );
@@ -52796,7 +53419,9 @@ class TileGrid {
      */
     this.tmpExtent_ = [0, 0, 0, 0];
 
-    if (options.sizes !== undefined) {
+    if (options.tileRanges !== undefined) {
+      this.fullTileRanges_ = options.tileRanges;
+    } else if (options.sizes !== undefined) {
       this.fullTileRanges_ = options.sizes.map((size, z) => {
         const tileRange = new _TileRange_js__WEBPACK_IMPORTED_MODULE_0__["default"](
           Math.min(0, size[0]),
@@ -53277,207 +53902,6 @@ class TileGrid {
 
 /***/ }),
 
-/***/ "./node_modules/ol/tilegrid/WMTS.js":
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createFromCapabilitiesMatrixSet: function() { return /* binding */ createFromCapabilitiesMatrixSet; }
-/* harmony export */ });
-/* harmony import */ var _proj_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/ol/proj.js");
-/* harmony import */ var _TileGrid_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/ol/tilegrid/TileGrid.js");
-/**
- * @module ol/tilegrid/WMTS
- */
-
-
-
-
-/**
- * @typedef {Object} Options
- * @property {import("../extent.js").Extent} [extent] Extent for the tile grid. No tiles
- * outside this extent will be requested by {@link module:ol/source/Tile~TileSource} sources.
- * When no `origin` or `origins` are configured, the `origin` will be set to the
- * top-left corner of the extent.
- * @property {import("../coordinate.js").Coordinate} [origin] The tile grid origin, i.e.
- * where the `x` and `y` axes meet (`[z, 0, 0]`). Tile coordinates increase left
- * to right and downwards. If not specified, `extent` or `origins` must be provided.
- * @property {Array<import("../coordinate.js").Coordinate>} [origins] Tile grid origins,
- * i.e. where the `x` and `y` axes meet (`[z, 0, 0]`), for each zoom level. If
- * given, the array length should match the length of the `resolutions` array, i.e.
- * each resolution can have a different origin. Tile coordinates increase left to
- * right and downwards. If not specified, `extent` or `origin` must be provided.
- * @property {!Array<number>} resolutions Resolutions. The array index of each
- * resolution needs to match the zoom level. This means that even if a `minZoom`
- * is configured, the resolutions array will have a length of `maxZoom + 1`
- * @property {!Array<string>} matrixIds matrix IDs. The length of this array needs
- * to match the length of the `resolutions` array.
- * @property {Array<import("../size.js").Size>} [sizes] Number of tile rows and columns
- * of the grid for each zoom level. The values here are the `TileMatrixWidth` and
- * `TileMatrixHeight` advertised in the GetCapabilities response of the WMTS, and
- * define each zoom level's extent together with the `origin` or `origins`.
- * A grid `extent` can be configured in addition, and will further limit the extent for
- * which tile requests are made by sources. If the bottom-left corner of
- * an extent is used as `origin` or `origins`, then the `y` value must be
- * negative because OpenLayers tile coordinates use the top left as the origin.
- * @property {number|import("../size.js").Size} [tileSize] Tile size.
- * @property {Array<number|import("../size.js").Size>} [tileSizes] Tile sizes. The length of
- * this array needs to match the length of the `resolutions` array.
- */
-
-/**
- * @classdesc
- * Set the grid pattern for sources accessing WMTS tiled-image servers.
- * @api
- */
-class WMTSTileGrid extends _TileGrid_js__WEBPACK_IMPORTED_MODULE_1__["default"] {
-  /**
-   * @param {Options} options WMTS options.
-   */
-  constructor(options) {
-    super({
-      extent: options.extent,
-      origin: options.origin,
-      origins: options.origins,
-      resolutions: options.resolutions,
-      tileSize: options.tileSize,
-      tileSizes: options.tileSizes,
-      sizes: options.sizes,
-    });
-
-    /**
-     * @private
-     * @type {!Array<string>}
-     */
-    this.matrixIds_ = options.matrixIds;
-  }
-
-  /**
-   * @param {number} z Z.
-   * @return {string} MatrixId..
-   */
-  getMatrixId(z) {
-    return this.matrixIds_[z];
-  }
-
-  /**
-   * Get the list of matrix identifiers.
-   * @return {Array<string>} MatrixIds.
-   * @api
-   */
-  getMatrixIds() {
-    return this.matrixIds_;
-  }
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (WMTSTileGrid);
-
-/**
- * Create a tile grid from a WMTS capabilities matrix set and an
- * optional TileMatrixSetLimits.
- * @param {Object} matrixSet An object representing a matrixSet in the
- *     capabilities document.
- * @param {import("../extent.js").Extent} [extent] An optional extent to restrict the tile
- *     ranges the server provides.
- * @param {Array<Object>} [matrixLimits] An optional object representing
- *     the available matrices for tileGrid.
- * @return {WMTSTileGrid} WMTS tileGrid instance.
- * @api
- */
-function createFromCapabilitiesMatrixSet(
-  matrixSet,
-  extent,
-  matrixLimits,
-) {
-  /** @type {!Array<number>} */
-  const resolutions = [];
-  /** @type {!Array<string>} */
-  const matrixIds = [];
-  /** @type {!Array<import("../coordinate.js").Coordinate>} */
-  const origins = [];
-  /** @type {!Array<number|import("../size.js").Size>} */
-  const tileSizes = [];
-  /** @type {!Array<import("../size.js").Size>} */
-  const sizes = [];
-
-  matrixLimits = matrixLimits !== undefined ? matrixLimits : [];
-
-  const supportedCRSPropName = 'SupportedCRS';
-  const matrixIdsPropName = 'TileMatrix';
-  const identifierPropName = 'Identifier';
-  const scaleDenominatorPropName = 'ScaleDenominator';
-  const topLeftCornerPropName = 'TopLeftCorner';
-  const tileWidthPropName = 'TileWidth';
-  const tileHeightPropName = 'TileHeight';
-
-  const code = matrixSet[supportedCRSPropName];
-  const projection = (0,_proj_js__WEBPACK_IMPORTED_MODULE_0__.get)(code);
-  const metersPerUnit = projection.getMetersPerUnit();
-  // swap origin x and y coordinates if axis orientation is lat/long
-  const switchOriginXY = projection.getAxisOrientation().startsWith('ne');
-
-  matrixSet[matrixIdsPropName].sort(function (a, b) {
-    return b[scaleDenominatorPropName] - a[scaleDenominatorPropName];
-  });
-
-  matrixSet[matrixIdsPropName].forEach(function (elt) {
-    let matrixAvailable;
-    // use of matrixLimits to filter TileMatrices from GetCapabilities
-    // TileMatrixSet from unavailable matrix levels.
-    if (matrixLimits.length > 0) {
-      matrixAvailable = matrixLimits.find(function (elt_ml) {
-        if (elt[identifierPropName] == elt_ml[matrixIdsPropName]) {
-          return true;
-        }
-        // Fallback for tileMatrix identifiers that don't get prefixed
-        // by their tileMatrixSet identifiers.
-        if (!elt[identifierPropName].includes(':')) {
-          return (
-            matrixSet[identifierPropName] + ':' + elt[identifierPropName] ===
-            elt_ml[matrixIdsPropName]
-          );
-        }
-        return false;
-      });
-    } else {
-      matrixAvailable = true;
-    }
-
-    if (matrixAvailable) {
-      matrixIds.push(elt[identifierPropName]);
-      const resolution =
-        (elt[scaleDenominatorPropName] * 0.28e-3) / metersPerUnit;
-      const tileWidth = elt[tileWidthPropName];
-      const tileHeight = elt[tileHeightPropName];
-      if (switchOriginXY) {
-        origins.push([
-          elt[topLeftCornerPropName][1],
-          elt[topLeftCornerPropName][0],
-        ]);
-      } else {
-        origins.push(elt[topLeftCornerPropName]);
-      }
-      resolutions.push(resolution);
-      tileSizes.push(
-        tileWidth == tileHeight ? tileWidth : [tileWidth, tileHeight],
-      );
-      sizes.push([elt['MatrixWidth'], elt['MatrixHeight']]);
-    }
-  });
-
-  return new WMTSTileGrid({
-    extent: extent,
-    origins: origins,
-    resolutions: resolutions,
-    matrixIds: matrixIds,
-    tileSizes: tileSizes,
-    sizes: sizes,
-  });
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/ol/tilegrid/common.js":
 /***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
@@ -53614,6 +54038,7 @@ function nullTileUrlFunction(tileCoord, pixelRatio, projection) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   IDENTITY_TRANSFORM: function() { return /* binding */ IDENTITY_TRANSFORM; },
 /* harmony export */   apply: function() { return /* binding */ apply; },
 /* harmony export */   compose: function() { return /* binding */ compose; },
 /* harmony export */   composeCssTransform: function() { return /* binding */ composeCssTransform; },
@@ -53658,6 +54083,9 @@ __webpack_require__.r(__webpack_exports__);
  * ```
  */
 
+/** @type {Transform} */
+const IDENTITY_TRANSFORM = [1, 0, 0, 1, 0, 0];
+
 /**
  * @private
  * @type {Transform}
@@ -53669,7 +54097,7 @@ const tmp_ = new Array(6);
  * @return {!Transform} Identity transform.
  */
 function create() {
-  return [1, 0, 0, 1, 0, 0];
+  return IDENTITY_TRANSFORM.slice(0);
 }
 
 /**
@@ -54109,7 +54537,7 @@ function getUid(obj) {
  * OpenLayers version.
  * @type {string}
  */
-const VERSION = '10.9.0';
+const VERSION = '10.10.0';
 
 
 /***/ }),
