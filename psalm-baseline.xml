@@ -8129,11 +8129,6 @@
       <code><![CDATA[empty($_POST['item_timing'])]]></code>
     </RiskyTruthyFalsyComparison>
   </file>
-  <file src="src/Twig/PmaGlobalVariable.php">
-    <UnusedParam>
-      <code><![CDATA[$arguments]]></code>
-    </UnusedParam>
-  </file>
   <file src="src/TwoFactor.php">
     <DeprecatedMethod>
       <code><![CDATA[Config::getInstance()]]></code>
@@ -9465,19 +9460,10 @@
     </DeprecatedMethod>
   </file>
   <file src="tests/unit/Database/RoutinesTest.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[Config::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-      <code><![CDATA[DatabaseInterface::getInstance()]]></code>
-    </DeprecatedMethod>
     <MixedAssignment>
       <code><![CDATA[$postData[$key]]]></code>
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <UndefinedAttributeClass>
-      <code><![CDATA[AllowMockObjectsWithoutExpectations]]></code>
-    </UndefinedAttributeClass>
   </file>
   <file src="tests/unit/Database/SearchTest.php">
     <DeprecatedMethod>
@@ -10158,9 +10144,6 @@
     </DeprecatedMethod>
   </file>
   <file src="tests/unit/Plugins/Transformations/TransformationPluginsTest.php">
-    <DeprecatedMethod>
-      <code><![CDATA[Config::getInstance()]]></code>
-    </DeprecatedMethod>
     <InvalidArgument>
       <code><![CDATA[testTransformation]]></code>
     </InvalidArgument>
