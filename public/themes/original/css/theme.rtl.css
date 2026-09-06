@@ -12758,7 +12758,8 @@ pre {
 
 code.json,
 code.php,
-code.sql {
+code.sql,
+code.xml {
   color: var(--bs-code-color);
 }
 
