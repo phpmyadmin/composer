@@ -191,7 +191,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
       $editorSpan.hide();
     }
   });
-  const gisEditorModal = document.getElementById('gisEditorModal');
+  const gisEditorModal = document.querySelector('#gisEditorModal.editor-for-search');
   gisEditorModal === null || gisEditorModal === void 0 || gisEditorModal.addEventListener('show.bs.modal', event => {
     // @ts-ignore
     const button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(event.relatedTarget);
