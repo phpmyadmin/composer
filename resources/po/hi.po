@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-10-04 01:17+0000\n"
+"POT-Creation-Date: 2026-10-11 00:47+0000\n"
 "PO-Revision-Date: 2022-02-15 16:21+0000\n"
 "Last-Translator: Maurício Meneghini Fauth <mauricio@fauth.dev>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -223,7 +223,7 @@ msgstr "%s के बाद"
 #: resources/templates/table/zoom_search/index.twig:120
 #: src/Config/ConfigFile.php:554
 #: src/Controllers/JavaScriptMessagesController.php:219
-#: src/Display/Results.php:921 src/Plugins/Export/ExportSql.php:1984
+#: src/Display/Results.php:921 src/Plugins/Export/ExportSql.php:1970
 #: src/Plugins/Schema/SchemaPdf.php:96
 msgid "None"
 msgstr "कुछ नहीं"
@@ -2051,7 +2051,7 @@ msgstr ""
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:991 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:977 src/Plugins/Export/ExportXml.php:92
 #: src/Util.php:1394
 msgid "Events"
 msgstr ""
@@ -2804,8 +2804,8 @@ msgid "Export routine"
 msgstr "निर्यात डिफ़ॉल्ट"
 
 #: resources/templates/database/routines/index.twig:113
-#: src/Controllers/Database/RoutinesController.php:335
-#: src/Controllers/Database/RoutinesController.php:343
+#: src/Controllers/Database/RoutinesController.php:336
+#: src/Controllers/Database/RoutinesController.php:344
 msgid "Execute routine"
 msgstr ""
 
@@ -3086,7 +3086,7 @@ msgstr ""
 
 #: resources/templates/database/structure/copy_form.twig:5
 #: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:250
-#: src/Plugins/Export/ExportSql.php:921 src/Plugins/Export/ExportXml.php:356
+#: src/Plugins/Export/ExportSql.php:907 src/Plugins/Export/ExportXml.php:356
 #: src/Plugins/Export/Helpers/Pdf.php:147
 #, fuzzy
 #| msgid "Database"
@@ -4005,7 +4005,7 @@ msgid "Server connection:"
 msgstr "सर्वर कनेक्शन:"
 
 #: resources/templates/home/index.twig:197
-#: src/Plugins/Export/ExportLatex.php:231 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportLatex.php:231 src/Plugins/Export/ExportSql.php:750
 #: src/Plugins/Export/ExportXml.php:203
 msgid "Server version:"
 msgstr "सर्वर संस्करण :"
@@ -6059,7 +6059,7 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:223 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportLatex.php:223 src/Plugins/Export/ExportSql.php:739
 #: src/Plugins/Export/ExportXml.php:195
 #, fuzzy
 #| msgid "Host"
@@ -8378,7 +8378,7 @@ msgstr "निर्यात सामग्री"
 #: src/Navigation/Nodes/NodeTriggerContainer.php:26
 #: src/Plugins/Export/ExportHtmlword.php:448
 #: src/Plugins/Export/ExportOdt.php:566 src/Plugins/Export/ExportPdf.php:173
-#: src/Plugins/Export/ExportSql.php:1847
+#: src/Plugins/Export/ExportSql.php:1833
 #: src/Plugins/Export/ExportTexytext.php:408
 #: src/Plugins/Export/ExportXml.php:112 src/Util.php:1395 src/Util.php:1411
 msgid "Triggers"
@@ -10173,7 +10173,7 @@ msgstr "अक्षम"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "structure"
 msgstr "संरचना"
@@ -10184,7 +10184,7 @@ msgstr "संरचना"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "data"
 msgstr "डेटा"
@@ -10195,7 +10195,7 @@ msgstr "डेटा"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "structure and data"
 msgstr "संरचना और डेटा"
@@ -10404,7 +10404,7 @@ msgid ""
 msgstr "एक स्क्रिप्ट को चलने की अवधि सेकंड में दें, (शून्य - कोई सीमा नहीं के लिए)"
 
 #: src/Config/Descriptions.php:172 src/Config/Descriptions.php:706
-#: src/Plugins/Export/ExportSql.php:367
+#: src/Plugins/Export/ExportSql.php:354
 msgid "Exclude definition of current user"
 msgstr ""
 
@@ -11920,7 +11920,7 @@ msgstr "टेबल नाम टेम्पलेट"
 #: src/Plugins/Export/ExportMediawiki.php:59
 #: src/Plugins/Export/ExportMediawiki.php:65
 #: src/Plugins/Export/ExportOdt.php:74 src/Plugins/Export/ExportPdf.php:75
-#: src/Plugins/Export/ExportSql.php:264
+#: src/Plugins/Export/ExportSql.php:252
 #: src/Plugins/Export/ExportTexytext.php:66
 msgid "Dump table"
 msgstr "टेबल दुम्प करें"
@@ -11988,11 +11988,11 @@ msgstr "निर्माण/अद्यतन/जाँच दिनांक
 msgid "Use delayed inserts"
 msgstr "विलंबित इनसर्टस"
 
-#: src/Config/Descriptions.php:690 src/Plugins/Export/ExportSql.php:234
+#: src/Config/Descriptions.php:690 src/Plugins/Export/ExportSql.php:222
 msgid "Disable foreign key checks"
 msgstr "निष्क्रिय विदेशी कुंजी चेक"
 
-#: src/Config/Descriptions.php:691 src/Plugins/Export/ExportSql.php:244
+#: src/Config/Descriptions.php:691 src/Plugins/Export/ExportSql.php:232
 #, fuzzy
 #| msgid "Exporting rows from \"%s\" table"
 msgid "Export views as tables"
@@ -12016,7 +12016,7 @@ msgid ""
 "creation)"
 msgstr ""
 
-#: src/Config/Descriptions.php:707 src/Plugins/Export/ExportSql.php:373
+#: src/Config/Descriptions.php:707 src/Plugins/Export/ExportSql.php:360
 #, fuzzy, php-format
 #| msgid "Session value"
 msgid "%s view"
@@ -12030,7 +12030,7 @@ msgstr "आवेषण उपेक्षा का प्रयोग कर�
 msgid "Syntax to use when inserting data"
 msgstr "डेटा दल्तें समय वाक्यविन्यास का उपयोग करें"
 
-#: src/Config/Descriptions.php:711 src/Plugins/Export/ExportSql.php:500
+#: src/Config/Descriptions.php:711 src/Plugins/Export/ExportSql.php:486
 msgid "Maximal length of created query"
 msgstr "क्वेरी के अधिकतम लंबाई"
 
@@ -12038,7 +12038,7 @@ msgstr "क्वेरी के अधिकतम लंबाई"
 msgid "Export type"
 msgstr "निर्यात प्रकार"
 
-#: src/Config/Descriptions.php:717 src/Plugins/Export/ExportSql.php:224
+#: src/Config/Descriptions.php:717 src/Plugins/Export/ExportSql.php:212
 msgid "Enclose export in a transaction"
 msgstr "एक सौदे में बंद निर्यात"
 
@@ -13354,13 +13354,13 @@ msgstr ""
 
 #: src/Controllers/Database/DesignerController.php:175
 #: src/Controllers/Database/DesignerController.php:180
-#: src/Controllers/Database/EventsController.php:52
+#: src/Controllers/Database/EventsController.php:53
 #: src/Controllers/Database/ExportController.php:57
 #: src/Controllers/Database/ExportController.php:62
 #: src/Controllers/Database/ImportController.php:62
 #: src/Controllers/Database/ImportController.php:67
-#: src/Controllers/Database/RoutinesController.php:77
-#: src/Controllers/Database/RoutinesController.php:95
+#: src/Controllers/Database/RoutinesController.php:78
+#: src/Controllers/Database/RoutinesController.php:96
 #: src/Controllers/Database/SearchController.php:53
 #: src/Controllers/Database/SearchController.php:58
 #: src/Controllers/Database/SqlController.php:54
@@ -13422,45 +13422,45 @@ msgstr ""
 msgid "No databases selected."
 msgstr "कोइ डाटाबेस नहीं चुना गया है।"
 
-#: src/Controllers/Database/EventsController.php:69
+#: src/Controllers/Database/EventsController.php:70
 msgid "The event was dropped immediately after creation."
 msgstr ""
 
-#: src/Controllers/Database/EventsController.php:136
+#: src/Controllers/Database/EventsController.php:137
 #, fuzzy
 #| msgid "Add a new server"
 msgid "Add event"
 msgstr "एक नया सर्वर जोडें"
 
-#: src/Controllers/Database/EventsController.php:140
+#: src/Controllers/Database/EventsController.php:141
 #, fuzzy
 #| msgid "Edit server"
 msgid "Edit event"
 msgstr "सर्वर को संपादित करें"
 
-#: src/Controllers/Database/EventsController.php:189
-#: src/Controllers/Database/RoutinesController.php:254
-#: src/Controllers/Database/RoutinesController.php:284
-#: src/Controllers/Database/RoutinesController.php:350
+#: src/Controllers/Database/EventsController.php:190
+#: src/Controllers/Database/RoutinesController.php:255
+#: src/Controllers/Database/RoutinesController.php:285
+#: src/Controllers/Database/RoutinesController.php:351
 #: src/Controllers/Triggers/IndexController.php:207
 #, fuzzy
 #| msgid "Error in Processing Request"
 msgid "Error in processing request:"
 msgstr "याचिका प्रसंस्करणमें त्रुटि"
 
-#: src/Controllers/Database/EventsController.php:191
+#: src/Controllers/Database/EventsController.php:192
 #, fuzzy, php-format
 #| msgid "No tables found in database."
 msgid "No event with name %1$s found in database %2$s."
 msgstr "डाटाबेस में कोई टेबल नहीं।"
 
-#: src/Controllers/Database/EventsController.php:217
+#: src/Controllers/Database/EventsController.php:218
 #, fuzzy, php-format
 #| msgid "Export contents"
 msgid "Export of event %s"
 msgstr "निर्यात सामग्री"
 
-#: src/Controllers/Database/EventsController.php:237
+#: src/Controllers/Database/EventsController.php:238
 #, fuzzy, php-format
 #| msgid "No tables found in database."
 msgid ""
@@ -13494,7 +13494,7 @@ msgstr "कोइ प्रिविलेज नहीं"
 msgid "You do not have the privileges to administrate the users!"
 msgstr "आपके पास यहाँ उपस्थित होने के अधिकार नहीं हैं"
 
-#: src/Controllers/Database/RoutinesController.php:85
+#: src/Controllers/Database/RoutinesController.php:86
 #: src/Controllers/Database/Structure/AddPrefixController.php:35
 #: src/Controllers/Database/Structure/CentralColumns/AddController.php:39
 #: src/Controllers/Database/Structure/CentralColumns/MakeConsistentController.php:38
@@ -13550,39 +13550,39 @@ msgstr "आपके पास यहाँ उपस्थित होने �
 msgid "No table selected."
 msgstr "कोइ टेबल नहीं चुना गया है।"
 
-#: src/Controllers/Database/RoutinesController.php:170
+#: src/Controllers/Database/RoutinesController.php:171
 #, fuzzy
 #| msgid "Add index"
 msgid "Add routine"
 msgstr "अनुक्रमणिका जोड़"
 
-#: src/Controllers/Database/RoutinesController.php:174
+#: src/Controllers/Database/RoutinesController.php:175
 #, fuzzy
 #| msgid "Edit mode"
 msgid "Edit routine"
 msgstr "संपादन मोड"
 
-#: src/Controllers/Database/RoutinesController.php:257
+#: src/Controllers/Database/RoutinesController.php:258
 #, php-format
 msgid ""
 "No routine with name %1$s found in database %2$s. You might be lacking the "
 "necessary privileges to edit this routine."
 msgstr ""
 
-#: src/Controllers/Database/RoutinesController.php:286
-#: src/Controllers/Database/RoutinesController.php:352
+#: src/Controllers/Database/RoutinesController.php:287
+#: src/Controllers/Database/RoutinesController.php:353
 #, fuzzy, php-format
 #| msgid "No tables found in database."
 msgid "No routine with name %1$s found in database %2$s."
 msgstr "डाटाबेस में कोई टेबल नहीं।"
 
-#: src/Controllers/Database/RoutinesController.php:395
+#: src/Controllers/Database/RoutinesController.php:384
 #, fuzzy, php-format
 #| msgid "Export defaults"
 msgid "Export of routine %s"
 msgstr "निर्यात डिफ़ॉल्ट"
 
-#: src/Controllers/Database/RoutinesController.php:414
+#: src/Controllers/Database/RoutinesController.php:403
 #, php-format
 msgid ""
 "Error in processing request: No routine with name %1$s found in database "
@@ -18135,7 +18135,7 @@ msgstr ""
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:630 src/Plugins/Export/ExportXml.php:97
 msgid "Functions"
 msgstr ""
 
@@ -18155,7 +18155,7 @@ msgstr ""
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:619 src/Plugins/Export/ExportXml.php:102
 msgid "Procedures"
 msgstr "प्रक्रियाओं"
 
@@ -18605,25 +18605,25 @@ msgid "Data dump options"
 msgstr ""
 
 #: src/Plugins/Export/ExportHtmlword.php:167
-#: src/Plugins/Export/ExportOdt.php:209 src/Plugins/Export/ExportSql.php:2093
+#: src/Plugins/Export/ExportOdt.php:209 src/Plugins/Export/ExportSql.php:2079
 #: src/Plugins/Export/ExportTexytext.php:137
 msgid "Dumping data for table"
 msgstr ""
 
 #: src/Plugins/Export/ExportHtmlword.php:439
-#: src/Plugins/Export/ExportOdt.php:556 src/Plugins/Export/ExportSql.php:1829
+#: src/Plugins/Export/ExportOdt.php:556 src/Plugins/Export/ExportSql.php:1815
 #: src/Plugins/Export/ExportTexytext.php:401
 msgid "Table structure for table"
 msgstr ""
 
 #: src/Plugins/Export/ExportHtmlword.php:456
-#: src/Plugins/Export/ExportOdt.php:576 src/Plugins/Export/ExportSql.php:1895
+#: src/Plugins/Export/ExportOdt.php:576 src/Plugins/Export/ExportSql.php:1881
 #: src/Plugins/Export/ExportTexytext.php:414
 msgid "Structure for view"
 msgstr "वीएव के लिए संरचना"
 
 #: src/Plugins/Export/ExportHtmlword.php:462
-#: src/Plugins/Export/ExportOdt.php:584 src/Plugins/Export/ExportSql.php:1938
+#: src/Plugins/Export/ExportOdt.php:584 src/Plugins/Export/ExportSql.php:1924
 #: src/Plugins/Export/ExportTexytext.php:418
 msgid "Stand-in structure for view"
 msgstr ""
@@ -18651,7 +18651,7 @@ msgid "Structure of table @TABLE@"
 msgstr "केवल संरचना"
 
 #: src/Plugins/Export/ExportLatex.php:124 src/Plugins/Export/ExportOdt.php:89
-#: src/Plugins/Export/ExportSql.php:280
+#: src/Plugins/Export/ExportSql.php:267
 msgid "Object creation options"
 msgstr ""
 
@@ -18677,7 +18677,7 @@ msgid "Label key:"
 msgstr "लेबल कुंजी"
 
 #: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:96
-#: src/Plugins/Export/ExportSql.php:206
+#: src/Plugins/Export/ExportSql.php:194
 msgid "Display foreign key relationships"
 msgstr ""
 
@@ -18688,7 +18688,7 @@ msgid "Display comments"
 msgstr "फीचरस दिखाओ"
 
 #: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:109
-#: src/Plugins/Export/ExportSql.php:214
+#: src/Plugins/Export/ExportSql.php:202
 #, fuzzy
 #| msgid "Display Features"
 msgid "Display media types"
@@ -18700,21 +18700,21 @@ msgstr "फीचरस दिखाओ"
 msgid "Put columns names in the first row:"
 msgstr "काँलम नाम प्रथम रो में"
 
-#: src/Plugins/Export/ExportLatex.php:229 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportLatex.php:229 src/Plugins/Export/ExportSql.php:746
 #: src/Plugins/Export/ExportXml.php:201
 #, fuzzy
 #| msgid "Generation Time"
 msgid "Generation Time:"
 msgstr "समय पर बनाया"
 
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:752
 #: src/Plugins/Export/ExportXml.php:204
 #, fuzzy
 #| msgid "Version"
 msgid "PHP Version:"
 msgstr "संस्करण"
 
-#: src/Plugins/Export/ExportLatex.php:287 src/Plugins/Export/ExportSql.php:1984
+#: src/Plugins/Export/ExportLatex.php:287 src/Plugins/Export/ExportSql.php:1970
 #, fuzzy
 #| msgid "Data"
 msgid "Data:"
@@ -18771,248 +18771,248 @@ msgstr "संरचना"
 msgid "Stand in"
 msgstr "और फिर"
 
-#: src/Plugins/Export/ExportSql.php:185
+#: src/Plugins/Export/ExportSql.php:173
 msgid ""
 "Display comments <i>(includes info such as export timestamp, PHP version, "
 "and server version)</i>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:192
+#: src/Plugins/Export/ExportSql.php:180
 msgid "Additional custom header comment (\\n splits lines):"
 msgstr "शीर्षक में कस्टम टिपण्णी जोडें (\\n लाइनों को विभाजित करें):"
 
-#: src/Plugins/Export/ExportSql.php:198
+#: src/Plugins/Export/ExportSql.php:186
 msgid ""
 "Include a timestamp of when databases were created, last updated, and last "
 "checked"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:251
+#: src/Plugins/Export/ExportSql.php:239
 #, fuzzy
 #| msgid "Export method"
 msgid "Export metadata"
 msgstr "निर्यात प्रकार"
 
-#: src/Plugins/Export/ExportSql.php:287
+#: src/Plugins/Export/ExportSql.php:274
 #, fuzzy
 #| msgid "Add constraints"
 msgid "Add statements:"
 msgstr "शर्तें जोडें"
 
-#: src/Plugins/Export/ExportSql.php:295 src/Plugins/Export/ExportSql.php:304
-#: src/Plugins/Export/ExportSql.php:321 src/Plugins/Export/ExportSql.php:330
-#: src/Plugins/Export/ExportSql.php:354 src/Plugins/Export/ExportSql.php:382
-#: src/Plugins/Export/ExportSql.php:391
+#: src/Plugins/Export/ExportSql.php:282 src/Plugins/Export/ExportSql.php:291
+#: src/Plugins/Export/ExportSql.php:308 src/Plugins/Export/ExportSql.php:317
+#: src/Plugins/Export/ExportSql.php:341 src/Plugins/Export/ExportSql.php:369
+#: src/Plugins/Export/ExportSql.php:378
 #, php-format
 msgid "Add %s statement"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:337
+#: src/Plugins/Export/ExportSql.php:324
 msgid "(less efficient as indexes will be generated during table creation)"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:344
+#: src/Plugins/Export/ExportSql.php:331
 #, fuzzy, php-format
 #| msgid "Session value"
 msgid "%s value"
 msgstr "सत्र मूल्य"
 
 #. l10n: Allow simplifying exported view syntax to only "CREATE VIEW"
-#: src/Plugins/Export/ExportSql.php:361
+#: src/Plugins/Export/ExportSql.php:348
 msgid "Use simple view export"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:400
+#: src/Plugins/Export/ExportSql.php:387
 msgid ""
 "Enclose table and column names with backquotes <i>(Protects column and table "
 "names formed with special characters or keywords)</i>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:415
+#: src/Plugins/Export/ExportSql.php:401
 #, fuzzy
 #| msgid "Transformation options"
 msgid "Data creation options"
 msgstr "परिवर्तन के विकल्प"
 
-#: src/Plugins/Export/ExportSql.php:419 src/Plugins/Export/ExportSql.php:2056
+#: src/Plugins/Export/ExportSql.php:405 src/Plugins/Export/ExportSql.php:2042
 msgid "Truncate table before insert"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:427
+#: src/Plugins/Export/ExportSql.php:413
 msgid "Instead of <code>INSERT</code> statements, use:"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:433
+#: src/Plugins/Export/ExportSql.php:419
 msgid "<code>INSERT DELAYED</code> statements"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:442 src/Plugins/Export/ExportSql.php:469
+#: src/Plugins/Export/ExportSql.php:428 src/Plugins/Export/ExportSql.php:455
 msgid "<code>INSERT IGNORE</code> statements"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:453
+#: src/Plugins/Export/ExportSql.php:439
 msgid "Function to use when dumping data:"
 msgstr "डाटा दुम्प करते वक़्त फ़ुन्क्तिओन का प्रयोग:"
 
-#: src/Plugins/Export/ExportSql.php:464
+#: src/Plugins/Export/ExportSql.php:450
 msgid "Syntax to use when inserting data:"
 msgstr "डाटा डालते समय वाक्यविन्यास का उपयोग:"
 
-#: src/Plugins/Export/ExportSql.php:474
+#: src/Plugins/Export/ExportSql.php:460
 msgid ""
 "include column names in every <code>INSERT</code> statement <br> &nbsp; "
 "&nbsp; &nbsp; Example: <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES "
 "(1,2,3)</code>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:479
+#: src/Plugins/Export/ExportSql.php:465
 msgid ""
 "insert multiple rows in every <code>INSERT</code> statement<br> &nbsp; "
 "&nbsp; &nbsp; Example: <code>INSERT INTO tbl_name VALUES (1,2,3), (4,5,6), "
 "(7,8,9)</code>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:484
+#: src/Plugins/Export/ExportSql.php:470
 msgid ""
 "both of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name (col_A,col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:489
+#: src/Plugins/Export/ExportSql.php:475
 msgid ""
 "neither of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name VALUES (1,2,3)</code>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:508
+#: src/Plugins/Export/ExportSql.php:494
 msgid ""
 "Dump binary columns in hexadecimal notation <i>(for example, \"abc\" becomes "
 "0x616263)</i>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:517
+#: src/Plugins/Export/ExportSql.php:503
 msgid ""
 "Dump TIMESTAMP columns in UTC <i>(enables TIMESTAMP columns to be dumped and "
 "reloaded between servers in different time zones)</i>"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:593
+#: src/Plugins/Export/ExportSql.php:579
 msgid "It appears your database uses routines;"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:596 src/Plugins/Export/ExportSql.php:1456
-#: src/Plugins/Export/ExportSql.php:1879
+#: src/Plugins/Export/ExportSql.php:582 src/Plugins/Export/ExportSql.php:1442
+#: src/Plugins/Export/ExportSql.php:1865
 msgid "alias export may not work reliably in all cases."
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:1051
+#: src/Plugins/Export/ExportSql.php:1037
 #, fuzzy
 #| msgid "Metadata Headers"
 msgid "Metadata"
 msgstr "मेटाडेटा हेडर"
 
-#: src/Plugins/Export/ExportSql.php:1110
+#: src/Plugins/Export/ExportSql.php:1096
 #, fuzzy, php-format
 #| msgid "Metadata Headers"
 msgid "Metadata for table %s"
 msgstr "मेटाडेटा हेडर"
 
-#: src/Plugins/Export/ExportSql.php:1117
+#: src/Plugins/Export/ExportSql.php:1103
 #, fuzzy, php-format
 #| msgid "Metadata Headers"
 msgid "Metadata for database %s"
 msgstr "मेटाडेटा हेडर"
 
-#: src/Plugins/Export/ExportSql.php:1377
+#: src/Plugins/Export/ExportSql.php:1363
 #, fuzzy, php-format
 #| msgid "Tracking report for table `%s`"
 msgid "Error reading structure for table %s:"
 msgstr "टेबल `%s` की ट्रैकिंग रिपोर्ट"
 
-#: src/Plugins/Export/ExportSql.php:1453
+#: src/Plugins/Export/ExportSql.php:1439
 msgid "It appears your database uses views;"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:1592
+#: src/Plugins/Export/ExportSql.php:1578
 msgid "Constraints for dumped tables"
 msgstr "दुम्प टेबलओं के लिए प्रतिबन्ध"
 
-#: src/Plugins/Export/ExportSql.php:1593
+#: src/Plugins/Export/ExportSql.php:1579
 msgid "Constraints for table"
 msgstr "टेबल के लिए प्रतिबन्ध"
 
-#: src/Plugins/Export/ExportSql.php:1619
+#: src/Plugins/Export/ExportSql.php:1605
 #, fuzzy
 #| msgid "Constraints for dumped tables"
 msgid "Indexes for dumped tables"
 msgstr "दुम्प टेबलओं के लिए प्रतिबन्ध"
 
-#: src/Plugins/Export/ExportSql.php:1620
+#: src/Plugins/Export/ExportSql.php:1606
 #, fuzzy
 #| msgid "Inside tables:"
 msgid "Indexes for table"
 msgstr "टेबल में:"
 
-#: src/Plugins/Export/ExportSql.php:1643
+#: src/Plugins/Export/ExportSql.php:1629
 #, fuzzy
 #| msgid "Do not use AUTO_INCREMENT for zero values"
 msgid "AUTO_INCREMENT for dumped tables"
 msgstr "शुन्य मूल्य के लिए AUTO_INCREMENT का प्रयोग न करें"
 
-#: src/Plugins/Export/ExportSql.php:1644
+#: src/Plugins/Export/ExportSql.php:1630
 #, fuzzy
 #| msgid "Add AUTO_INCREMENT value"
 msgid "AUTO_INCREMENT for table"
 msgstr "AUTO_INCREMENT मूल्य जोडें"
 
-#: src/Plugins/Export/ExportSql.php:1695
+#: src/Plugins/Export/ExportSql.php:1681
 #, fuzzy
 #| msgid "MIME TYPES FOR TABLE"
 msgid "MEDIA TYPES FOR TABLE"
 msgstr "टेबल के लिए MIME प्रकार"
 
-#: src/Plugins/Export/ExportSql.php:1725
+#: src/Plugins/Export/ExportSql.php:1711
 #, fuzzy
 #| msgid "RELATIONS FOR TABLE"
 msgid "RELATIONSHIPS FOR TABLE"
 msgstr "टेबल के लिए संबंध"
 
-#: src/Plugins/Export/ExportSql.php:1876
+#: src/Plugins/Export/ExportSql.php:1862
 msgid "It appears your table uses triggers;"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:1910
+#: src/Plugins/Export/ExportSql.php:1896
 #, fuzzy, php-format
 #| msgid "Structure for view"
 msgid "Structure for view %s exported as a table"
 msgstr "वीएव के लिए संरचना"
 
-#: src/Plugins/Export/ExportSql.php:1941
+#: src/Plugins/Export/ExportSql.php:1927
 msgid "(See below for the actual view)"
 msgstr ""
 
-#: src/Plugins/Export/ExportSql.php:1997
+#: src/Plugins/Export/ExportSql.php:1983
 #, fuzzy, php-format
 #| msgid "Allows reading data."
 msgid "Error reading data for table %s:"
 msgstr "डाटा पढने की अनुमति देता है"
 
-#: src/Plugins/Export/ExportSql.php:2518
+#: src/Plugins/Export/ExportSql.php:2504
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:540
 msgid "Creation:"
 msgstr "रचना:"
 
-#: src/Plugins/Export/ExportSql.php:2526
+#: src/Plugins/Export/ExportSql.php:2512
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:551
 msgid "Last update:"
 msgstr "पिछला नवीनीकरण:"
 
-#: src/Plugins/Export/ExportSql.php:2534
+#: src/Plugins/Export/ExportSql.php:2520
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:562
 msgid "Last check:"
 msgstr "पिछली जाँच:"
 
-#: src/Plugins/Export/ExportSql.php:2554
+#: src/Plugins/Export/ExportSql.php:2540
 msgid ""
 "Database system or older MySQL server to maximize output compatibility with:"
 msgstr ""
@@ -19133,17 +19133,17 @@ msgstr "दस्तावेज़ खोलें"
 msgid "ESRI Shape File"
 msgstr ""
 
-#: src/Plugins/Import/ImportShp.php:113 src/Plugins/Import/ImportShp.php:179
+#: src/Plugins/Import/ImportShp.php:113 src/Plugins/Import/ImportShp.php:176
 #, php-format
 msgid "There was an error importing the ESRI shape file: \"%s\"."
 msgstr ""
 
-#: src/Plugins/Import/ImportShp.php:204
+#: src/Plugins/Import/ImportShp.php:201
 #, php-format
 msgid "MySQL Spatial Extension does not support ESRI type \"%s\"."
 msgstr ""
 
-#: src/Plugins/Import/ImportShp.php:249
+#: src/Plugins/Import/ImportShp.php:246
 #, fuzzy
 #| msgid "File %s does not contain any key id"
 msgid "The imported file does not contain any data!"

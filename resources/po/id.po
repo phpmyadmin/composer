@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-10-04 01:17+0000\n"
+"POT-Creation-Date: 2026-10-11 00:47+0000\n"
 "PO-Revision-Date: 2026-08-21 11:52+0000\n"
 "Last-Translator: Zahid Rizky Fakhri <zahidrizkyfakhri@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/phpmyadmin/"
@@ -202,7 +202,7 @@ msgstr "setelah %s"
 #: resources/templates/table/zoom_search/index.twig:120
 #: src/Config/ConfigFile.php:554
 #: src/Controllers/JavaScriptMessagesController.php:219
-#: src/Display/Results.php:921 src/Plugins/Export/ExportSql.php:1984
+#: src/Display/Results.php:921 src/Plugins/Export/ExportSql.php:1970
 #: src/Plugins/Schema/SchemaPdf.php:96
 msgid "None"
 msgstr "Tidak ada"
@@ -1825,7 +1825,7 @@ msgstr "Pendefinisi"
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:991 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:977 src/Plugins/Export/ExportXml.php:92
 #: src/Util.php:1394
 msgid "Events"
 msgstr "Event"
@@ -2484,8 +2484,8 @@ msgid "Export routine"
 msgstr "Ekspor rutin"
 
 #: resources/templates/database/routines/index.twig:113
-#: src/Controllers/Database/RoutinesController.php:335
-#: src/Controllers/Database/RoutinesController.php:343
+#: src/Controllers/Database/RoutinesController.php:336
+#: src/Controllers/Database/RoutinesController.php:344
 msgid "Execute routine"
 msgstr "Jalankan routine"
 
@@ -2731,7 +2731,7 @@ msgstr ""
 
 #: resources/templates/database/structure/copy_form.twig:5
 #: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:250
-#: src/Plugins/Export/ExportSql.php:921 src/Plugins/Export/ExportXml.php:356
+#: src/Plugins/Export/ExportSql.php:907 src/Plugins/Export/ExportXml.php:356
 #: src/Plugins/Export/Helpers/Pdf.php:147
 msgid "Database:"
 msgstr "Basis data:"
@@ -3551,7 +3551,7 @@ msgid "Server connection:"
 msgstr "Koneksi server:"
 
 #: resources/templates/home/index.twig:197
-#: src/Plugins/Export/ExportLatex.php:231 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportLatex.php:231 src/Plugins/Export/ExportSql.php:750
 #: src/Plugins/Export/ExportXml.php:203
 msgid "Server version:"
 msgstr "Versi server:"
@@ -5419,7 +5419,7 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:223 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportLatex.php:223 src/Plugins/Export/ExportSql.php:739
 #: src/Plugins/Export/ExportXml.php:195
 msgid "Host:"
 msgstr "Host:"
@@ -7433,7 +7433,7 @@ msgstr "Ekspor trigger %s"
 #: src/Navigation/Nodes/NodeTriggerContainer.php:26
 #: src/Plugins/Export/ExportHtmlword.php:448
 #: src/Plugins/Export/ExportOdt.php:566 src/Plugins/Export/ExportPdf.php:173
-#: src/Plugins/Export/ExportSql.php:1847
+#: src/Plugins/Export/ExportSql.php:1833
 #: src/Plugins/Export/ExportTexytext.php:408
 #: src/Plugins/Export/ExportXml.php:112 src/Util.php:1395 src/Util.php:1411
 msgid "Triggers"
@@ -9173,7 +9173,7 @@ msgstr "Tidak aktif"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "structure"
 msgstr "struktur"
@@ -9184,7 +9184,7 @@ msgstr "struktur"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "data"
 msgstr "data"
@@ -9195,7 +9195,7 @@ msgstr "data"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "structure and data"
 msgstr "struktur dan data"
@@ -9396,7 +9396,7 @@ msgstr ""
 "untuk tak terbatas)."
 
 #: src/Config/Descriptions.php:172 src/Config/Descriptions.php:706
-#: src/Plugins/Export/ExportSql.php:367
+#: src/Plugins/Export/ExportSql.php:354
 msgid "Exclude definition of current user"
 msgstr "Kecualikan definisi dari pengguna sekarang"
 
@@ -10713,7 +10713,7 @@ msgstr "Templat nama tabel"
 #: src/Plugins/Export/ExportMediawiki.php:59
 #: src/Plugins/Export/ExportMediawiki.php:65
 #: src/Plugins/Export/ExportOdt.php:74 src/Plugins/Export/ExportPdf.php:75
-#: src/Plugins/Export/ExportSql.php:264
+#: src/Plugins/Export/ExportSql.php:252
 #: src/Plugins/Export/ExportTexytext.php:66
 msgid "Dump table"
 msgstr "Tabel dump"
@@ -10775,11 +10775,11 @@ msgstr "Tanggal Pembuatan/Pembaruan/Pemeriksaan"
 msgid "Use delayed inserts"
 msgstr "Gunakan sisipan tertunda"
 
-#: src/Config/Descriptions.php:690 src/Plugins/Export/ExportSql.php:234
+#: src/Config/Descriptions.php:690 src/Plugins/Export/ExportSql.php:222
 msgid "Disable foreign key checks"
 msgstr "Tanpa pemeriksaan kunci asing"
 
-#: src/Config/Descriptions.php:691 src/Plugins/Export/ExportSql.php:244
+#: src/Config/Descriptions.php:691 src/Plugins/Export/ExportSql.php:232
 msgid "Export views as tables"
 msgstr "Mengekspor tampilan sebagai tabel"
 
@@ -10799,7 +10799,7 @@ msgstr ""
 "Tambahkan IF NOT EXIST(kurang efisien sebagai indeks akan dihasilkan selama "
 "pembuatan tabel)"
 
-#: src/Config/Descriptions.php:707 src/Plugins/Export/ExportSql.php:373
+#: src/Config/Descriptions.php:707 src/Plugins/Export/ExportSql.php:360
 #, php-format
 msgid "%s view"
 msgstr "tampilan %s"
@@ -10812,7 +10812,7 @@ msgstr "Gunakan sisipan abaikan"
 msgid "Syntax to use when inserting data"
 msgstr "Sintaks yang digunakan sewaktu menambahkan data"
 
-#: src/Config/Descriptions.php:711 src/Plugins/Export/ExportSql.php:500
+#: src/Config/Descriptions.php:711 src/Plugins/Export/ExportSql.php:486
 msgid "Maximal length of created query"
 msgstr "Panjang maksimum kueri yang dibuat"
 
@@ -10820,7 +10820,7 @@ msgstr "Panjang maksimum kueri yang dibuat"
 msgid "Export type"
 msgstr "Jenis ekspor"
 
-#: src/Config/Descriptions.php:717 src/Plugins/Export/ExportSql.php:224
+#: src/Config/Descriptions.php:717 src/Plugins/Export/ExportSql.php:212
 msgid "Enclose export in a transaction"
 msgstr "Jalankan ekspor dalam transaksi"
 
@@ -12049,13 +12049,13 @@ msgstr ""
 
 #: src/Controllers/Database/DesignerController.php:175
 #: src/Controllers/Database/DesignerController.php:180
-#: src/Controllers/Database/EventsController.php:52
+#: src/Controllers/Database/EventsController.php:53
 #: src/Controllers/Database/ExportController.php:57
 #: src/Controllers/Database/ExportController.php:62
 #: src/Controllers/Database/ImportController.php:62
 #: src/Controllers/Database/ImportController.php:67
-#: src/Controllers/Database/RoutinesController.php:77
-#: src/Controllers/Database/RoutinesController.php:95
+#: src/Controllers/Database/RoutinesController.php:78
+#: src/Controllers/Database/RoutinesController.php:96
 #: src/Controllers/Database/SearchController.php:53
 #: src/Controllers/Database/SearchController.php:58
 #: src/Controllers/Database/SqlController.php:54
@@ -12117,37 +12117,37 @@ msgstr ""
 msgid "No databases selected."
 msgstr "Basis data belum dipilih."
 
-#: src/Controllers/Database/EventsController.php:69
+#: src/Controllers/Database/EventsController.php:70
 msgid "The event was dropped immediately after creation."
 msgstr "Peristiwa langsung dihapus setelah pembuatan."
 
-#: src/Controllers/Database/EventsController.php:136
+#: src/Controllers/Database/EventsController.php:137
 msgid "Add event"
 msgstr "Tambahkan event"
 
-#: src/Controllers/Database/EventsController.php:140
+#: src/Controllers/Database/EventsController.php:141
 msgid "Edit event"
 msgstr "Edit kejadian"
 
-#: src/Controllers/Database/EventsController.php:189
-#: src/Controllers/Database/RoutinesController.php:254
-#: src/Controllers/Database/RoutinesController.php:284
-#: src/Controllers/Database/RoutinesController.php:350
+#: src/Controllers/Database/EventsController.php:190
+#: src/Controllers/Database/RoutinesController.php:255
+#: src/Controllers/Database/RoutinesController.php:285
+#: src/Controllers/Database/RoutinesController.php:351
 #: src/Controllers/Triggers/IndexController.php:207
 msgid "Error in processing request:"
 msgstr "Galat dalam memproses permintaan:"
 
-#: src/Controllers/Database/EventsController.php:191
+#: src/Controllers/Database/EventsController.php:192
 #, php-format
 msgid "No event with name %1$s found in database %2$s."
 msgstr "Tidak ada event dengan nama %1$s ditemukan dalam basis data %2$s."
 
-#: src/Controllers/Database/EventsController.php:217
+#: src/Controllers/Database/EventsController.php:218
 #, php-format
 msgid "Export of event %s"
 msgstr "Ekspor event %s"
 
-#: src/Controllers/Database/EventsController.php:237
+#: src/Controllers/Database/EventsController.php:238
 #, php-format
 msgid ""
 "Error in processing request: No event with name %1$s found in database %2$s."
@@ -12180,7 +12180,7 @@ msgstr "Tidak Ada Hak Akses"
 msgid "You do not have the privileges to administrate the users!"
 msgstr "Anda tidak memiliki hak istimewa untuk mengelola pengguna!"
 
-#: src/Controllers/Database/RoutinesController.php:85
+#: src/Controllers/Database/RoutinesController.php:86
 #: src/Controllers/Database/Structure/AddPrefixController.php:35
 #: src/Controllers/Database/Structure/CentralColumns/AddController.php:39
 #: src/Controllers/Database/Structure/CentralColumns/MakeConsistentController.php:38
@@ -12234,15 +12234,15 @@ msgstr "Anda tidak memiliki hak istimewa untuk mengelola pengguna!"
 msgid "No table selected."
 msgstr "Tidak ada tabel yang dipilih."
 
-#: src/Controllers/Database/RoutinesController.php:170
+#: src/Controllers/Database/RoutinesController.php:171
 msgid "Add routine"
 msgstr "Tambahkan routine"
 
-#: src/Controllers/Database/RoutinesController.php:174
+#: src/Controllers/Database/RoutinesController.php:175
 msgid "Edit routine"
 msgstr "Edit rutinitas"
 
-#: src/Controllers/Database/RoutinesController.php:257
+#: src/Controllers/Database/RoutinesController.php:258
 #, php-format
 msgid ""
 "No routine with name %1$s found in database %2$s. You might be lacking the "
@@ -12251,18 +12251,18 @@ msgstr ""
 "Tidak ada rutinitas ditemukan dengan nama %1$s dalam database %2$s. Anda "
 "mungkin tidak memiliki otoritas untuk menyunting rutinitas ini."
 
-#: src/Controllers/Database/RoutinesController.php:286
-#: src/Controllers/Database/RoutinesController.php:352
+#: src/Controllers/Database/RoutinesController.php:287
+#: src/Controllers/Database/RoutinesController.php:353
 #, php-format
 msgid "No routine with name %1$s found in database %2$s."
 msgstr "Routine dengan nama %1$s tidak ditemukan dalam basis data %2$s."
 
-#: src/Controllers/Database/RoutinesController.php:395
+#: src/Controllers/Database/RoutinesController.php:384
 #, php-format
 msgid "Export of routine %s"
 msgstr "Ekspor routine %s"
 
-#: src/Controllers/Database/RoutinesController.php:414
+#: src/Controllers/Database/RoutinesController.php:403
 #, php-format
 msgid ""
 "Error in processing request: No routine with name %1$s found in database "
@@ -16587,7 +16587,7 @@ msgstr "Baru"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:630 src/Plugins/Export/ExportXml.php:97
 msgid "Functions"
 msgstr "Fungsi"
 
@@ -16607,7 +16607,7 @@ msgstr "Bentangkan/Tutup"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:619 src/Plugins/Export/ExportXml.php:102
 msgid "Procedures"
 msgstr "Prosedur"
 
@@ -17070,25 +17070,25 @@ msgid "Data dump options"
 msgstr "Opsi dump data"
 
 #: src/Plugins/Export/ExportHtmlword.php:167
-#: src/Plugins/Export/ExportOdt.php:209 src/Plugins/Export/ExportSql.php:2093
+#: src/Plugins/Export/ExportOdt.php:209 src/Plugins/Export/ExportSql.php:2079
 #: src/Plugins/Export/ExportTexytext.php:137
 msgid "Dumping data for table"
 msgstr "Dumping data untuk tabel"
 
 #: src/Plugins/Export/ExportHtmlword.php:439
-#: src/Plugins/Export/ExportOdt.php:556 src/Plugins/Export/ExportSql.php:1829
+#: src/Plugins/Export/ExportOdt.php:556 src/Plugins/Export/ExportSql.php:1815
 #: src/Plugins/Export/ExportTexytext.php:401
 msgid "Table structure for table"
 msgstr "Struktur dari tabel"
 
 #: src/Plugins/Export/ExportHtmlword.php:456
-#: src/Plugins/Export/ExportOdt.php:576 src/Plugins/Export/ExportSql.php:1895
+#: src/Plugins/Export/ExportOdt.php:576 src/Plugins/Export/ExportSql.php:1881
 #: src/Plugins/Export/ExportTexytext.php:414
 msgid "Structure for view"
 msgstr "Struktur untuk view"
 
 #: src/Plugins/Export/ExportHtmlword.php:462
-#: src/Plugins/Export/ExportOdt.php:584 src/Plugins/Export/ExportSql.php:1938
+#: src/Plugins/Export/ExportOdt.php:584 src/Plugins/Export/ExportSql.php:1924
 #: src/Plugins/Export/ExportTexytext.php:418
 msgid "Stand-in structure for view"
 msgstr "Stand-in struktur untuk tampilan"
@@ -17115,7 +17115,7 @@ msgid "Structure of table @TABLE@"
 msgstr "Struktur tabel @TABLE@"
 
 #: src/Plugins/Export/ExportLatex.php:124 src/Plugins/Export/ExportOdt.php:89
-#: src/Plugins/Export/ExportSql.php:280
+#: src/Plugins/Export/ExportSql.php:267
 msgid "Object creation options"
 msgstr "Opsi pembuatan objek"
 
@@ -17135,7 +17135,7 @@ msgid "Label key:"
 msgstr "Label kunci:"
 
 #: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:96
-#: src/Plugins/Export/ExportSql.php:206
+#: src/Plugins/Export/ExportSql.php:194
 msgid "Display foreign key relationships"
 msgstr "Tampilkan hubungan kunci luar"
 
@@ -17144,7 +17144,7 @@ msgid "Display comments"
 msgstr "Tampilkan komentar"
 
 #: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:109
-#: src/Plugins/Export/ExportSql.php:214
+#: src/Plugins/Export/ExportSql.php:202
 msgid "Display media types"
 msgstr "Tampilkan jenis media"
 
@@ -17152,17 +17152,17 @@ msgstr "Tampilkan jenis media"
 msgid "Put columns names in the first row:"
 msgstr "Masukkan nama kolom pada baris pertama:"
 
-#: src/Plugins/Export/ExportLatex.php:229 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportLatex.php:229 src/Plugins/Export/ExportSql.php:746
 #: src/Plugins/Export/ExportXml.php:201
 msgid "Generation Time:"
 msgstr "Waktu pembuatan:"
 
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:752
 #: src/Plugins/Export/ExportXml.php:204
 msgid "PHP Version:"
 msgstr "Versi PHP:"
 
-#: src/Plugins/Export/ExportLatex.php:287 src/Plugins/Export/ExportSql.php:1984
+#: src/Plugins/Export/ExportLatex.php:287 src/Plugins/Export/ExportSql.php:1970
 msgid "Data:"
 msgstr "Data:"
 
@@ -17203,7 +17203,7 @@ msgstr "Lihat struktur"
 msgid "Stand in"
 msgstr "Berdiri di"
 
-#: src/Plugins/Export/ExportSql.php:185
+#: src/Plugins/Export/ExportSql.php:173
 msgid ""
 "Display comments <i>(includes info such as export timestamp, PHP version, "
 "and server version)</i>"
@@ -17211,11 +17211,11 @@ msgstr ""
 "Menampilkan komentar <i>(termasuk info seperti stempel waktu ekspor, versi "
 "PHP, dan versi server)</i>"
 
-#: src/Plugins/Export/ExportSql.php:192
+#: src/Plugins/Export/ExportSql.php:180
 msgid "Additional custom header comment (\\n splits lines):"
 msgstr "Menambahkan komentar judul kustom (\\n memotong baris):"
 
-#: src/Plugins/Export/ExportSql.php:198
+#: src/Plugins/Export/ExportSql.php:186
 msgid ""
 "Include a timestamp of when databases were created, last updated, and last "
 "checked"
@@ -17223,37 +17223,37 @@ msgstr ""
 "Sertakan timestamp kapan database diciptakan, diperbarui terakhir, dan "
 "terakhir diperiksa"
 
-#: src/Plugins/Export/ExportSql.php:251
+#: src/Plugins/Export/ExportSql.php:239
 msgid "Export metadata"
 msgstr "Ekspor metadata"
 
-#: src/Plugins/Export/ExportSql.php:287
+#: src/Plugins/Export/ExportSql.php:274
 msgid "Add statements:"
 msgstr "Tambahkan statement:"
 
-#: src/Plugins/Export/ExportSql.php:295 src/Plugins/Export/ExportSql.php:304
-#: src/Plugins/Export/ExportSql.php:321 src/Plugins/Export/ExportSql.php:330
-#: src/Plugins/Export/ExportSql.php:354 src/Plugins/Export/ExportSql.php:382
-#: src/Plugins/Export/ExportSql.php:391
+#: src/Plugins/Export/ExportSql.php:282 src/Plugins/Export/ExportSql.php:291
+#: src/Plugins/Export/ExportSql.php:308 src/Plugins/Export/ExportSql.php:317
+#: src/Plugins/Export/ExportSql.php:341 src/Plugins/Export/ExportSql.php:369
+#: src/Plugins/Export/ExportSql.php:378
 #, php-format
 msgid "Add %s statement"
 msgstr "Tambahkan statement %s"
 
-#: src/Plugins/Export/ExportSql.php:337
+#: src/Plugins/Export/ExportSql.php:324
 msgid "(less efficient as indexes will be generated during table creation)"
 msgstr "(Kurang efisien sebagai indeks akan dihasilkan selama pembuatan tabel)"
 
-#: src/Plugins/Export/ExportSql.php:344
+#: src/Plugins/Export/ExportSql.php:331
 #, php-format
 msgid "%s value"
 msgstr "Nilai %s"
 
 #. l10n: Allow simplifying exported view syntax to only "CREATE VIEW"
-#: src/Plugins/Export/ExportSql.php:361
+#: src/Plugins/Export/ExportSql.php:348
 msgid "Use simple view export"
 msgstr "Menggunakan simple view export"
 
-#: src/Plugins/Export/ExportSql.php:400
+#: src/Plugins/Export/ExportSql.php:387
 msgid ""
 "Enclose table and column names with backquotes <i>(Protects column and table "
 "names formed with special characters or keywords)</i>"
@@ -17262,35 +17262,35 @@ msgstr ""
 "nama kolom dan tabel yang dibentuk dengan karakter khusus atau kata kunci)</"
 "i>"
 
-#: src/Plugins/Export/ExportSql.php:415
+#: src/Plugins/Export/ExportSql.php:401
 msgid "Data creation options"
 msgstr "Opsi pembuatan data"
 
-#: src/Plugins/Export/ExportSql.php:419 src/Plugins/Export/ExportSql.php:2056
+#: src/Plugins/Export/ExportSql.php:405 src/Plugins/Export/ExportSql.php:2042
 msgid "Truncate table before insert"
 msgstr "Potong tabel sebelum dimasukkan"
 
-#: src/Plugins/Export/ExportSql.php:427
+#: src/Plugins/Export/ExportSql.php:413
 msgid "Instead of <code>INSERT</code> statements, use:"
 msgstr "Alih-alih perintah <code>INSERT</code>, gunakan:"
 
-#: src/Plugins/Export/ExportSql.php:433
+#: src/Plugins/Export/ExportSql.php:419
 msgid "<code>INSERT DELAYED</code> statements"
 msgstr "perintah <code>INSERT DELAYED</code>"
 
-#: src/Plugins/Export/ExportSql.php:442 src/Plugins/Export/ExportSql.php:469
+#: src/Plugins/Export/ExportSql.php:428 src/Plugins/Export/ExportSql.php:455
 msgid "<code>INSERT IGNORE</code> statements"
 msgstr "perintah <code>INSERT IGNORE</code>"
 
-#: src/Plugins/Export/ExportSql.php:453
+#: src/Plugins/Export/ExportSql.php:439
 msgid "Function to use when dumping data:"
 msgstr "Fungsi yang digunakan sewaktu dump data:"
 
-#: src/Plugins/Export/ExportSql.php:464
+#: src/Plugins/Export/ExportSql.php:450
 msgid "Syntax to use when inserting data:"
 msgstr "Sintaks yang digunakan sewaktu menambah data:"
 
-#: src/Plugins/Export/ExportSql.php:474
+#: src/Plugins/Export/ExportSql.php:460
 msgid ""
 "include column names in every <code>INSERT</code> statement <br> &nbsp; "
 "&nbsp; &nbsp; Example: <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES "
@@ -17300,7 +17300,7 @@ msgstr ""
 "&nbsp; &nbsp; &nbsp; Contoh: <code> INSERT INTO tbl_name (col_A, col_B, "
 "col_C) VALUES (1,2,3)</code>"
 
-#: src/Plugins/Export/ExportSql.php:479
+#: src/Plugins/Export/ExportSql.php:465
 msgid ""
 "insert multiple rows in every <code>INSERT</code> statement<br> &nbsp; "
 "&nbsp; &nbsp; Example: <code>INSERT INTO tbl_name VALUES (1,2,3), (4,5,6), "
@@ -17310,7 +17310,7 @@ msgstr ""
 "<br> &nbsp; &nbsp; &nbsp; Contoh: <code> INSERT INTO NILAI tbl_name (1,2,3), "
 "(4,5,6), (7,8,9)</code>"
 
-#: src/Plugins/Export/ExportSql.php:484
+#: src/Plugins/Export/ExportSql.php:470
 msgid ""
 "both of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name (col_A,col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
@@ -17318,7 +17318,7 @@ msgstr ""
 "kedua hal di atas <br> &nbsp; &nbsp; &nbsp; Contoh: <code>INSERT INTO "
 "tbl_name (col_A, col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
 
-#: src/Plugins/Export/ExportSql.php:489
+#: src/Plugins/Export/ExportSql.php:475
 msgid ""
 "neither of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name VALUES (1,2,3)</code>"
@@ -17326,7 +17326,7 @@ msgstr ""
 "hal tersebut di atas <br> &nbsp; &nbsp; &nbsp; Contoh: <code>INSERT INTO "
 "NILAI tbl_name (1,2,3)</code>"
 
-#: src/Plugins/Export/ExportSql.php:508
+#: src/Plugins/Export/ExportSql.php:494
 msgid ""
 "Dump binary columns in hexadecimal notation <i>(for example, \"abc\" becomes "
 "0x616263)</i>"
@@ -17334,7 +17334,7 @@ msgstr ""
 "Buang kolom biner dalam notasi heksadesimal <i>(misalnya, \"abc\" menjadi "
 "0x616263)</i>"
 
-#: src/Plugins/Export/ExportSql.php:517
+#: src/Plugins/Export/ExportSql.php:503
 msgid ""
 "Dump TIMESTAMP columns in UTC <i>(enables TIMESTAMP columns to be dumped and "
 "reloaded between servers in different time zones)</i>"
@@ -17342,105 +17342,105 @@ msgstr ""
 "Buang kolom TIMESTAMP dalam UTC <i>(memungkinkan kolom TIMESTAMP dibuang dan "
 "dimuat ulang antara server di zona waktu yang berbeda)</i>"
 
-#: src/Plugins/Export/ExportSql.php:593
+#: src/Plugins/Export/ExportSql.php:579
 msgid "It appears your database uses routines;"
 msgstr "Tampaknya database Anda menggunakan rutin;"
 
-#: src/Plugins/Export/ExportSql.php:596 src/Plugins/Export/ExportSql.php:1456
-#: src/Plugins/Export/ExportSql.php:1879
+#: src/Plugins/Export/ExportSql.php:582 src/Plugins/Export/ExportSql.php:1442
+#: src/Plugins/Export/ExportSql.php:1865
 msgid "alias export may not work reliably in all cases."
 msgstr "ekspor alias mungkin tidak berfungsi dengan baik dalam semua kasus."
 
-#: src/Plugins/Export/ExportSql.php:1051
+#: src/Plugins/Export/ExportSql.php:1037
 msgid "Metadata"
 msgstr "Metadata"
 
-#: src/Plugins/Export/ExportSql.php:1110
+#: src/Plugins/Export/ExportSql.php:1096
 #, php-format
 msgid "Metadata for table %s"
 msgstr "Metadata untuk tabel %s"
 
-#: src/Plugins/Export/ExportSql.php:1117
+#: src/Plugins/Export/ExportSql.php:1103
 #, php-format
 msgid "Metadata for database %s"
 msgstr "Metadata untuk database %s"
 
-#: src/Plugins/Export/ExportSql.php:1377
+#: src/Plugins/Export/ExportSql.php:1363
 #, php-format
 msgid "Error reading structure for table %s:"
 msgstr "Kesalahan membaca struktur untuk tabel %s:"
 
-#: src/Plugins/Export/ExportSql.php:1453
+#: src/Plugins/Export/ExportSql.php:1439
 msgid "It appears your database uses views;"
 msgstr "Tampaknya basis data Anda menggunakan tampilan;"
 
-#: src/Plugins/Export/ExportSql.php:1592
+#: src/Plugins/Export/ExportSql.php:1578
 msgid "Constraints for dumped tables"
 msgstr "Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)"
 
-#: src/Plugins/Export/ExportSql.php:1593
+#: src/Plugins/Export/ExportSql.php:1579
 msgid "Constraints for table"
 msgstr "Ketidakleluasaan untuk tabel"
 
-#: src/Plugins/Export/ExportSql.php:1619
+#: src/Plugins/Export/ExportSql.php:1605
 msgid "Indexes for dumped tables"
 msgstr "Indeks untuk tabel yang dibuang"
 
-#: src/Plugins/Export/ExportSql.php:1620
+#: src/Plugins/Export/ExportSql.php:1606
 msgid "Indexes for table"
 msgstr "Indeks untuk tabel"
 
-#: src/Plugins/Export/ExportSql.php:1643
+#: src/Plugins/Export/ExportSql.php:1629
 msgid "AUTO_INCREMENT for dumped tables"
 msgstr "AUTO_INCREMENT untuk tabel yang dibuang"
 
 # Imperative verb
-#: src/Plugins/Export/ExportSql.php:1644
+#: src/Plugins/Export/ExportSql.php:1630
 msgid "AUTO_INCREMENT for table"
 msgstr "AUTO_INCREMENT untuk tabel"
 
-#: src/Plugins/Export/ExportSql.php:1695
+#: src/Plugins/Export/ExportSql.php:1681
 msgid "MEDIA TYPES FOR TABLE"
 msgstr "JENIS MEDIA UNTUK TABEL"
 
-#: src/Plugins/Export/ExportSql.php:1725
+#: src/Plugins/Export/ExportSql.php:1711
 msgid "RELATIONSHIPS FOR TABLE"
 msgstr "HUBUNGAN RELASI UNTUK TABEL"
 
-#: src/Plugins/Export/ExportSql.php:1876
+#: src/Plugins/Export/ExportSql.php:1862
 msgid "It appears your table uses triggers;"
 msgstr "Tampaknya tabel Anda menggunakan pemicu;"
 
-#: src/Plugins/Export/ExportSql.php:1910
+#: src/Plugins/Export/ExportSql.php:1896
 #, php-format
 msgid "Structure for view %s exported as a table"
 msgstr "Struktur untuk view %s diekspor sebagai tabel"
 
-#: src/Plugins/Export/ExportSql.php:1941
+#: src/Plugins/Export/ExportSql.php:1927
 msgid "(See below for the actual view)"
 msgstr "(Lihat di bawah untuk tampilan aktual)"
 
-#: src/Plugins/Export/ExportSql.php:1997
+#: src/Plugins/Export/ExportSql.php:1983
 #, php-format
 msgid "Error reading data for table %s:"
 msgstr "Kesalahan membaca data untuk tabel %s:"
 
-#: src/Plugins/Export/ExportSql.php:2518
+#: src/Plugins/Export/ExportSql.php:2504
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:540
 msgid "Creation:"
 msgstr "Pembuatan:"
 
-#: src/Plugins/Export/ExportSql.php:2526
+#: src/Plugins/Export/ExportSql.php:2512
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:551
 msgid "Last update:"
 msgstr "Pembaruan terakhir:"
 
-#: src/Plugins/Export/ExportSql.php:2534
+#: src/Plugins/Export/ExportSql.php:2520
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:562
 msgid "Last check:"
 msgstr "Pemeriksaan terakhir:"
 
-#: src/Plugins/Export/ExportSql.php:2554
+#: src/Plugins/Export/ExportSql.php:2540
 msgid ""
 "Database system or older MySQL server to maximize output compatibility with:"
 msgstr ""
@@ -17568,17 +17568,17 @@ msgstr "Tidak dapat mengurai OpenDocument Spreadsheet!"
 msgid "ESRI Shape File"
 msgstr "Berkas Bentuk ESRI"
 
-#: src/Plugins/Import/ImportShp.php:113 src/Plugins/Import/ImportShp.php:179
+#: src/Plugins/Import/ImportShp.php:113 src/Plugins/Import/ImportShp.php:176
 #, php-format
 msgid "There was an error importing the ESRI shape file: \"%s\"."
 msgstr "Terjadi galat saat mengimpor berkas bentuk ESRI: \"%s\"."
 
-#: src/Plugins/Import/ImportShp.php:204
+#: src/Plugins/Import/ImportShp.php:201
 #, php-format
 msgid "MySQL Spatial Extension does not support ESRI type \"%s\"."
 msgstr "Ekstensi Spasial MySQL tidak mendukung tipe ESRI \"%s\"."
 
-#: src/Plugins/Import/ImportShp.php:249
+#: src/Plugins/Import/ImportShp.php:246
 msgid "The imported file does not contain any data!"
 msgstr "Berkas yang diimpor tidak mengandung data!"
 

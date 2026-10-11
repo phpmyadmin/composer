@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpMyAdmin 6.0.0-dev\n"
 "Report-Msgid-Bugs-To: translators@phpmyadmin.net\n"
-"POT-Creation-Date: 2026-10-04 01:17+0000\n"
+"POT-Creation-Date: 2026-10-11 00:47+0000\n"
 "PO-Revision-Date: 2026-07-28 04:01+0000\n"
 "Last-Translator: Rajkumar Ramadoss <lionrajkumar@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/phpmyadmin/master/"
@@ -205,7 +205,7 @@ msgstr "%s க்கு அடுத்து"
 #: resources/templates/table/zoom_search/index.twig:120
 #: src/Config/ConfigFile.php:554
 #: src/Controllers/JavaScriptMessagesController.php:219
-#: src/Display/Results.php:921 src/Plugins/Export/ExportSql.php:1984
+#: src/Display/Results.php:921 src/Plugins/Export/ExportSql.php:1970
 #: src/Plugins/Schema/SchemaPdf.php:96
 msgid "None"
 msgstr "எதுவுமில்லை"
@@ -1825,7 +1825,7 @@ msgstr "வரையறுக்கவும்"
 #: resources/templates/database/events/index.twig:3 src/Menu.php:381
 #: src/Navigation/Nodes/NodeEventContainer.php:23
 #: src/Navigation/Nodes/NodeEventContainer.php:25
-#: src/Plugins/Export/ExportSql.php:991 src/Plugins/Export/ExportXml.php:92
+#: src/Plugins/Export/ExportSql.php:977 src/Plugins/Export/ExportXml.php:92
 #: src/Util.php:1394
 msgid "Events"
 msgstr "நிகழ்வுகள்"
@@ -2480,8 +2480,8 @@ msgid "Export routine"
 msgstr "செயல்முறை தரவேற்றம்"
 
 #: resources/templates/database/routines/index.twig:113
-#: src/Controllers/Database/RoutinesController.php:335
-#: src/Controllers/Database/RoutinesController.php:343
+#: src/Controllers/Database/RoutinesController.php:336
+#: src/Controllers/Database/RoutinesController.php:344
 msgid "Execute routine"
 msgstr "வழக்கத்தை இயக்கவும்"
 
@@ -2729,7 +2729,7 @@ msgstr ""
 
 #: resources/templates/database/structure/copy_form.twig:5
 #: resources/templates/menu/main.twig:16 src/Plugins/Export/ExportLatex.php:250
-#: src/Plugins/Export/ExportSql.php:921 src/Plugins/Export/ExportXml.php:356
+#: src/Plugins/Export/ExportSql.php:907 src/Plugins/Export/ExportXml.php:356
 #: src/Plugins/Export/Helpers/Pdf.php:147
 msgid "Database:"
 msgstr "தரவுத்தளம்:"
@@ -3546,7 +3546,7 @@ msgid "Server connection:"
 msgstr "சேவையக இணைப்பு:"
 
 #: resources/templates/home/index.twig:197
-#: src/Plugins/Export/ExportLatex.php:231 src/Plugins/Export/ExportSql.php:764
+#: src/Plugins/Export/ExportLatex.php:231 src/Plugins/Export/ExportSql.php:750
 #: src/Plugins/Export/ExportXml.php:203
 msgid "Server version:"
 msgstr "வழங்கி பதிப்பு:"
@@ -5388,7 +5388,7 @@ msgstr ""
 
 #: resources/templates/server/replication/change_primary.twig:25
 #: resources/templates/server/replication/primary_add_replica_user.twig:29
-#: src/Plugins/Export/ExportLatex.php:223 src/Plugins/Export/ExportSql.php:753
+#: src/Plugins/Export/ExportLatex.php:223 src/Plugins/Export/ExportSql.php:739
 #: src/Plugins/Export/ExportXml.php:195
 msgid "Host:"
 msgstr "புரவலன்:"
@@ -7385,7 +7385,7 @@ msgstr "%s செயல்தூண்டியின் தரவேற்ற�
 #: src/Navigation/Nodes/NodeTriggerContainer.php:26
 #: src/Plugins/Export/ExportHtmlword.php:448
 #: src/Plugins/Export/ExportOdt.php:566 src/Plugins/Export/ExportPdf.php:173
-#: src/Plugins/Export/ExportSql.php:1847
+#: src/Plugins/Export/ExportSql.php:1833
 #: src/Plugins/Export/ExportTexytext.php:408
 #: src/Plugins/Export/ExportXml.php:112 src/Util.php:1395 src/Util.php:1411
 msgid "Triggers"
@@ -9120,7 +9120,7 @@ msgstr "முடக்கு"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "structure"
 msgstr "கட்டமைப்பு"
@@ -9131,7 +9131,7 @@ msgstr "கட்டமைப்பு"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "data"
 msgstr "தரவு"
@@ -9142,7 +9142,7 @@ msgstr "தரவு"
 #: src/Plugins/Export/ExportLatex.php:114
 #: src/Plugins/Export/ExportMediawiki.php:69
 #: src/Plugins/Export/ExportOdt.php:79 src/Plugins/Export/ExportPdf.php:79
-#: src/Plugins/Export/ExportSql.php:268
+#: src/Plugins/Export/ExportSql.php:256
 #: src/Plugins/Export/ExportTexytext.php:71
 msgid "structure and data"
 msgstr "கட்டமைப்பும் தரவும்"
@@ -9338,7 +9338,7 @@ msgstr ""
 "வரம்புக்கு)."
 
 #: src/Config/Descriptions.php:172 src/Config/Descriptions.php:706
-#: src/Plugins/Export/ExportSql.php:367
+#: src/Plugins/Export/ExportSql.php:354
 msgid "Exclude definition of current user"
 msgstr "தற்போதைய பயனரின் வரையறையை விலக்கவும்"
 
@@ -10633,7 +10633,7 @@ msgstr "அட்டவணை பெயர் வார்ப்புரு"
 #: src/Plugins/Export/ExportMediawiki.php:59
 #: src/Plugins/Export/ExportMediawiki.php:65
 #: src/Plugins/Export/ExportOdt.php:74 src/Plugins/Export/ExportPdf.php:75
-#: src/Plugins/Export/ExportSql.php:264
+#: src/Plugins/Export/ExportSql.php:252
 #: src/Plugins/Export/ExportTexytext.php:66
 msgid "Dump table"
 msgstr "டம்ப் டேபிள்"
@@ -10695,11 +10695,11 @@ msgstr "உருவாக்கம்/புதுப்பித்தல்/�
 msgid "Use delayed inserts"
 msgstr "தாமதமான செருகல்களைப் பயன்படுத்தவும்"
 
-#: src/Config/Descriptions.php:690 src/Plugins/Export/ExportSql.php:234
+#: src/Config/Descriptions.php:690 src/Plugins/Export/ExportSql.php:222
 msgid "Disable foreign key checks"
 msgstr "வெளிநாட்டு விசை காசோலைகளை முடக்கு"
 
-#: src/Config/Descriptions.php:691 src/Plugins/Export/ExportSql.php:244
+#: src/Config/Descriptions.php:691 src/Plugins/Export/ExportSql.php:232
 msgid "Export views as tables"
 msgstr "விவரபார்வையை அட்டவணையாக தரவாக்குக"
 
@@ -10719,7 +10719,7 @@ msgstr ""
 "இல்லை என்றால் சேர் (அட்டவணை உருவாக்கத்தின் போது குறியீடுகள் உருவாக்கப்படும் என்பதால் குறைந்த "
 "செயல்திறன் கொண்டது)"
 
-#: src/Config/Descriptions.php:707 src/Plugins/Export/ExportSql.php:373
+#: src/Config/Descriptions.php:707 src/Plugins/Export/ExportSql.php:360
 #, php-format
 msgid "%s view"
 msgstr "%s"
@@ -10732,7 +10732,7 @@ msgstr "புறக்கணிப்பு செருகல்களைப�
 msgid "Syntax to use when inserting data"
 msgstr "தரவைச் செருகும்போது பயன்படுத்த தொடரியல்"
 
-#: src/Config/Descriptions.php:711 src/Plugins/Export/ExportSql.php:500
+#: src/Config/Descriptions.php:711 src/Plugins/Export/ExportSql.php:486
 msgid "Maximal length of created query"
 msgstr "உருவாக்கப்பட்ட வினவலின் அதிகபட்ச நீளம்"
 
@@ -10740,7 +10740,7 @@ msgstr "உருவாக்கப்பட்ட வினவலின் அ�
 msgid "Export type"
 msgstr "ஏற்றுமதி வகை"
 
-#: src/Config/Descriptions.php:717 src/Plugins/Export/ExportSql.php:224
+#: src/Config/Descriptions.php:717 src/Plugins/Export/ExportSql.php:212
 msgid "Enclose export in a transaction"
 msgstr "ஒரு பரிவர்த்தனையில் ஏற்றுமதியை இணைக்கவும்"
 
@@ -11953,13 +11953,13 @@ msgstr "\"%s\" என்ற பக்கம் ஏற்கனவே உள்�
 
 #: src/Controllers/Database/DesignerController.php:175
 #: src/Controllers/Database/DesignerController.php:180
-#: src/Controllers/Database/EventsController.php:52
+#: src/Controllers/Database/EventsController.php:53
 #: src/Controllers/Database/ExportController.php:57
 #: src/Controllers/Database/ExportController.php:62
 #: src/Controllers/Database/ImportController.php:62
 #: src/Controllers/Database/ImportController.php:67
-#: src/Controllers/Database/RoutinesController.php:77
-#: src/Controllers/Database/RoutinesController.php:95
+#: src/Controllers/Database/RoutinesController.php:78
+#: src/Controllers/Database/RoutinesController.php:96
 #: src/Controllers/Database/SearchController.php:53
 #: src/Controllers/Database/SearchController.php:58
 #: src/Controllers/Database/SqlController.php:54
@@ -12021,37 +12021,37 @@ msgstr "\"%s\" என்ற பக்கம் ஏற்கனவே உள்�
 msgid "No databases selected."
 msgstr "எந்த தரவுத்தளமும் தேர்ந்தெடுக்கப்படவில்லை."
 
-#: src/Controllers/Database/EventsController.php:69
+#: src/Controllers/Database/EventsController.php:70
 msgid "The event was dropped immediately after creation."
 msgstr "நிகழ்வு உருவாக்கப்பட்ட உடனேயே கைவிடப்பட்டது."
 
-#: src/Controllers/Database/EventsController.php:136
+#: src/Controllers/Database/EventsController.php:137
 msgid "Add event"
 msgstr "புதிய பயனாளரை சேர்க்க->நிகழ்வை சேர்க்க"
 
-#: src/Controllers/Database/EventsController.php:140
+#: src/Controllers/Database/EventsController.php:141
 msgid "Edit event"
 msgstr "நிகழ்வை தொகுக்க"
 
-#: src/Controllers/Database/EventsController.php:189
-#: src/Controllers/Database/RoutinesController.php:254
-#: src/Controllers/Database/RoutinesController.php:284
-#: src/Controllers/Database/RoutinesController.php:350
+#: src/Controllers/Database/EventsController.php:190
+#: src/Controllers/Database/RoutinesController.php:255
+#: src/Controllers/Database/RoutinesController.php:285
+#: src/Controllers/Database/RoutinesController.php:351
 #: src/Controllers/Triggers/IndexController.php:207
 msgid "Error in processing request:"
 msgstr "வேண்டுகோள் செயலாக்கதில் பிழை:"
 
-#: src/Controllers/Database/EventsController.php:191
+#: src/Controllers/Database/EventsController.php:192
 #, php-format
 msgid "No event with name %1$s found in database %2$s."
 msgstr "தரவுத்தள %2$s இல் %1$s என்ற பெயர் கொண்ட நிகழ்வு இல்லை."
 
-#: src/Controllers/Database/EventsController.php:217
+#: src/Controllers/Database/EventsController.php:218
 #, php-format
 msgid "Export of event %s"
 msgstr "%s நிகழ்வின் தரவேற்றம்"
 
-#: src/Controllers/Database/EventsController.php:237
+#: src/Controllers/Database/EventsController.php:238
 #, php-format
 msgid ""
 "Error in processing request: No event with name %1$s found in database %2$s."
@@ -12085,7 +12085,7 @@ msgstr "சலுகைகள் இல்லை"
 msgid "You do not have the privileges to administrate the users!"
 msgstr "பயனர்களை நிர்வகிப்பதற்கான சலுகைகள் உங்களிடம் இல்லை!"
 
-#: src/Controllers/Database/RoutinesController.php:85
+#: src/Controllers/Database/RoutinesController.php:86
 #: src/Controllers/Database/Structure/AddPrefixController.php:35
 #: src/Controllers/Database/Structure/CentralColumns/AddController.php:39
 #: src/Controllers/Database/Structure/CentralColumns/MakeConsistentController.php:38
@@ -12139,15 +12139,15 @@ msgstr "பயனர்களை நிர்வகிப்பதற்கா�
 msgid "No table selected."
 msgstr "எந்த அட்டவணையும் தேர்ந்தெடுக்கப்படவில்லை."
 
-#: src/Controllers/Database/RoutinesController.php:170
+#: src/Controllers/Database/RoutinesController.php:171
 msgid "Add routine"
 msgstr "%s களத்தை சேர்க்க->செயல்முறையை சேர்க்க"
 
-#: src/Controllers/Database/RoutinesController.php:174
+#: src/Controllers/Database/RoutinesController.php:175
 msgid "Edit routine"
 msgstr "வழக்கத்தைத் திருத்து"
 
-#: src/Controllers/Database/RoutinesController.php:257
+#: src/Controllers/Database/RoutinesController.php:258
 #, php-format
 msgid ""
 "No routine with name %1$s found in database %2$s. You might be lacking the "
@@ -12156,18 +12156,18 @@ msgstr ""
 "தரவுத்தள %2$s இல் %1$s என்ற பெயரைக் கொண்ட வழக்கம் இல்லை. இந்த வழக்கத்தைத் திருத்துவதற்கு "
 "தேவையான சலுகைகள் உங்களுக்கு இல்லாதிருக்கலாம்."
 
-#: src/Controllers/Database/RoutinesController.php:286
-#: src/Controllers/Database/RoutinesController.php:352
+#: src/Controllers/Database/RoutinesController.php:287
+#: src/Controllers/Database/RoutinesController.php:353
 #, php-format
 msgid "No routine with name %1$s found in database %2$s."
 msgstr "தரவுத்தள %2$s இல் %1$s என்ற பெயருடன் வழக்கமாக இல்லை."
 
-#: src/Controllers/Database/RoutinesController.php:395
+#: src/Controllers/Database/RoutinesController.php:384
 #, php-format
 msgid "Export of routine %s"
 msgstr "%s செயல்முறையின் தரவேற்றம்"
 
-#: src/Controllers/Database/RoutinesController.php:414
+#: src/Controllers/Database/RoutinesController.php:403
 #, php-format
 msgid ""
 "Error in processing request: No routine with name %1$s found in database "
@@ -16457,7 +16457,7 @@ msgstr "புதியது"
 
 #: src/Navigation/Nodes/NodeFunctionContainer.php:23
 #: src/Navigation/Nodes/NodeFunctionContainer.php:27
-#: src/Plugins/Export/ExportSql.php:644 src/Plugins/Export/ExportXml.php:97
+#: src/Plugins/Export/ExportSql.php:630 src/Plugins/Export/ExportXml.php:97
 msgid "Functions"
 msgstr "செயல்பாடுகள்"
 
@@ -16477,7 +16477,7 @@ msgstr "விரிவாக்கு/சரிவு"
 
 #: src/Navigation/Nodes/NodeProcedureContainer.php:23
 #: src/Navigation/Nodes/NodeProcedureContainer.php:27
-#: src/Plugins/Export/ExportSql.php:633 src/Plugins/Export/ExportXml.php:102
+#: src/Plugins/Export/ExportSql.php:619 src/Plugins/Export/ExportXml.php:102
 msgid "Procedures"
 msgstr "நடைமுறைகள்"
 
@@ -16933,25 +16933,25 @@ msgid "Data dump options"
 msgstr "தரவு டம்ப் விருப்பங்கள்"
 
 #: src/Plugins/Export/ExportHtmlword.php:167
-#: src/Plugins/Export/ExportOdt.php:209 src/Plugins/Export/ExportSql.php:2093
+#: src/Plugins/Export/ExportOdt.php:209 src/Plugins/Export/ExportSql.php:2079
 #: src/Plugins/Export/ExportTexytext.php:137
 msgid "Dumping data for table"
 msgstr "அட்டவணைக்கான தரவை கொட்டுகிறது"
 
 #: src/Plugins/Export/ExportHtmlword.php:439
-#: src/Plugins/Export/ExportOdt.php:556 src/Plugins/Export/ExportSql.php:1829
+#: src/Plugins/Export/ExportOdt.php:556 src/Plugins/Export/ExportSql.php:1815
 #: src/Plugins/Export/ExportTexytext.php:401
 msgid "Table structure for table"
 msgstr "அட்டவணைக்கான அட்டவணை அமைப்பு"
 
 #: src/Plugins/Export/ExportHtmlword.php:456
-#: src/Plugins/Export/ExportOdt.php:576 src/Plugins/Export/ExportSql.php:1895
+#: src/Plugins/Export/ExportOdt.php:576 src/Plugins/Export/ExportSql.php:1881
 #: src/Plugins/Export/ExportTexytext.php:414
 msgid "Structure for view"
 msgstr "பார்வைக்கு அமைப்பு"
 
 #: src/Plugins/Export/ExportHtmlword.php:462
-#: src/Plugins/Export/ExportOdt.php:584 src/Plugins/Export/ExportSql.php:1938
+#: src/Plugins/Export/ExportOdt.php:584 src/Plugins/Export/ExportSql.php:1924
 #: src/Plugins/Export/ExportTexytext.php:418
 msgid "Stand-in structure for view"
 msgstr "பார்வைக்கு ச்டாண்ட்-இன் அமைப்பு"
@@ -16978,7 +16978,7 @@ msgid "Structure of table @TABLE@"
 msgstr "அட்டவணையின் அமைப்பு @அட்டவணை @"
 
 #: src/Plugins/Export/ExportLatex.php:124 src/Plugins/Export/ExportOdt.php:89
-#: src/Plugins/Export/ExportSql.php:280
+#: src/Plugins/Export/ExportSql.php:267
 msgid "Object creation options"
 msgstr "பொருள் உருவாக்கும் விருப்பங்கள்"
 
@@ -16998,7 +16998,7 @@ msgid "Label key:"
 msgstr "சிட்டை குறிப்பெழுத்து:"
 
 #: src/Plugins/Export/ExportLatex.php:149 src/Plugins/Export/ExportOdt.php:96
-#: src/Plugins/Export/ExportSql.php:206
+#: src/Plugins/Export/ExportSql.php:194
 msgid "Display foreign key relationships"
 msgstr "வெளிநாட்டு முக்கிய உறவுகளைக் காண்பி"
 
@@ -17007,7 +17007,7 @@ msgid "Display comments"
 msgstr "கருத்துரைகளை காட்டுக"
 
 #: src/Plugins/Export/ExportLatex.php:162 src/Plugins/Export/ExportOdt.php:109
-#: src/Plugins/Export/ExportSql.php:214
+#: src/Plugins/Export/ExportSql.php:202
 msgid "Display media types"
 msgstr "ஊடக வகைகளைக் காண்பி"
 
@@ -17015,17 +17015,17 @@ msgstr "ஊடக வகைகளைக் காண்பி"
 msgid "Put columns names in the first row:"
 msgstr "முதல் வரிசையில் நெடுவரிசை பெயர்களை வைக்கவும்:"
 
-#: src/Plugins/Export/ExportLatex.php:229 src/Plugins/Export/ExportSql.php:760
+#: src/Plugins/Export/ExportLatex.php:229 src/Plugins/Export/ExportSql.php:746
 #: src/Plugins/Export/ExportXml.php:201
 msgid "Generation Time:"
 msgstr "இயற்றப்பட்ட நேரம்:"
 
-#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:766
+#: src/Plugins/Export/ExportLatex.php:232 src/Plugins/Export/ExportSql.php:752
 #: src/Plugins/Export/ExportXml.php:204
 msgid "PHP Version:"
 msgstr "PHP பதிப்பு:"
 
-#: src/Plugins/Export/ExportLatex.php:287 src/Plugins/Export/ExportSql.php:1984
+#: src/Plugins/Export/ExportLatex.php:287 src/Plugins/Export/ExportSql.php:1970
 msgid "Data:"
 msgstr "தரவு:"
 
@@ -17066,7 +17066,7 @@ msgstr "கட்டமைப்பைக் காண்க"
 msgid "Stand in"
 msgstr "உள்ளே நிற்க"
 
-#: src/Plugins/Export/ExportSql.php:185
+#: src/Plugins/Export/ExportSql.php:173
 msgid ""
 "Display comments <i>(includes info such as export timestamp, PHP version, "
 "and server version)</i>"
@@ -17074,11 +17074,11 @@ msgstr ""
 "கருத்துகளைக் காண்பி <i> (ஏற்றுமதி நேர முத்திரை, பிஎச்பி பதிப்பு மற்றும் சேவையக பதிப்பு "
 "போன்ற தகவல்களை உள்ளடக்கியது) </i>"
 
-#: src/Plugins/Export/ExportSql.php:192
+#: src/Plugins/Export/ExportSql.php:180
 msgid "Additional custom header comment (\\n splits lines):"
 msgstr "கூடுதல் தனிப்பயன் தலைப்புக் கருத்து (\\பிளவு வரிகளில்):"
 
-#: src/Plugins/Export/ExportSql.php:198
+#: src/Plugins/Export/ExportSql.php:186
 msgid ""
 "Include a timestamp of when databases were created, last updated, and last "
 "checked"
@@ -17086,39 +17086,39 @@ msgstr ""
 "தரவுத்தளங்கள் எப்போது உருவாக்கப்பட்டன, கடைசியாக புதுப்பிக்கப்பட்டன, கடைசியாக "
 "சரிபார்க்கப்பட்டன"
 
-#: src/Plugins/Export/ExportSql.php:251
+#: src/Plugins/Export/ExportSql.php:239
 msgid "Export metadata"
 msgstr "ஏற்றுமதி மேனிலை தரவு"
 
-#: src/Plugins/Export/ExportSql.php:287
+#: src/Plugins/Export/ExportSql.php:274
 msgid "Add statements:"
 msgstr "கூற்றுகளை சேர்க்க:"
 
-#: src/Plugins/Export/ExportSql.php:295 src/Plugins/Export/ExportSql.php:304
-#: src/Plugins/Export/ExportSql.php:321 src/Plugins/Export/ExportSql.php:330
-#: src/Plugins/Export/ExportSql.php:354 src/Plugins/Export/ExportSql.php:382
-#: src/Plugins/Export/ExportSql.php:391
+#: src/Plugins/Export/ExportSql.php:282 src/Plugins/Export/ExportSql.php:291
+#: src/Plugins/Export/ExportSql.php:308 src/Plugins/Export/ExportSql.php:317
+#: src/Plugins/Export/ExportSql.php:341 src/Plugins/Export/ExportSql.php:369
+#: src/Plugins/Export/ExportSql.php:378
 #, php-format
 msgid "Add %s statement"
 msgstr "%s அறிக்கையைச் சேர்க்கவும்"
 
-#: src/Plugins/Export/ExportSql.php:337
+#: src/Plugins/Export/ExportSql.php:324
 msgid "(less efficient as indexes will be generated during table creation)"
 msgstr ""
 "(அட்டவணை உருவாக்கத்தின் போது குறியீடுகள் உருவாக்கப்படும் என்பதால் குறைந்த செயல்திறன் "
 "கொண்டது)"
 
-#: src/Plugins/Export/ExportSql.php:344
+#: src/Plugins/Export/ExportSql.php:331
 #, php-format
 msgid "%s value"
 msgstr "%s மதிப்பு"
 
 #. l10n: Allow simplifying exported view syntax to only "CREATE VIEW"
-#: src/Plugins/Export/ExportSql.php:361
+#: src/Plugins/Export/ExportSql.php:348
 msgid "Use simple view export"
 msgstr "எளிய பார்வை ஏற்றுமதியைப் பயன்படுத்தவும்"
 
-#: src/Plugins/Export/ExportSql.php:400
+#: src/Plugins/Export/ExportSql.php:387
 msgid ""
 "Enclose table and column names with backquotes <i>(Protects column and table "
 "names formed with special characters or keywords)</i>"
@@ -17127,35 +17127,35 @@ msgstr ""
 "அல்லது முக்கிய வார்த்தைகளுடன் உருவாக்கப்பட்ட நெடுவரிசை மற்றும் அட்டவணை பெயர்களைப் "
 "பாதுகாக்கிறது) </i>"
 
-#: src/Plugins/Export/ExportSql.php:415
+#: src/Plugins/Export/ExportSql.php:401
 msgid "Data creation options"
 msgstr "தரவேற்ற விருப்பங்கள்"
 
-#: src/Plugins/Export/ExportSql.php:419 src/Plugins/Export/ExportSql.php:2056
+#: src/Plugins/Export/ExportSql.php:405 src/Plugins/Export/ExportSql.php:2042
 msgid "Truncate table before insert"
 msgstr "செருகுவதற்கு முன் அட்டவணையை துண்டிக்கவும்"
 
-#: src/Plugins/Export/ExportSql.php:427
+#: src/Plugins/Export/ExportSql.php:413
 msgid "Instead of <code>INSERT</code> statements, use:"
 msgstr "<code>INSERT</code> அறிக்கைகளுக்குப் பதிலாக, பயன்படுத்தவும்:"
 
-#: src/Plugins/Export/ExportSql.php:433
+#: src/Plugins/Export/ExportSql.php:419
 msgid "<code>INSERT DELAYED</code> statements"
 msgstr "<code>தாமதமான</code> அறிக்கைகளைச் செருகவும்"
 
-#: src/Plugins/Export/ExportSql.php:442 src/Plugins/Export/ExportSql.php:469
+#: src/Plugins/Export/ExportSql.php:428 src/Plugins/Export/ExportSql.php:455
 msgid "<code>INSERT IGNORE</code> statements"
 msgstr "<code>புறக்கணிப்பைச் செருகு</code> அறிக்கைகள்"
 
-#: src/Plugins/Export/ExportSql.php:453
+#: src/Plugins/Export/ExportSql.php:439
 msgid "Function to use when dumping data:"
 msgstr "தரவுகளை குவிக்கும் போது பயன்படும் செயல்கூறு:"
 
-#: src/Plugins/Export/ExportSql.php:464
+#: src/Plugins/Export/ExportSql.php:450
 msgid "Syntax to use when inserting data:"
 msgstr "தரவைச் செருகும்போது பயன்படுத்த தொடரியல்:"
 
-#: src/Plugins/Export/ExportSql.php:474
+#: src/Plugins/Export/ExportSql.php:460
 msgid ""
 "include column names in every <code>INSERT</code> statement <br> &nbsp; "
 "&nbsp; &nbsp; Example: <code>INSERT INTO tbl_name (col_A,col_B,col_C) VALUES "
@@ -17165,7 +17165,7 @@ msgstr ""
 "nbsp; & nbsp; & nbsp; எடுத்துக்காட்டு: <code> TBL_NAME (COL_A, COL_B, COL_C) "
 "மதிப்புகள் (1,2,3) </code> இல் செருகவும்"
 
-#: src/Plugins/Export/ExportSql.php:479
+#: src/Plugins/Export/ExportSql.php:465
 msgid ""
 "insert multiple rows in every <code>INSERT</code> statement<br> &nbsp; "
 "&nbsp; &nbsp; Example: <code>INSERT INTO tbl_name VALUES (1,2,3), (4,5,6), "
@@ -17175,7 +17175,7 @@ msgstr ""
 "& nbsp; & nbsp; எடுத்துக்காட்டு: <code> TBL_NAME மதிப்புகள் (1,2,3), (4,5,6), "
 "(7,8,9) </code> இல் செருகவும்"
 
-#: src/Plugins/Export/ExportSql.php:484
+#: src/Plugins/Export/ExportSql.php:470
 msgid ""
 "both of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name (col_A,col_B,col_C) VALUES (1,2,3), (4,5,6), (7,8,9)</code>"
@@ -17183,7 +17183,7 @@ msgstr ""
 "மேலே உள்ள இரண்டும் <br> & nbsp; & nbsp; & nbsp; எடுத்துக்காட்டு: <code> TBL_NAME "
 "(COL_A, COL_B, COL_C) மதிப்புகள் (1,2,3), (4,5,6), (7,8,9) </code> இல் செருகவும்"
 
-#: src/Plugins/Export/ExportSql.php:489
+#: src/Plugins/Export/ExportSql.php:475
 msgid ""
 "neither of the above<br> &nbsp; &nbsp; &nbsp; Example: <code>INSERT INTO "
 "tbl_name VALUES (1,2,3)</code>"
@@ -17191,7 +17191,7 @@ msgstr ""
 "மேற்கூறிய எதுவும் இல்லை <br> & nbsp; & nbsp; & nbsp; எடுத்துக்காட்டு: <code> "
 "TBL_NAME மதிப்புகளில் (1,2,3) </code> இல் செருகவும்"
 
-#: src/Plugins/Export/ExportSql.php:508
+#: src/Plugins/Export/ExportSql.php:494
 msgid ""
 "Dump binary columns in hexadecimal notation <i>(for example, \"abc\" becomes "
 "0x616263)</i>"
@@ -17199,7 +17199,7 @@ msgstr ""
 "எக்சாடெசிமல் குறியீட்டில் பைனரி நெடுவரிசைகளை டம்ப் <i> (எடுத்துக்காட்டாக, \"ஏபிசி\" "
 "0x616263 ஆகிறது) </i> ஆகிறது"
 
-#: src/Plugins/Export/ExportSql.php:517
+#: src/Plugins/Export/ExportSql.php:503
 msgid ""
 "Dump TIMESTAMP columns in UTC <i>(enables TIMESTAMP columns to be dumped and "
 "reloaded between servers in different time zones)</i>"
@@ -17208,104 +17208,104 @@ msgstr ""
 "சேவையகங்களுக்கு இடையில் நேர முத்திரை நெடுவரிசைகளை கொட்டவும் மீண்டும் ஏற்றவும் "
 "செயல்படுத்துகிறது) </i>"
 
-#: src/Plugins/Export/ExportSql.php:593
+#: src/Plugins/Export/ExportSql.php:579
 msgid "It appears your database uses routines;"
 msgstr "உங்கள் தரவுத்தளம் நடைமுறைகளைப் பயன்படுத்துகிறது என்று தோன்றுகிறது;"
 
-#: src/Plugins/Export/ExportSql.php:596 src/Plugins/Export/ExportSql.php:1456
-#: src/Plugins/Export/ExportSql.php:1879
+#: src/Plugins/Export/ExportSql.php:582 src/Plugins/Export/ExportSql.php:1442
+#: src/Plugins/Export/ExportSql.php:1865
 msgid "alias export may not work reliably in all cases."
 msgstr "மாற்று ஏற்றுமதி எல்லா நிகழ்வுகளிலும் நம்பத்தகுந்ததாக செயல்படாது."
 
-#: src/Plugins/Export/ExportSql.php:1051
+#: src/Plugins/Export/ExportSql.php:1037
 msgid "Metadata"
 msgstr "மேனிலை தரவு"
 
-#: src/Plugins/Export/ExportSql.php:1110
+#: src/Plugins/Export/ExportSql.php:1096
 #, php-format
 msgid "Metadata for table %s"
 msgstr "அட்டவணை %s க்கான மேனிலை தரவு"
 
-#: src/Plugins/Export/ExportSql.php:1117
+#: src/Plugins/Export/ExportSql.php:1103
 #, php-format
 msgid "Metadata for database %s"
 msgstr "தரவுத்தளம் %s க்கான மேனிலை தரவு"
 
-#: src/Plugins/Export/ExportSql.php:1377
+#: src/Plugins/Export/ExportSql.php:1363
 #, php-format
 msgid "Error reading structure for table %s:"
 msgstr "அட்டவணை %s க்கான பிழை வாசிப்பு:"
 
-#: src/Plugins/Export/ExportSql.php:1453
+#: src/Plugins/Export/ExportSql.php:1439
 msgid "It appears your database uses views;"
 msgstr "உங்கள் தரவுத்தளம் காட்சிகளைப் பயன்படுத்துகிறது என்று தோன்றுகிறது;"
 
-#: src/Plugins/Export/ExportSql.php:1592
+#: src/Plugins/Export/ExportSql.php:1578
 msgid "Constraints for dumped tables"
 msgstr "கொட்டப்பட்ட அட்டவணைகளுக்கான தடைகள்"
 
-#: src/Plugins/Export/ExportSql.php:1593
+#: src/Plugins/Export/ExportSql.php:1579
 msgid "Constraints for table"
 msgstr "அட்டவணைக்கான தடைகள்"
 
-#: src/Plugins/Export/ExportSql.php:1619
+#: src/Plugins/Export/ExportSql.php:1605
 msgid "Indexes for dumped tables"
 msgstr "குவிக்கப்பட்ட அட்டவணைகளுக்கான தொகுப்புக்குறிகள்"
 
-#: src/Plugins/Export/ExportSql.php:1620
+#: src/Plugins/Export/ExportSql.php:1606
 msgid "Indexes for table"
 msgstr "அட்டவணைகளில்:->அட்டவணைகளுக்கான தொகுப்புக்குறிகள்"
 
-#: src/Plugins/Export/ExportSql.php:1643
+#: src/Plugins/Export/ExportSql.php:1629
 msgid "AUTO_INCREMENT for dumped tables"
 msgstr "குவிக்கப்பட்ட அட்டவணைகளுக்கான AUTO_INCREMENT(தன்னிலைகூட்டு)"
 
-#: src/Plugins/Export/ExportSql.php:1644
+#: src/Plugins/Export/ExportSql.php:1630
 msgid "AUTO_INCREMENT for table"
 msgstr "அட்டவணைக்கான AUTO_INCREMENT(தன்னிலைகூட்டு)"
 
-#: src/Plugins/Export/ExportSql.php:1695
+#: src/Plugins/Export/ExportSql.php:1681
 msgid "MEDIA TYPES FOR TABLE"
 msgstr "அட்டவணைக்கான ஊடக வகைகள்"
 
-#: src/Plugins/Export/ExportSql.php:1725
+#: src/Plugins/Export/ExportSql.php:1711
 msgid "RELATIONSHIPS FOR TABLE"
 msgstr "அட்டவணைக்கான உறவுகள்"
 
-#: src/Plugins/Export/ExportSql.php:1876
+#: src/Plugins/Export/ExportSql.php:1862
 msgid "It appears your table uses triggers;"
 msgstr "உங்கள் அட்டவணை தூண்டுதல்களைப் பயன்படுத்துகிறது;"
 
-#: src/Plugins/Export/ExportSql.php:1910
+#: src/Plugins/Export/ExportSql.php:1896
 #, php-format
 msgid "Structure for view %s exported as a table"
 msgstr "பார்வைக்கான கட்டமைப்பு %s ஒரு அட்டவணையாக ஏற்றுமதி செய்யப்படுகின்றன"
 
-#: src/Plugins/Export/ExportSql.php:1941
+#: src/Plugins/Export/ExportSql.php:1927
 msgid "(See below for the actual view)"
 msgstr "(உண்மையான பார்வைக்கு கீழே காண்க)"
 
-#: src/Plugins/Export/ExportSql.php:1997
+#: src/Plugins/Export/ExportSql.php:1983
 #, php-format
 msgid "Error reading data for table %s:"
 msgstr "அட்டவணை %s க்கான தரவைப் படிப்பது பிழை:"
 
-#: src/Plugins/Export/ExportSql.php:2518
+#: src/Plugins/Export/ExportSql.php:2504
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:540
 msgid "Creation:"
 msgstr "உருவாக்கம்:"
 
-#: src/Plugins/Export/ExportSql.php:2526
+#: src/Plugins/Export/ExportSql.php:2512
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:551
 msgid "Last update:"
 msgstr "கடைசி நிகழ்நிலையாக்கம்:"
 
-#: src/Plugins/Export/ExportSql.php:2534
+#: src/Plugins/Export/ExportSql.php:2520
 #: src/Plugins/Schema/Pdf/PdfRelationSchema.php:562
 msgid "Last check:"
 msgstr "கடைசி சரிபார்ப்பு:"
 
-#: src/Plugins/Export/ExportSql.php:2554
+#: src/Plugins/Export/ExportSql.php:2540
 msgid ""
 "Database system or older MySQL server to maximize output compatibility with:"
 msgstr ""
@@ -17430,17 +17430,17 @@ msgstr "Opendocument விரிதாளை அலச முடியவில
 msgid "ESRI Shape File"
 msgstr "ESRI வடிவகோப்பு"
 
-#: src/Plugins/Import/ImportShp.php:113 src/Plugins/Import/ImportShp.php:179
+#: src/Plugins/Import/ImportShp.php:113 src/Plugins/Import/ImportShp.php:176
 #, php-format
 msgid "There was an error importing the ESRI shape file: \"%s\"."
 msgstr "ESRI வடிவகோப்பை \"%s\" தரவிறக்குவதில் பிழை நிகழ்ந்துள்ளது."
 
-#: src/Plugins/Import/ImportShp.php:204
+#: src/Plugins/Import/ImportShp.php:201
 #, php-format
 msgid "MySQL Spatial Extension does not support ESRI type \"%s\"."
 msgstr "MySQL இடம்சார் நிரல்நீட்சியானது ESRI வகைக்கு \"%s\" ஆதரவளிக்கவில்லை."
 
-#: src/Plugins/Import/ImportShp.php:249
+#: src/Plugins/Import/ImportShp.php:246
 msgid "The imported file does not contain any data!"
 msgstr "இறக்குமதி செய்யப்பட்ட கோப்பில் எந்த தரவும் இல்லை!"
 
