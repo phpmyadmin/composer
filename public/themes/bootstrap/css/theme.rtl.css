@@ -11891,11 +11891,11 @@ input#auto_increment_opt {
   padding: 0;
   position: relative;
 }
-.toggleButton .container {
+.toggleButton .toggle-container {
   position: absolute;
 }
-.toggleButton .container td,
-.toggleButton .container tr {
+.toggleButton .toggle-container td,
+.toggleButton .toggle-container tr {
   background: none !important;
 }
 .toggleButton .toggleOn {
