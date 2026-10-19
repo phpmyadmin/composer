@@ -97,7 +97,7 @@ const getDropdownValues = function ($dropdown) {
   const $db = $form.find('input[name="db"]').val();
   const $table = $form.find('input[name="table"]').val();
   const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-  let params = 'getDropdownValues=true' + argsep + 'ajax_request=true' + argsep + 'db=' + encodeURIComponent($db) + argsep + 'table=' + encodeURIComponent($table) + argsep + 'foreign=' + (foreign !== '') + argsep + 'foreignDb=' + encodeURIComponent(foreignDb) + (foreignTable !== null ? argsep + 'foreignTable=' + encodeURIComponent(foreignTable) : '');
+  let params = 'getDropdownValues=true' + argsep + 'db=' + encodeURIComponent($db) + argsep + 'table=' + encodeURIComponent($table) + argsep + 'foreign=' + (foreign !== '') + argsep + 'foreignDb=' + encodeURIComponent(foreignDb) + (foreignTable !== null ? argsep + 'foreignTable=' + encodeURIComponent(foreignTable) : '');
   const $server = $form.find('input[name="server"]');
   if ($server.length > 0) {
     params += argsep + 'server=' + $form.find('input[name="server"]').val();

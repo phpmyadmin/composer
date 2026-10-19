@@ -35,7 +35,6 @@ let primaryKey;
 let dataParsed = null;
 function appendHtmlColumnsList() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/get-columns', {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
@@ -51,7 +50,6 @@ function goTo3NFStep1(newTables) {
     tables = [_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')];
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/3nf/step1', {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'tables': tables
@@ -82,7 +80,6 @@ function goTo3NFStep1(newTables) {
 }
 function goTo2NFStep1() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/2nf/step1', {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
@@ -125,7 +122,6 @@ function goToFinish1NF() {
 }
 function goToStep4() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/1nf/step4', {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
@@ -145,7 +141,6 @@ window.goToFinish1NF = goToFinish1NF;
 window.goToStep4 = goToStep4;
 function goToStep3() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/1nf/step3', {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
@@ -165,7 +160,6 @@ function goToStep3() {
 function goToStep2() {
   let extra = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/1nf/step2', {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
@@ -199,7 +193,6 @@ function goTo2NFFinish(pd) {
     tables[dependson] = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[name="' + dependson + '"]').val();
   }
   const datastring = {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -245,7 +238,6 @@ function goTo3NFFinish(newTables) {
     }
   }
   const datastring = {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'newTables': JSON.stringify(newTables)
@@ -293,7 +285,6 @@ function goTo2NFStep2(pd, primaryKey) {
   } else {
     extra += '</div>';
     const datastring = {
-      'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -341,7 +332,6 @@ function goTo3NFStep2(pd, tablesTds) {
   } else {
     extra += '</div>';
     const datastring = {
-      'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'tables': JSON.stringify(tablesTds),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -434,7 +424,6 @@ function moveRepeatingGroup(repeatingCols) {
     return false;
   }
   const datastring = {
-    'ajax_request': true,
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -491,7 +480,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     }
     const numField = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#numField').val();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/create-new-column', {
-      'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -528,11 +516,10 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     }
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
     let datastring = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols :input').serialize();
-    datastring += argsep + 'ajax_request=1' + argsep + 'do_save_data=1' + argsep + 'field_where=last';
+    datastring += argsep + 'do_save_data=1' + argsep + 'field_where=last';
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/add-field', datastring, function (data) {
       if (data.success) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', {
-          'ajax_request': true,
           'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
           'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
           'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -557,7 +544,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra').on('click', '#addNewPrimary', function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/add-new-primary', {
-      'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
@@ -590,7 +576,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent .card-footer').on('click', '#saveNewPrimary', function () {
     let datastring = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols :input').serialize();
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator');
-    datastring += argsep + 'field_key[0]=primary_0' + argsep + 'ajax_request=1' + argsep + 'do_save_data=1' + argsep + 'field_where=last';
+    datastring += argsep + 'field_key[0]=primary_0' + argsep + 'do_save_data=1' + argsep + 'field_where=last';
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/add-field', datastring, function (data) {
       if (data.success === true) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#mainContent h4').html(window.Messages.strPrimaryKeyAdded);
@@ -613,7 +599,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     });
     dropQuery = dropQuery.slice(0, -2);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', {
-      'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
@@ -666,8 +651,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
       'add_fields': 1,
       'index': {
         'Key_name': 'PRIMARY'
-      },
-      'ajax_request': true
+      }
     };
     const title = window.Messages.strAddPrimaryKey;
     (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.indexEditorDialog)(url, title, function () {
@@ -698,7 +682,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols').insertAfter('#mainContent h4');
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols').html('<div class="text-center">' + window.Messages.strLoading + '<br>' + window.Messages.strWaitForPd + '</div>');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/normalization/partial-dependencies', {
-      'ajax_request': true,
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
       'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')

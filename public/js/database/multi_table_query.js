@@ -95,7 +95,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
         'server': sessionStorage.server,
         'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_name').val(),
         'tables': Object.keys(tableAliases),
-        'ajax_request': '1',
         'token': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('token')
       },
       success: function (response) {
@@ -142,7 +141,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     const data = {
       'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_name').val(),
       'sql_query': query,
-      'ajax_request': '1',
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'token': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('token')
     };

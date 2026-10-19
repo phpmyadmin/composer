@@ -113,7 +113,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('database/stru
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#makeConsistentWithCentralListContinue').on('click', function () {
           const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tablesForm');
           const argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-          const data = $form.serialize() + argSep + 'ajax_request=true' + argSep + 'ajax_page_request=true';
+          const data = $form.serialize() + argSep + 'ajax_page_request=true';
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
           _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.source = $form;
           jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/structure/central-columns/make-consistent', data, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.responseHandler);
@@ -191,7 +191,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('database/stru
     }
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('form');
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-    const data = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+    const data = $form.serialize() + argsep + 'ajax_page_request=true';
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.source = $form;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, data, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.responseHandler);

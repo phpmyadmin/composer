@@ -51,7 +51,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/variab
     $mySaveLink.on('click', function () {
       const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/variables/set/' + encodeURIComponent(varName), {
-        'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
         'varValue': $valueCell.find('input').val()
       }, function (data) {
@@ -80,7 +79,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/variab
       return false;
     });
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/server/variables/get/' + encodeURIComponent(varName), {
-      'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server')
     }, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {

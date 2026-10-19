@@ -441,7 +441,7 @@ const AJAX = {
     }, 'fast');
     const url = isLink ? href : jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action');
     const argsep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    let params = 'ajax_request=true' + argsep + 'ajax_page_request=true';
+    let params = 'ajax_page_request=true';
     const dataPost = AJAX.source.getPostData();
     if (!isLink) {
       params += argsep + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize();
@@ -963,7 +963,7 @@ const AJAX = {
         const state = event.originalEvent.state;
         if (state && state.menu) {
           AJAX.$msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)();
-          const params = 'ajax_request=true' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator') + 'ajax_page_request=true';
+          const params = 'ajax_page_request=true';
           const url = state.url || location.href;
           jquery__WEBPACK_IMPORTED_MODULE_0___default().get(url, params, AJAX.responseHandler);
           // TODO: Check if sometimes menu is not retrieved from server,
@@ -1734,7 +1734,6 @@ function savePrefsToLocalStorage(form) {
     cache: false,
     type: 'POST',
     data: {
-      'ajax_request': true,
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
       'submit_get_json': true
     },
@@ -1966,7 +1965,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   onloadRecentFavoriteTables: function() { return /* binding */ onloadRecentFavoriteTables; },
 /* harmony export */   onloadSortLinkMouseEvent: function() { return /* binding */ onloadSortLinkMouseEvent; },
 /* harmony export */   onloadSqlQueryEditEvents: function() { return /* binding */ onloadSqlQueryEditEvents; },
-/* harmony export */   prepareForAjaxRequest: function() { return /* binding */ prepareForAjaxRequest; },
 /* harmony export */   prettyProfilingNum: function() { return /* binding */ prettyProfilingNum; },
 /* harmony export */   previewSql: function() { return /* binding */ previewSql; },
 /* harmony export */   removeAutocompleteInfo: function() { return /* binding */ removeAutocompleteInfo; },
@@ -2352,17 +2350,6 @@ function verifyColumnsProperties() {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('select.virtuality').each(function () {
     hideShowExpression(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
   });
-}
-/**
- * Add a hidden field to the form to indicate that this will be an
- * Ajax request (only if this hidden field does not exist)
- *
- * @param {object} $form the form
- */
-function prepareForAjaxRequest($form) {
-  if (!$form.find('input:hidden').is('#ajax_request_hidden')) {
-    $form.append('<input type="hidden" id="ajax_request_hidden" name="ajax_request" value="true">');
-  }
 }
 function checkPasswordStrength(value, meterObject, meterObjectLabel, username) {
   // List of words we don't want to appear in the password
@@ -2762,7 +2749,6 @@ function onloadIdleEvent() {
       guid = window.sessionStorage.guid;
     }
     const params = {
-      'ajax_request': true,
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
       'db': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db'),
       'guid': guid,
@@ -2942,7 +2928,6 @@ function getForeignKeyCheckboxLoader() {
 function loadForeignKeyCheckbox() {
   // Load default foreign key check value
   const params = {
-    'ajax_request': true,
     'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
   };
   jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/sql/get-default-fk-check-value', params, function (data) {
@@ -3066,7 +3051,6 @@ function codeMirrorAutoCompleteOnInputRead(instance) {
       instance.options.hintOptions.defaultTable = '';
       sqlAutoCompleteInProgress = true;
       const params = {
-        'ajax_request': true,
         'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
         'db': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db'),
         'no_debug': true
@@ -3216,7 +3200,7 @@ function updateCode($base, htmlValue, rawValue) {
 function previewSql($form) {
   const formUrl = $form.attr('action');
   const sep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-  const formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
+  const formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1';
   const $messageBox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
   jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
     type: 'POST',
@@ -3580,7 +3564,6 @@ function onloadCreateTableEvents() {
      * is actually an array of DOM elements)
      */
     if (checkTableEditForm($form[0], $form.find('input[name=orig_num_fields]').val())) {
-      prepareForAjaxRequest($form);
       if (!checkReservedWordColumns($form)) {
         return;
       }
@@ -3634,7 +3617,7 @@ function onloadCreateTableEvents() {
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.reload();
         // Redirect to table structure page on creation of new table
         const argsep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-        const params12 = 'ajax_request=true' + argsep + 'ajax_page_request=true';
+        const params12 = 'ajax_page_request=true';
         const tableStructureUrl = 'index.php?route=/table/structure' + argsep + 'server=' + data.params.server + argsep + 'db=' + data.params.db + argsep + 'token=' + data.params.token + argsep + 'goto=' + encodeURIComponent('index.php?route=/database/structure') + argsep + 'table=' + data.params.table + '';
         jquery__WEBPACK_IMPORTED_MODULE_0___default().get(tableStructureUrl, params12, _ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.responseHandler);
       }); // end $.post()
@@ -3652,7 +3635,6 @@ function onloadCreateTableEvents() {
      */
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form.create_table_form.ajax');
     const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-    prepareForAjaxRequest($form);
     // User wants to add more fields to the table
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + '&' + actionParam, function (data) {
       if (typeof data === 'undefined' || !data.success) {
@@ -3829,7 +3811,6 @@ function onloadChangePasswordEvents() {
       const thisValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
       const submitForm = function () {
         const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-        $theForm.append('<input type="hidden" name="ajax_request" value="true">');
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post($theForm.attr('action'), $theForm.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'change_pw=' + thisValue, function (data) {
           if (typeof data === 'undefined' || data.success !== true) {
             (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
@@ -3850,9 +3831,7 @@ function onloadChangePasswordEvents() {
         submitForm();
       }
     });
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().get(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), {
-      'ajax_request': true
-    }, function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().get(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (data) {
       if (typeof data === 'undefined' || !data.success) {
         (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false);
         return;
@@ -4112,7 +4091,6 @@ function onloadEnumSetEditor() {
       pick = true;
     }
     const params = {
-      'ajax_request': true,
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
       'db': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('db'),
       'cur_table': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('table'),
@@ -4259,7 +4237,7 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
     const formUrl = $form.attr('action');
     const sep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-    const formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1' + sep + 'ajax_request=1';
+    const formData = $form.serialize() + sep + 'do_save_data=1' + sep + 'preview_sql=1';
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post({
       url: formUrl,
       data: formData,
@@ -4287,7 +4265,6 @@ function indexDialogModal(routeUrl, url, title, callbackSuccess) {
      */
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
     (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
-    prepareForAjaxRequest($form);
     // User wants to submit the form
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'do_save_data=1', function (data) {
       const $sqlqueryresults = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.sqlqueryresults');
@@ -4558,7 +4535,7 @@ function toggleButton($obj) {
       addClass = 'on';
     }
     const parts = url.split('?');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().post(parts[0], parts[1] + '&ajax_request=true', function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().post(parts[0], parts[1], function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
         (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msg);
         $container.removeClass(removeClass).addClass(addClass).animate({
@@ -5533,7 +5510,7 @@ function getJsConfirmCommonParam(elem, parameters) {
   } else {
     params = '';
   }
-  params += 'is_js_confirmed=1' + sep + 'ajax_request=true' + sep + 'fk_checks=' + ($elem.find('#fk_checks').is(':checked') ? 1 : 0);
+  params += 'is_js_confirmed=1' + sep + 'fk_checks=' + ($elem.find('#fk_checks').is(':checked') ? 1 : 0);
   return params;
 }
 
@@ -5973,7 +5950,6 @@ function showAddIndexDialog(sourceArray, arrayIndex, targetColumns, colIndex, in
     'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
     'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="db"]').val(),
     'table': table,
-    'ajax_request': 1,
     'create_edit_table': 1,
     'index': index,
     'columns': ''
@@ -6184,7 +6160,7 @@ function on() {
       event.preventDefault();
       const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#index_frm');
       const argsep = _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-      const submitData = $form.serialize() + argsep + 'do_save_data=1' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+      const submitData = $form.serialize() + argsep + 'do_save_data=1' + argsep + 'ajax_page_request=true';
       (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       _ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -6273,8 +6249,7 @@ function on() {
         url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').getPostData();
         title = window.Messages.strEditIndex;
       }
-      url += _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true';
-      (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.indexEditorDialog)(url, title, function (data) {
+      ;(0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.indexEditorDialog)(url, title, function (data) {
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db));
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table));
         (0,_functions_refreshMainContent_ts__WEBPACK_IMPORTED_MODULE_8__["default"])('index.php?route=/table/structure');
@@ -6285,9 +6260,8 @@ function on() {
      **/
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', '#table_index tbody tr td.rename_index.ajax', function (event) {
       event.preventDefault();
-      let url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').getPostData();
+      const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').getPostData();
       const title = window.Messages.strRenameIndex;
-      url += _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true';
       (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.indexRenameDialog)(url, title, function (data) {
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('db', data.params.db));
         _navigation_ts__WEBPACK_IMPORTED_MODULE_3__.Navigation.update(_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.set('table', data.params.table));
@@ -6691,7 +6665,7 @@ function loadChildNodes(isNode, $expandElem, callback) {
       'searchClause2': ''
     };
   }
-  jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/navigation&ajax_request=1', params, function (data) {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/navigation', params, function (data) {
     if (typeof data === 'undefined') {
       return;
     }
@@ -7057,7 +7031,7 @@ function ensureSettings(selflink) {
       getNaviSettings: true,
       server: _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server')
     };
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/navigation&ajax_request=1', params, function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/navigation', params, function (data) {
       if (typeof data !== 'undefined' && data.success) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navi_settings_container').html(data.message);
         _config_ts__WEBPACK_IMPORTED_MODULE_2__.Config.setupRestoreField();
@@ -7094,7 +7068,7 @@ function reload() {
   }
   requestNaviReload(params);
   function requestNaviReload(params) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/navigation&ajax_request=1', params, function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/navigation', params, function (data) {
       if (typeof data === 'undefined') {
         return;
       }
@@ -7139,12 +7113,12 @@ function treePagination($this) {
   const $msgbox = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
   const isDbSelector = $this.closest('div.pageselector').is('.dbselector');
   const url = 'index.php?route=/navigation';
-  let params = 'ajax_request=true';
+  let params;
   if ($this[0].tagName === 'A') {
-    params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + $this.getPostData();
+    params = $this.getPostData();
   } else {
     // tagName === 'SELECT'
-    params += _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('arg_separator') + $this.closest('form').serialize();
+    params = $this.closest('form').serialize();
   }
   const searchClause = Navigation.FastFilter.getSearchClause();
   if (searchClause) {
@@ -7630,7 +7604,7 @@ FastFilter.Filter.prototype.request = function () {
     }
   }
   self.xhr = jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-    url: 'index.php?route=/navigation&ajax_request=1&server=' + _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
+    url: 'index.php?route=/navigation&server=' + _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
     type: 'post',
     dataType: 'json',
     data: params,
@@ -7770,7 +7744,6 @@ function updateNavigationWidthConfig(value) {
     type: 'POST',
     dataType: 'json',
     data: {
-      'ajax_request': true,
       server: _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       value: value
     },
@@ -8277,8 +8250,7 @@ __webpack_require__.r(__webpack_exports__);
 const ThemesManager = {
   handleEvent: () => {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/themes', {
-      'server': _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
-      'ajax_request': true
+      'server': _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server')
     }, data => {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#themesModal .modal-body').html(data.themes);
     });
@@ -8294,7 +8266,6 @@ const ThemeColorModeToggle = {
     setColorModeToHtmlTag(toggleSelect.options.item(toggleSelect.selectedIndex).value);
     const toggleForm = toggleSelect.form;
     const formData = new FormData(toggleForm);
-    formData.set('ajax_request', '1');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(toggleForm.action, Object.fromEntries(formData.entries())).done(function (data) {
       setColorModeToHtmlTag(data.themeColorMode);
     });

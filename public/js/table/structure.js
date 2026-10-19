@@ -49,7 +49,7 @@ __webpack_require__.r(__webpack_exports__);
  * Reload fields table
  */
 function reloadFieldForm() {
-  jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').attr('action'), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true', function (formData) {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').attr('action'), jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').serialize(), function (formData) {
     const $tempDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div id=\'temp_div\'><div>').append(formData.message);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#fieldsForm').replaceWith($tempDiv.find('#fieldsForm'));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addColumns').replaceWith($tempDiv.find('#addColumns'));
@@ -155,7 +155,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
      */
     if ((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.checkTableEditForm)($form[0], fieldCnt)) {
       // OK, form passed validation step
-      (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
       if ((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.checkReservedWordColumns)($form)) {
         // User wants to submit the form
         // If Collation is changed, Warn and Confirm
@@ -302,7 +301,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
       }
       const formUrl = $form.attr('action');
       const sep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-      const formData = serialized + sep + 'preview_sql=1' + sep + 'ajax_request=1';
+      const formData = serialized + sep + 'preview_sql=1';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post({
         url: formUrl,
         data: formData,
@@ -336,7 +335,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
         return;
       }
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.prop('action'), serialized + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=true', function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.prop('action'), serialized, function (data) {
         if (data.success === false) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxRemoveMessage)($msgbox);
           const errorModal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#moveColumnsErrorModal');
@@ -371,7 +370,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     e.preventDefault();
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('form');
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-    const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+    const submitData = $form.serialize() + argsep + 'ajax_page_request=true';
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(this.formAction, submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -383,7 +382,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     e.preventDefault();
     const $link = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     function submitPartitionAction(url) {
-      const params = 'ajax_request=true&ajax_page_request=true&' + $link.getPostData();
+      const params = 'ajax_page_request=true&' + $link.getPostData();
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $link;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -409,7 +408,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/structu
     const question = window.Messages.strRemovePartitioningWarning;
     $link.confirm(question, $link.attr('href'), function (url) {
       const params = (0,_modules_functions_getJsConfirmCommonParam_ts__WEBPACK_IMPORTED_MODULE_8__["default"])({
-        'ajax_request': true,
         'ajax_page_request': true
       }, $link.getPostData());
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();

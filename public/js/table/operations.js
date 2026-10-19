@@ -92,7 +92,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#copyTable.ajax', function (event) {
     event.preventDefault();
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'submit_copy=Go', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
@@ -119,7 +118,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#moveTableForm', function (event) {
     event.preventDefault();
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'submit_move=1', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
@@ -150,7 +148,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     const question = window.Messages.strChangeAllColumnCollationsWarning;
     if ($tblNameField.val() !== $tblNameField[0].defaultValue) {
       // reload page and navigation if the table has been renamed
-      (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
       if ($tblCollationField.val() !== collationOrigValue && $changeAllColumnCollationsCheckBox.is(':checked')) {
         $form.confirm(question, $form.attr('action'), function () {
           submitOptionsForm();
@@ -198,7 +195,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     }
     // variables which stores the common attributes
     let params = jquery__WEBPACK_IMPORTED_MODULE_0___default().param({
-      'ajax_request': 1,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     });
     const postData = $link.getPostData();
@@ -250,7 +246,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/operati
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     function submitPartitionMaintenance() {
       const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-      const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+      const submitData = $form.serialize() + argsep + 'ajax_page_request=true';
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strProcessingRequest);
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);

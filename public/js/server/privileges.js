@@ -62,7 +62,6 @@ const EditUserGroup = {
     const button = event.relatedTarget;
     const username = button.getAttribute('data-username');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/server/user-groups/edit-form', {
-      'ajax_request': true,
       'username': username,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     }, data => {
@@ -76,7 +75,7 @@ const EditUserGroup = {
       modalBody.innerHTML = data.message;
       saveButton.addEventListener('click', () => {
         const form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(editUserGroupModal.querySelector('#changeUserGroupForm'));
-        jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/privileges', form.serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'ajax_request=1', data => {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/privileges', form.serialize(), data => {
           if (typeof data === 'undefined' || data.success !== true) {
             (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.error, false, 'error');
             return;
@@ -102,7 +101,6 @@ const AccountLocking = {
     const params = {
       'username': button.dataset.userName,
       'hostname': button.dataset.hostName,
-      'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     };
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, params, data => {
@@ -137,7 +135,6 @@ const AddUserLoginCheckUsername = {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#select_pred_username').val() === 'userdefined' && username !== '') {
       const href = jquery__WEBPACK_IMPORTED_MODULE_0___default()('form[name=\'usersForm\']').attr('action');
       const params = {
-        'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
         'validate_username': true,
         'username': username
@@ -226,7 +223,7 @@ const RevokeUser = {
       }
       ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strRemovingSelectedUsers);
       const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val() + argsep + 'ajax_request=true', function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, $form.serialize() + argsep + 'delete=' + $thisButton.val(), function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(data.message);
           // Refresh navigation, if we dropped some databases with the name
@@ -278,7 +275,7 @@ const ExportPrivileges = {
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator');
     const serverId = _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server');
     const selectedUsers = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#usersForm input[name*=\'selected_usr\']:checkbox').serialize();
-    const postStr = selectedUsers + '&submit_mult=export' + argsep + 'ajax_request=true&server=' + serverId;
+    const postStr = selectedUsers + '&submit_mult=export' + argsep + 'server=' + serverId;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.form).prop('action'), postStr, function (data) {
       exportPrivilegesModalHandler(data, msgbox);
     }); // end $.post
@@ -294,9 +291,7 @@ const ExportUser = {
   handleEvent: function (event) {
     event.preventDefault();
     const msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().get(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), {
-      'ajax_request': true
-    }, function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().get(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), function (data) {
       exportPrivilegesModalHandler(data, msgbox);
     });
   }

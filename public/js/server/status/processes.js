@@ -61,7 +61,7 @@ const processList = {
     event.preventDefault();
     const argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
     let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
-    params += argSep + 'ajax_request=1' + argSep + 'server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    params += argSep + 'server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     // Get row element of the process to be killed.
     const $tr = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('tr');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), params, function (data) {
@@ -146,7 +146,6 @@ const processList = {
   getUrlParams: function () {
     const urlParams = {
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
-      'ajax_request': true,
       'refresh': true,
       'full': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="full"]').val(),
       'order_by_field': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="order_by_field"]').val(),

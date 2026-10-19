@@ -134,7 +134,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
     const url = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('href') + '#searchresults';
     const browseSql = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('browse-sql');
     const params = {
-      'ajax_request': true,
       'is_js_confirmed': true,
       'sql_query': browseSql
     };
@@ -171,7 +170,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
       /** Load the deleted option to the page*/
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryform').html('');
       const params = {
-        'ajax_request': true,
         'is_js_confirmed': true,
         'sql_query': jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('delete-sql')
       };
@@ -208,7 +206,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/sear
     const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strSearching, false);
     // jQuery object to reuse
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     const url = $form.serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('arg_separator') + 'submit_search=' + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#buttonGo').val();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), url, function (data) {
       if (typeof data !== 'undefined' && data.success === true) {

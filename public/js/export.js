@@ -85,7 +85,6 @@ function getTemplateData() {
 function createTemplate(name) {
   const templateData = Export.getTemplateData();
   const params = {
-    'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
@@ -116,7 +115,6 @@ function createTemplate(name) {
  */
 function loadTemplate(id) {
   const params = {
-    'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
@@ -164,7 +162,6 @@ function loadTemplate(id) {
 function updateTemplate(id) {
   const templateData = Export.getTemplateData();
   const params = {
-    'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
@@ -188,7 +185,6 @@ function updateTemplate(id) {
  */
 function deleteTemplate(id) {
   const params = {
-    'ajax_request': true,
     'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
     'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
     'table': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table'),
@@ -660,7 +656,6 @@ function checkTimeOut(timeLimit) {
   clearTimeout(timeOut);
   timeOut = setTimeout(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/export/check-time-out', {
-      'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
     }, function (data) {
       if (data.message === 'timeout') {
@@ -687,7 +682,6 @@ function createAliasModal(event) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').append(option).val(db).trigger('change');
     } else {
       const params = {
-        'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server')
       };
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/databases', params, function (response) {
@@ -814,7 +808,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
     } else {
       const database = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
       const params = {
-        'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
         'db': database
       };
@@ -838,7 +831,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('export.js', f
     const database = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#db_alias_select').val();
     const table = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
     const params = {
-      'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': database,
       'table': table

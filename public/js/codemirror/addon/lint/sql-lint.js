@@ -39,8 +39,7 @@ window.CodeMirror.sqlLint = function (text, updateLinting, options, cm) {
       'sql_query': text,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
       'options': options.lintOptions,
-      'no_history': true,
-      'ajax_request': true
+      'no_history': true
     },
     success: handleResponse
   });

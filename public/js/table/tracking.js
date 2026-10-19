@@ -88,7 +88,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/trackin
     const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     const $form = $button.parent('form');
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
+    const submitData = $form.serialize() + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
     if ($button.val() === 'delete_version') {
       const question = window.Messages.strDeleteTrackingVersionMultiple;
       $button.confirm(question, $form.attr('action'), function (url) {

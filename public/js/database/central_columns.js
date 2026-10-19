@@ -84,7 +84,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
       return false;
     }
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    const editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    const editColumnData = editColumnList + '' + argsep + 'edit_central_columns_page=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/central-columns', editColumnData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -93,7 +93,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     event.preventDefault();
     event.stopPropagation();
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    const multiColumnEditData = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+    const multiColumnEditData = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#multi_edit_central_columns').serialize() + argsep + 'multi_edit_central_column_save=true' + argsep + 'ajax_page_request=true' + argsep + 'db=' + encodeURIComponent(_modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db')) + argsep + 'server=' + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/database/central-columns', multiColumnEditData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
@@ -169,7 +169,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
       type: 'POST',
       url: 'index.php?route=/database/central-columns',
-      data: datastring + _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator') + 'ajax_request=true',
+      data: datastring,
       dataType: 'json',
       success: function (data) {
         if (data.message !== '1') {
@@ -201,7 +201,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/cent
     const defaultColumnSelect = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#column-select').find('option').first();
     const href = 'index.php?route=/database/central-columns/populate';
     const params = {
-      'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('db'),
       'selectedTable': selectValue

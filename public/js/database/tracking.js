@@ -72,7 +72,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/trac
     const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     const $form = $button.parent('form');
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
+    const submitData = $form.serialize() + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
     if ($button.val() === 'delete_tracking') {
       const question = window.Messages.strDeleteTrackingDataMultiple;
       $button.confirm(question, $form.attr('action'), function (url) {
@@ -94,7 +94,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/trac
     const $button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     const $form = $button.parent('form');
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-    const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
+    const submitData = $form.serialize() + argsep + 'ajax_page_request=true' + argsep + 'submit_mult=' + $button.val();
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = $form;
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);

@@ -405,7 +405,6 @@ const makeGrid = function (t) {
           return;
         }
         const postParams = {
-          'ajax_request': true,
           'db': g.db,
           'table': g.table,
           'token': g.token,
@@ -883,7 +882,6 @@ const makeGrid = function (t) {
            * @var postParams Object containing parameters for the POST request
            */
           postParams = {
-            'ajax_request': true,
             'server': g.server,
             'db': g.db,
             'table': g.table,
@@ -923,7 +921,6 @@ const makeGrid = function (t) {
            * @var postParams Object containing parameters for the POST request
            */
           postParams = {
-            'ajax_request': true,
             'server': g.server,
             'db': g.db,
             'table': g.table,
@@ -950,7 +947,6 @@ const makeGrid = function (t) {
           // if the data is truncated, get the full data
           if ($td.is('.truncated')) {
             postParams = {
-              'ajax_request': true,
               'server': g.server,
               'db': g.db,
               'table': g.table,
@@ -961,7 +957,6 @@ const makeGrid = function (t) {
             };
           } else {
             postParams = {
-              'ajax_request': true,
               'server': g.server,
               'db': g.db,
               'table': g.table,
@@ -1010,7 +1005,6 @@ const makeGrid = function (t) {
             g.lastXHR = jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', {
               'server': g.server,
               'db': g.db,
-              'ajax_request': true,
               'sql_query': sqlQuery,
               'grid_edit': true
             }, function (data) {
@@ -1272,7 +1266,6 @@ const makeGrid = function (t) {
        * @var postParams Object containing parameters for the POST request
        */
       const postParams = {
-        'ajax_request': true,
         'sql_query': fullSqlQuery,
         'server': g.server,
         'db': g.db,

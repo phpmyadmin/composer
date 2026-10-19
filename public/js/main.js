@@ -555,7 +555,7 @@ function onloadNavigation() {
       event.preventDefault();
       const argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
       let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
-      params += argSep + 'ajax_request=true' + argSep + 'server=' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+      params += argSep + 'server=' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         type: 'POST',
         data: params,
@@ -574,8 +574,7 @@ function onloadNavigation() {
       event.preventDefault();
       const $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
       const argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
-      let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
-      params += argSep + 'ajax_request=true';
+      const params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href'), params, function (data) {
         if (typeof data !== 'undefined' && data.success === true) {
           (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
@@ -593,7 +592,7 @@ function onloadNavigation() {
       const $msg = (0,_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
       const argSep = _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('arg_separator');
       let params = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).getPostData();
-      params += argSep + 'ajax_request=true' + argSep + 'server=' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
+      params += argSep + 'server=' + _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server');
       jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
         type: 'POST',
         data: params,

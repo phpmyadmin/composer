@@ -148,7 +148,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_0').on('change', function () {
     // AJAX request for field type, collation, operators, and value field
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/zoom-search', {
-      'ajax_request': true,
       'change_tbl_info': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -172,7 +171,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_1').on('change', function () {
     // AJAX request for field type, collation, operators, and value field
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/zoom-search', {
-      'ajax_request': true,
       'change_tbl_info': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -195,7 +193,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_2').on('change', function () {
     // AJAX request for field type, collation, operators, and value field
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/zoom-search', {
-      'ajax_request': true,
       'change_tbl_info': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -216,7 +213,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tableid_3').on('change', function () {
     // AJAX request for field type, collation, operators, and value field
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/table/zoom-search', {
-      'ajax_request': true,
       'change_tbl_info': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
       'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
@@ -391,7 +387,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', {
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
         'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),
-        'ajax_request': true,
         'sql_query': sqlQuery,
         'inline_edit': false
       }, function (data) {
@@ -611,7 +606,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/zoom_se
           searchedDataKey = data[4]; // key from searchedData (global)
           let fieldId = 0;
           const postParams = {
-            'ajax_request': true,
             'get_data_row': true,
             'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('server'),
             'db': _modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('db'),

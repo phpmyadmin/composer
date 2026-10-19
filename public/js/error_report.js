@@ -73,7 +73,6 @@ const ErrorReport = {
     ErrorReport.lastException = exception;
     if (ErrorReport.errorReportData === null) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/error-report', {
-        'ajax_request': true,
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
         'get_settings': true,
         'exception_type': 'js'
@@ -212,7 +211,6 @@ const ErrorReport = {
     }
     const reportData = {
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
-      'ajax_request': true,
       'exception': exception,
       'url': window.location.href,
       'exception_type': 'js'

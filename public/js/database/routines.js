@@ -97,9 +97,7 @@ const DatabaseRoutines = {
       exportAnchors.each(function () {
         const h = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('href');
         p = p.then(function () {
-          return jquery__WEBPACK_IMPORTED_MODULE_0___default().get(h, {
-            'ajax_request': true
-          }, function (data) {
+          return jquery__WEBPACK_IMPORTED_MODULE_0___default().get(h, function (data) {
             returnCount++;
             if (data.success === true) {
               combined.message += '\n' + data.message + '\n';
@@ -118,9 +116,7 @@ const DatabaseRoutines = {
         });
       });
     } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().get($this.attr('href'), {
-        'ajax_request': true
-      }, showExport);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().get($this.attr('href'), showExport);
     }
     ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
     function showExport(data) {
@@ -166,9 +162,7 @@ const DatabaseRoutines = {
      *           the AJAX message shown to the user
      */
     let $msg = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().get($this.attr('href'), {
-      'ajax_request': true
-    }, function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().get($this.attr('href'), function (data) {
       if (data.success !== true) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(data.error, false);
         return;

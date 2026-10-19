@@ -8,9 +8,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/ajax.ts");
-/* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/functions.ts");
-/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
-
+/* harmony import */ var _modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/ajax-message.ts");
 
 
 
@@ -39,10 +37,9 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('table/find_re
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#find_replace_form').on('submit', function (e) {
     e.preventDefault();
     const findReplaceForm = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#find_replace_form');
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)(findReplaceForm);
-    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
+    const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_2__.ajaxShowMessage)();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post(findReplaceForm.attr('action'), findReplaceForm.serialize(), function (data) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxRemoveMessage)($msgbox);
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_2__.ajaxRemoveMessage)($msgbox);
       if (data.success === true) {
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggle_find_div').show();
         jquery__WEBPACK_IMPORTED_MODULE_0___default()('#toggle_find').trigger('click');

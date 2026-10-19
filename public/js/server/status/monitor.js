@@ -820,7 +820,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   function loadLogVars() {
     let getvars = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
     const vars = {
-      'ajax_request': true,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     };
     if (getvars) {
@@ -1402,7 +1401,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
   function refreshChartGrid() {
     /* Send to server */
     runtime.refreshRequest = jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/status/monitor/chart', {
-      'ajax_request': true,
       'requiredData': JSON.stringify(runtime.dataList),
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     }, function (data) {
@@ -1597,7 +1595,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
       url = 'index.php?route=/server/status/monitor/general-log';
     }
     logRequest = jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, {
-      'ajax_request': true,
       'time_start': Math.round(opts.start / 1000),
       'time_end': Math.round(opts.end / 1000),
       'removeVariables': opts.removeVariables,
@@ -1921,7 +1918,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('server/status
     let profilingChart = null;
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#queryAnalyzerDialog').find('div.placeHolder').html(window.Messages.strAnalyzing + ' <img class="ajaxIcon" src="' + window.themeImagePath + 'ajax_clock_small.gif" alt="">');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/status/monitor/query', {
-      'ajax_request': true,
       'query': window.codeMirrorEditor ? window.codeMirrorEditor.getValue() : jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlquery').val(),
       'database': db,
       'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')

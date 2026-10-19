@@ -68,7 +68,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
     }
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     const question = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)('CREATE DATABASE ' + newDbName + ' / DROP DATABASE ' + oldDbName);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     $form.confirm(question, $form.attr('action'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strRenamingDatabases, false);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post(url, jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rename_db_form').serialize() + _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('arg_separator') + 'is_js_confirmed=1', function (data) {
@@ -102,7 +101,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
     }
     ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strCopyingDatabase, false);
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
       // use messages that stay on screen
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.alert-success, .alert-danger').fadeOut();
@@ -136,7 +134,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/oper
   jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('submit', '#change_db_charset_form.ajax', function (event) {
     event.preventDefault();
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.prepareForAjaxRequest)($form);
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxShowMessage)(window.Messages.strChangingCharset);
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
       if (typeof data !== 'undefined' && data.success === true) {

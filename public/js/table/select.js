@@ -101,7 +101,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
     // empty previous search results while we are waiting for new results
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter').empty();
     const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_6__.ajaxShowMessage)(window.Messages.strSearching, false);
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.prepareForAjaxRequest)($searchForm);
     const values = {};
     $searchForm.find(':input').each(function () {
       const $input = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
@@ -236,7 +235,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('table/select.
         type: 'POST',
         data: {
           'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
-          'ajax_request': 1,
           'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="db"]').val(),
           'table': jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name="table"]').val(),
           'column': columnName,

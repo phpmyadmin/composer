@@ -278,7 +278,6 @@ const insertQuery = function (queryType) {
     if (window.codeMirrorEditor) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#querymessage').html(window.Messages.strFormatting + '&nbsp;<img class="ajaxIcon" src="' + window.themeImagePath + 'ajax_clock_small.gif" alt="">');
       const params = {
-        'ajax_request': true,
         'sql': window.codeMirrorEditor.getValue(),
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('server'),
         'formatSingleLine': queryType === 'formatSingleLine'
@@ -506,7 +505,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     $link.confirm(question, $link.attr('href'), function (url) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
       const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-      let params = 'ajax_request=1' + argsep + 'is_js_confirmed=1';
+      let params = 'is_js_confirmed=1';
       const postData = $link.getPostData();
       if (postData) {
         params += argsep + postData;
@@ -530,7 +529,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     }
     ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action'), 'ajax_request=1' + argsep + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize(), function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action'), jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).serialize(), function (data) {
       if (data.success) {
         (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)(data.message);
       } else {
@@ -756,7 +755,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.alert-danger').remove();
     const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     const $sqlqueryresultsouter = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#sqlqueryresultsouter');
-    (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.prepareForAjaxRequest)($form);
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
     jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'ajax_page_request=true', function (data) {
       if (typeof data !== 'undefined' && data.success === true) {
@@ -853,7 +851,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
     const $msgbox = (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize() + argsep + 'ajax_request=true', function (data) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), $form.serialize(), function (data) {
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxRemoveMessage)($msgbox);
       const $sqlqueryresults = $form.parents('.sqlqueryresults');
       $sqlqueryresults.html(data.message).trigger('makeGrid');
@@ -889,7 +887,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     const $form = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).parents('form');
     const submitShowAllForm = function () {
       const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-      const submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+      const submitData = $form.serialize() + argsep + 'ajax_page_request=true';
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.source = $form;
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post($form.attr('action'), submitData, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.responseHandler);
@@ -931,7 +929,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
       data: {
         'server': _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('server'),
         'db': dbName,
-        'ajax_request': '1',
         'sql_query': query,
         'sql_delimiter': delimiter
       },
@@ -978,7 +975,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     const action = $button.val();
     const $form = $button.closest('form');
     const argsep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-    let submitData = $form.serialize() + argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true' + argsep;
+    let submitData = $form.serialize() + argsep + 'ajax_page_request=true' + argsep;
     (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_9__.ajaxShowMessage)();
     _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.source = $form;
     let url;
@@ -1062,8 +1059,7 @@ function browseForeignDialog($thisA) {
   const tableId = '#browse_foreign_table';
   const filterId = '#input_foreign_filter';
   const argSep = _modules_common_ts__WEBPACK_IMPORTED_MODULE_5__.CommonParams.get('arg_separator');
-  let params = $thisA.getPostData();
-  params += argSep + 'ajax_request=true';
+  const params = $thisA.getPostData();
   let browseForeignModal = document.getElementById('browseForeignModal');
   if (browseForeignModal === null) {
     const browseForeignModalHtml = '<div class="modal fade" id="browseForeignModal" tabindex="-1" aria-labelledby="browseForeignModalLabel" aria-hidden="true">\n' + '  <div class="modal-dialog modal-lg">\n' + '    <div class="modal-content">\n' + '      <div class="modal-header">\n' + '        <h1 class="modal-title fs-5" id="browseForeignModalLabel">' + window.Messages.strBrowseForeignValues + '</h1>\n' + '        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="' + window.Messages.strClose + '"></button>\n' + '      </div>\n' + '      <div class="modal-body">\n' + '        <div class="spinner-border" role="status">\n' + '          <span class="visually-hidden">' + window.Messages.strLoading + '</span>\n' + '        </div>\n' + '      </div>\n' + '    </div>\n' + '  </div>\n' + '</div>\n';
@@ -1117,7 +1113,7 @@ function browseForeignDialog($thisA) {
         });
       }
       // updates values in dialog
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action') + '&ajax_request=1', postParams, function (data) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().post(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('action'), postParams, function (data) {
         const $obj = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>').html(data.message);
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(formId).html($obj.find(formId).html());
         jquery__WEBPACK_IMPORTED_MODULE_0___default()(tableId).html($obj.find(tableId).html());

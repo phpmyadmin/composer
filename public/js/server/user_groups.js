@@ -40,8 +40,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('server/user_g
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#deleteUserGroupConfirm').on('click', function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/server/user-groups', {
         'deleteUserGroup': true,
-        'userGroup': userGroupName,
-        'ajax_request': true
+        'userGroup': userGroupName
       }, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#deleteUserGroupModal').modal('hide');
     });

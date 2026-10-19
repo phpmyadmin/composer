@@ -30,13 +30,13 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('multi_column_
       event.preventDefault();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
-      orderUrlRemove += argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+      orderUrlRemove += argsep + 'ajax_page_request=true';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', orderUrlRemove, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     } else if (event.shiftKey) {
       event.preventDefault();
       _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.source = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
       (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_3__.ajaxShowMessage)();
-      orderUrlAdd += argsep + 'ajax_request=true' + argsep + 'ajax_page_request=true';
+      orderUrlAdd += argsep + 'ajax_page_request=true';
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/sql', orderUrlAdd, _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.responseHandler);
     }
   });

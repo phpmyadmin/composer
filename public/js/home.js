@@ -144,7 +144,6 @@ const GitInfo = {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#li_pma_version_git').remove();
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/git-revision', {
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_1__.CommonParams.get('server'),
-      'ajax_request': true,
       'no_debug': true
     }).done(function (data) {
       if (typeof data !== 'undefined' && data.success === true) {

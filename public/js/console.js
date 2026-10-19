@@ -909,7 +909,6 @@ const ConsoleMessages = {
         jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/import', {
           'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
           'action_bookmark': 2,
-          'ajax_request': true,
           'id_bookmark': $message.attr('bookmarkid')
         }, function () {
           ConsoleBookmarks.refresh();
@@ -1037,7 +1036,6 @@ const ConsoleBookmarks = {
   },
   refresh: function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default().get('index.php?route=/console/bookmark/refresh', {
-      'ajax_request': true,
       'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server')
     }, function (data) {
       if (data.console_message_bookmark) {
@@ -1067,7 +1065,6 @@ const ConsoleBookmarks = {
       }
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).prop('disabled', true);
       jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/console/bookmark/add', {
-        'ajax_request': true,
         'label': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=label]').val(),
         'server': _common_ts__WEBPACK_IMPORTED_MODULE_4__.CommonParams.get('server'),
         'db': jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_bookmarks').find('.card.add [name=targetdb]').val(),
@@ -1470,7 +1467,6 @@ class Config {
  */
 function setConfigValue(key, value) {
   jquery__WEBPACK_IMPORTED_MODULE_0___default().post('index.php?route=/console/update-config', {
-    'ajax_request': true,
     server: _common_ts__WEBPACK_IMPORTED_MODULE_2__.CommonParams.get('server'),
     key: key,
     value: value
