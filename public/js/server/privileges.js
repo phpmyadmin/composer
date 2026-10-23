@@ -37,7 +37,7 @@ function exportPrivilegesModalHandler(data, msgbox) {
     const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPrivilegesModal');
     // Remove any previous privilege modal data, if any
     modal.find('.modal-body').first().html('');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPrivilegesModalLabel').first().html('Loading');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#exportPrivilegesModalLabel').first().text(window.Messages.strLoading);
     modal.modal('show');
     modal.on('shown.bs.modal', function () {
       modal.find('.modal-body').first().html(data.message);

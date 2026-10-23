@@ -83,7 +83,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
       }
     });
     if (Object.keys(tableAliases).length === 0) {
-      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)('Nothing selected', false, 'error');
+      (0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_4__.ajaxShowMessage)(window.Messages.strNothingSelected, false, 'error');
       return;
     }
     let foreignKeys;
@@ -201,7 +201,11 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
         showTwoFields(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
       } else {
         const options = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('table').find('.options');
-        options.parent().prepend('<input type="text" class="rhs_text_val query-form__input--wide" placeholder="Enter criteria as free text"></input>');
+        options.parent().prepend(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
+          type: 'text',
+          class: 'rhs_text_val query-form__input--wide',
+          placeholder: window.Messages.strEnterCriteriaFreeText
+        }));
         options.remove();
       }
     });
@@ -211,8 +215,20 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     const critetiaCol = critetiaRow.find('td').last();
     const criteriaInput = critetiaCol.find('input').first();
     if (critetiaCol.find('.binary').length === 0) {
+      var _criteriaInput$val;
       critetiaCol.empty();
-      critetiaCol.append("\n                <div class=\"options binary\">\n                    <input type=\"text\" class=\"val\" placeholder=\"".concat(window.Messages.strFirstValuePlaceholder, "\" value=\"").concat(criteriaInput.val(), "\" />\n                    <input type=\"text\" class=\"val\" placeholder=\"").concat(window.Messages.strSecondValuePlaceholder, "\" />\n                </div>\n            "));
+      critetiaCol.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>', {
+        class: 'options binary'
+      }).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
+        type: 'text',
+        class: 'val',
+        placeholder: window.Messages.strFirstValuePlaceholder,
+        value: String((_criteriaInput$val = criteriaInput.val()) !== null && _criteriaInput$val !== void 0 ? _criteriaInput$val : '')
+      }), jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
+        type: 'text',
+        class: 'val',
+        placeholder: window.Messages.strSecondValuePlaceholder
+      })));
     }
   }
   function showMultiFields(opSelect) {
@@ -220,8 +236,22 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('database/mult
     const critetiaCol = critetiaRow.find('td').last();
     const criteriaInput = critetiaCol.find('input').first();
     if (critetiaCol.find('.multi').length === 0) {
+      var _criteriaInput$val2;
       critetiaCol.empty();
-      critetiaCol.append("\n                <div class=\"options multi\">\n                    <div class=\"option\">\n                        <input type=\"text\" class=\"val\" placeholder=\"Enter an option\" value=\"".concat(criteriaInput.val(), "\" />\n                        <input type=\"button\" class=\"btn btn-secondary add-option\" value=\"+\" />\n                    </div>\n                </div>\n            "));
+      critetiaCol.append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>', {
+        class: 'options multi'
+      }).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div>', {
+        class: 'option'
+      }).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
+        type: 'text',
+        class: 'val',
+        placeholder: window.Messages.strEnterAnOption,
+        value: String((_criteriaInput$val2 = criteriaInput.val()) !== null && _criteriaInput$val2 !== void 0 ? _criteriaInput$val2 : '')
+      }), jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
+        type: 'button',
+        class: 'btn btn-secondary add-option',
+        value: '+'
+      }))));
     }
   }
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').on('click', 'input.add-option', function () {

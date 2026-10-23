@@ -6238,7 +6238,7 @@ function on() {
       let title;
       if (jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).find('a').length === 0) {
         // Add index
-        const valid = (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.checkFormElementInRange)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form')[0], 'added_fields', 'Column count has to be larger than zero.');
+        const valid = (0,_functions_ts__WEBPACK_IMPORTED_MODULE_2__.checkFormElementInRange)(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).closest('form')[0], 'added_fields', window.Messages.strColumnCountPositive);
         if (!valid) {
           return;
         }

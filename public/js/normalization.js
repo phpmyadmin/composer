@@ -620,9 +620,17 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('normalization
     if (repeatingCols !== '') {
       const newColName = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#extra input[type=checkbox]:checked').first().val();
       repeatingCols = repeatingCols.slice(0, -2);
-      let confirmStr = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__.sprintf)(window.Messages.strMoveRepeatingGroup, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(repeatingCols), (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
-      confirmStr += '<input type="text" name="repeatGroupTable" placeholder="' + window.Messages.strNewTablePlaceholder + '">' + '( ' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(primaryKey.toString()) + ', <input type="text" name="repeatGroupColumn" placeholder="' + window.Messages.strNewColumnPlaceholder + '" value="' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(newColName) + '">)' + '</ol>';
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols').html(confirmStr);
+      const confirmStr = (0,locutus_php_strings_sprintf__WEBPACK_IMPORTED_MODULE_6__.sprintf)(window.Messages.strMoveRepeatingGroup, (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(repeatingCols), (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_5__.escapeHtml)(_modules_common_ts__WEBPACK_IMPORTED_MODULE_3__.CommonParams.get('table')));
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#newCols').html(confirmStr).find('ol').first().append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
+        type: 'text',
+        name: 'repeatGroupTable',
+        placeholder: window.Messages.strNewTablePlaceholder
+      }), document.createTextNode('( ' + primaryKey.toString() + ', '), jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>', {
+        type: 'text',
+        name: 'repeatGroupColumn',
+        placeholder: window.Messages.strNewColumnPlaceholder,
+        value: newColName
+      }), document.createTextNode(')'));
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('<input>').attr({
         type: 'submit',
         value: window.Messages.strCancel,

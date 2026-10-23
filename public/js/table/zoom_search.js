@@ -30,7 +30,7 @@ function displayHelp() {
   const modal = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#helpModal');
   modal.modal('show');
   modal.find('.modal-body').first().html(window.Messages.strDisplayHelp);
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#helpModalLabel').first().html(window.Messages.strHelpTitle);
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#helpModalLabel').first().text(window.Messages.strHelpTitle);
   return false;
 }
 /**

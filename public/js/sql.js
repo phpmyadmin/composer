@@ -611,7 +611,7 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_2__.AJAX.registerOnload('sql.js', func
     try {
       document.execCommand('copy');
     } catch (err) {
-      alert('Sorry! Unable to copy');
+      alert(window.Messages.strCopyQueryButtonFailure);
     }
     // eslint-disable-next-line compat/compat
     document.body.removeChild(textArea);
