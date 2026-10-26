@@ -44,6 +44,7 @@ use PhpMyAdmin\Normalization;
 use PhpMyAdmin\Operations;
 use PhpMyAdmin\Partitioning\Maintenance;
 use PhpMyAdmin\Plugins\AuthenticationPluginFactory;
+use PhpMyAdmin\Plugins\PluginFactory;
 use PhpMyAdmin\Replication\Replication;
 use PhpMyAdmin\Replication\ReplicationGui;
 use PhpMyAdmin\ResponseRenderer;
@@ -99,7 +100,13 @@ return [
     DbTableExists::class => ['class' => DbTableExists::class, 'arguments' => [DatabaseInterface::class]],
     Designer::class => [
         'class' => Designer::class,
-        'arguments' => [DatabaseInterface::class, Relation::class, Template::class, Config::class],
+        'arguments' => [
+            DatabaseInterface::class,
+            Relation::class,
+            Template::class,
+            Config::class,
+            PluginFactory::class,
+        ],
     ],
     Common::class => [
         'class' => Common::class,
@@ -111,7 +118,10 @@ return [
         'arguments' => [HttpRequest::class, Relation::class, Template::class, Config::class],
     ],
     Events::class => ['class' => Events::class, 'arguments' => [DatabaseInterface::class, Config::class]],
-    Export::class => ['class' => Export::class, 'arguments' => [DatabaseInterface::class, OutputHandler::class]],
+    Export::class => [
+        'class' => Export::class,
+        'arguments' => [DatabaseInterface::class, OutputHandler::class, PluginFactory::class],
+    ],
     Options::class => [
         'class' => Options::class,
         'arguments' => [Relation::class, TemplateModel::class, UserPreferencesHandler::class],
@@ -130,6 +140,7 @@ return [
             Relation::class,
             UserPreferences::class,
             UserPreferencesHandler::class,
+            ThemeManager::class,
         ],
     ],
     HttpRequest::class => ['class' => HttpRequest::class],
@@ -184,6 +195,10 @@ return [
         'class' => Middleware\UrlParamsSetting::class,
         'arguments' => [Config::class],
     ],
+    Middleware\ResponseRendererAjaxSetting::class => [
+        'class' => Middleware\ResponseRendererAjaxSetting::class,
+        'arguments' => [ResponseRenderer::class],
+    ],
     Middleware\TokenRequestParamChecking::class => [
         'class' => Middleware\TokenRequestParamChecking::class,
         'arguments' => [ResponseRenderer::class],
@@ -203,7 +218,10 @@ return [
         'class' => Middleware\CurrentServerGlobalSetting::class,
         'arguments' => [Config::class],
     ],
-    Middleware\ThemeInitialization::class => ['class' => Middleware\ThemeInitialization::class],
+    Middleware\ThemeInitialization::class => [
+        'class' => Middleware\ThemeInitialization::class,
+        'arguments' => [ThemeManager::class],
+    ],
     Middleware\UrlRedirection::class => [
         'class' => Middleware\UrlRedirection::class,
         'arguments' => [UrlRedirector::class, UserPreferencesHandler::class],
@@ -218,7 +236,7 @@ return [
     ],
     Middleware\LanguageAndThemeCookieSaving::class => [
         'class' => Middleware\LanguageAndThemeCookieSaving::class,
-        'arguments' => [Config::class],
+        'arguments' => [Config::class, ThemeManager::class],
     ],
     Middleware\LoginCookieValiditySetting::class => [
         'class' => Middleware\LoginCookieValiditySetting::class,
@@ -266,7 +284,13 @@ return [
     ],
     Navigation::class => [
         'class' => Navigation::class,
-        'arguments' => [Template::class, Relation::class, DatabaseInterface::class, Config::class],
+        'arguments' => [
+            Template::class,
+            Relation::class,
+            DatabaseInterface::class,
+            Config::class,
+            ThemeManager::class,
+        ],
     ],
     Normalization::class => [
         'class' => Normalization::class,
@@ -327,6 +351,7 @@ return [
             BookmarkRepository::class,
             Config::class,
             ResponseRenderer::class,
+            ThemeManager::class,
         ],
     ],
     SqlQueryForm::class => [
@@ -344,6 +369,17 @@ return [
     \PhpMyAdmin\Table\Maintenance::class => [
         'class' => \PhpMyAdmin\Table\Maintenance::class,
         'arguments' => [DatabaseInterface::class],
+    ],
+    PluginFactory::class => [
+        'class' => PluginFactory::class,
+        'arguments' => [
+            Relation::class,
+            OutputHandler::class,
+            Transformations::class,
+            DatabaseInterface::class,
+            Config::class,
+            Import::class,
+        ],
     ],
     Search::class => ['class' => Search::class, 'arguments' => [DatabaseInterface::class]],
     Template::class => ['class' => Template::class, 'arguments' => [Config::class]],
@@ -394,7 +430,10 @@ return [
         'class' => Console::class,
         'arguments' => [Relation::class, Template::class, BookmarkRepository::class, History::class],
     ],
-    TableMover::class => ['class' => TableMover::class, 'arguments' => [DatabaseInterface::class, Relation::class]],
+    TableMover::class => [
+        'class' => TableMover::class,
+        'arguments' => [DatabaseInterface::class, Relation::class, PluginFactory::class],
+    ],
     History::class => [
         'class' => History::class,
         'arguments' => [DatabaseInterface::class, Relation::class, Config::class],

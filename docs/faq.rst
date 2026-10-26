@@ -976,8 +976,8 @@ workaround to this behaviour. News to this item will be posted in `issue
 
 .. _faq3_10:
 
-3.10 Homonyms and no primary key: When the results of a SELECT display more that one column with the same value (for example ``SELECT lastname from employees where firstname like 'A%'`` and two "Smith" values are displayed), if I click Edit I cannot be sure that I am editing the intended row.
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3.10 Homonyms and no primary key: When the results of a SELECT display more than one row with the same value (for example ``SELECT lastname from employees where firstname like 'A%'`` and two "Smith" values are displayed), if I click Edit I cannot be sure that I am editing the intended row.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Please make sure that your table has a :term:`primary key`, so that phpMyAdmin
 can use it for the Edit and Delete links.
@@ -1271,19 +1271,13 @@ refresh, just do this in the right frame.
 
 .. _faq5_8:
 
-5.8 With Mozilla 0.9.7 I have problems sending a query modified in the query box.
----------------------------------------------------------------------------------
-
-Looks like a Mozilla bug: 0.9.6 was OK. We will keep an eye on future
-Mozilla versions.
+5.8 (withdrawn).
+----------------
 
 .. _faq5_9:
 
-5.9 With Mozilla 0.9.? to 1.0 and Netscape 7.0-PR1 I can't type a whitespace in the SQL-Query edit area: the page scrolls down.
--------------------------------------------------------------------------------------------------------------------------------
-
-This is a Mozilla bug (see bug #26882 at `BugZilla
-<https://bugzilla.mozilla.org/>`_).
+5.9 (withdrawn).
+----------------
 
 .. _faq5_10:
 
