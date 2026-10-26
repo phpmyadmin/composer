@@ -216,7 +216,7 @@ const DatabaseTriggers = {
              */
             let inserted = false;
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data').find('tr').each(function () {
-              text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('td').eq(0).find('strong').text().toUpperCase().trim();
+              text = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).children('td').eq(1).find('strong').text().toUpperCase().trim();
               if (text !== '' && text > data.name) {
                 jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).before(data.new_row);
                 inserted = true;
@@ -229,8 +229,6 @@ const DatabaseTriggers = {
               // so we insert it there.
               jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data').append(data.new_row);
             }
-            // Fade-in the new row
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()('tr.ajaxInsert').show('slow').removeClass('ajaxInsert');
           } else if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('table.data').find('tr').has('td').length === 0) {
             // If we are not supposed to insert the new row,
             // we will now check if the table is empty and
@@ -342,12 +340,12 @@ const DatabaseTriggers = {
          * @var $table Object containing reference
          *             to the main list of elements
          */
-        const $table = $currRow.parent();
+        const $table = $currRow.closest('table');
         // Check how many rows will be left after we remove
         // the one that the user has requested us to remove
         if ($table.find('tr').length === 3) {
-          // If there are two rows left, it means that they are
-          // the header of the table and the rows that we are
+          // If there are three rows left, it means that they are
+          // the header row, the hidden row and the row that we are
           // about to remove, so after the removal there will be
           // nothing to show in the table, so we hide it.
           $table.hide('slow', function () {
@@ -419,12 +417,12 @@ const DatabaseTriggers = {
            * @var $table Object containing reference
            *             to the main list of elements
            */
-          const $table = $currRow.parent();
+          const $table = $currRow.closest('table');
           // Check how many rows will be left after we remove
           // the one that the user has requested us to remove
           if ($table.find('tr').length === 3) {
-            // If there are two rows left, it means that they are
-            // the header of the table and the rows that we are
+            // If there are three rows left, it means that they are
+            // the header row, the hidden row and the row that we are
             // about to remove, so after the removal there will be
             // nothing to show in the table, so we hide it.
             $table.hide('slow', function () {
