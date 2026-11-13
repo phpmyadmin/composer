@@ -195,7 +195,7 @@ const DatabaseRoutines = {
           ;(0,_modules_ajax_message_ts__WEBPACK_IMPORTED_MODULE_5__.ajaxRemoveMessage)($msg);
           (0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_3__.slidingMessage)(data.message);
           bootstrap__WEBPACK_IMPORTED_MODULE_1__.Modal.getOrCreateInstance('#routinesEditorModal').hide();
-          const tableId = '#' + data.tableType + 'Table';
+          const tableId = '#routinesTable';
           // If we are in 'edit' mode, we must
           // remove the reference to the old row.
           if (isEditMode && $editRow !== null) {

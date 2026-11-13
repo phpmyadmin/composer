@@ -255,6 +255,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_functions_ts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./resources/js/modules/functions.ts");
 /* harmony import */ var _modules_functions_getImageTag_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("./resources/js/modules/functions/getImageTag.ts");
 /* harmony import */ var _config_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("./resources/js/designer/config.ts");
+/* harmony import */ var _modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("./resources/js/modules/functions/escape.ts");
+
 
 
 
@@ -333,7 +335,7 @@ const display = function (init, finit) {
   const historyArrayLength = DesignerHistory.historyArray.length;
   for (i = 0; i < historyArrayLength; i++) {
     temp = DesignerHistory.historyArray[i].getTab(); // + '.' + DesignerHistory.historyArray[i].getObjNo(); for Self JOIN
-    str += '<h3 class="tiger"><a href="#">' + temp + '</a></h3>';
+    str += '<h3 class="tiger"><a href="#">' + (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_4__.escapeHtml)(temp) + '</a></h3>';
     str += '<div class="toggle_container">\n';
     while (DesignerHistory.historyArray[i].getTab() === temp) {
       // + '.' + DesignerHistory.historyArray[i].getObjNo()) === temp) {
