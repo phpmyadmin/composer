@@ -1249,6 +1249,12 @@ parameters:
 			path: src/ConfigStorage/Relation.php
 
 		-
+			message: '#^Only booleans are allowed in &&, mixed given on the right side\.$#'
+			identifier: booleanAnd.rightNotBoolean
+			count: 18
+			path: src/ConfigStorage/RelationParameters.php
+
+		-
 			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
 				Use dependency injection instead\.$#
@@ -1370,24 +1376,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Database/DesignerController.php
-
-		-
-			message: '#^Cannot access offset ''handler'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: src/Controllers/Database/ImportController.php
-
-		-
-			message: '#^Cannot call static method getIdKey\(\) on mixed\.$#'
-			identifier: staticMethod.nonObject
-			count: 1
-			path: src/Controllers/Database/ImportController.php
-
-		-
-			message: '#^Possibly invalid array key type mixed\.$#'
-			identifier: array.invalidKey
-			count: 1
-			path: src/Controllers/Database/ImportController.php
 
 		-
 			message: '#^Cannot cast mixed to int\.$#'
@@ -2113,24 +2101,6 @@ parameters:
 			path: src/Controllers/Server/DatabasesController.php
 
 		-
-			message: '#^Cannot access offset ''handler'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: src/Controllers/Server/ImportController.php
-
-		-
-			message: '#^Cannot call static method getIdKey\(\) on mixed\.$#'
-			identifier: staticMethod.nonObject
-			count: 1
-			path: src/Controllers/Server/ImportController.php
-
-		-
-			message: '#^Possibly invalid array key type mixed\.$#'
-			identifier: array.invalidKey
-			count: 1
-			path: src/Controllers/Server/ImportController.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 1
@@ -2324,12 +2294,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#1 \$string of function htmlspecialchars expects string, int\|string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Server/Variables/SetVariableController.php
-
-		-
-			message: '#^Parameter \#2 \$value of method PhpMyAdmin\\Controllers\\Server\\Variables\\SetVariableController\:\:formatVariable\(\) expects int\|string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Server/Variables/SetVariableController.php
@@ -2662,24 +2626,6 @@ parameters:
 			path: src/Controllers/Table/GisVisualizationController.php
 
 		-
-			message: '#^Cannot access offset ''handler'' on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: src/Controllers/Table/ImportController.php
-
-		-
-			message: '#^Cannot call static method getIdKey\(\) on mixed\.$#'
-			identifier: staticMethod.nonObject
-			count: 1
-			path: src/Controllers/Table/ImportController.php
-
-		-
-			message: '#^Possibly invalid array key type mixed\.$#'
-			identifier: array.invalidKey
-			count: 1
-			path: src/Controllers/Table/ImportController.php
-
-		-
 			message: '#^Binary operation "\+\=" between int and mixed results in an error\.$#'
 			identifier: assignOp.invalid
 			count: 1
@@ -2974,43 +2920,7 @@ parameters:
 			path: src/Controllers/Table/ReplaceController.php
 
 		-
-			message: '#^Cannot access offset int on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Controllers/Table/SearchController.php
-
-		-
-			message: '#^Class PhpMyAdmin\\Controllers\\Table\\SearchController has an uninitialized property \$foreigners\. Give it default value or assign it in the constructor\.$#'
-			identifier: property.uninitialized
-			count: 1
-			path: src/Controllers/Table/SearchController.php
-
-		-
-			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
-			identifier: empty.notAllowed
-			count: 1
-			path: src/Controllers/Table/SearchController.php
-
-		-
 			message: '#^Parameter \#1 \$column of method PhpMyAdmin\\Controllers\\Table\\SearchController\:\:getColumnMinMax\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/SearchController.php
-
-		-
-			message: '#^Parameter \#1 \$string of function strtoupper expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/SearchController.php
-
-		-
-			message: '#^Parameter \#1 \$type of method PhpMyAdmin\\Types\:\:getTypeOperatorsHtml\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/SearchController.php
-
-		-
-			message: '#^Parameter \#3 \$selectedOperator of method PhpMyAdmin\\Types\:\:getTypeOperatorsHtml\(\) expects string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Table/SearchController.php
@@ -3160,12 +3070,6 @@ parameters:
 			path: src/Controllers/Table/Structure/SaveController.php
 
 		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: src/Controllers/Table/Structure/SaveController.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
 			count: 2
@@ -3181,6 +3085,12 @@ parameters:
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
 			count: 2
+			path: src/Controllers/Table/Structure/SaveController.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
 			path: src/Controllers/Table/Structure/SaveController.php
 
 		-
@@ -3430,12 +3340,6 @@ parameters:
 			path: src/Controllers/Table/ZoomSearchController.php
 
 		-
-			message: '#^Cannot access offset int on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: src/Controllers/Table/ZoomSearchController.php
-
-		-
 			message: '#^Cannot access offset int\<0, 3\> on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
@@ -3448,15 +3352,9 @@ parameters:
 			path: src/Controllers/Table/ZoomSearchController.php
 
 		-
-			message: '#^Class PhpMyAdmin\\Controllers\\Table\\ZoomSearchController has an uninitialized property \$foreigners\. Give it default value or assign it in the constructor\.$#'
-			identifier: property.uninitialized
-			count: 1
-			path: src/Controllers/Table/ZoomSearchController.php
-
-		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 2
+			count: 1
 			path: src/Controllers/Table/ZoomSearchController.php
 
 		-
@@ -3496,31 +3394,7 @@ parameters:
 			path: src/Controllers/Table/ZoomSearchController.php
 
 		-
-			message: '#^Parameter \#1 \$string of function strtoupper expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/ZoomSearchController.php
-
-		-
-			message: '#^Parameter \#1 \$type of method PhpMyAdmin\\Types\:\:getTypeOperatorsHtml\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/ZoomSearchController.php
-
-		-
-			message: '#^Parameter \#2 \$columnIndex of method PhpMyAdmin\\Controllers\\Table\\ZoomSearchController\:\:getColumnProperties\(\) expects int, int\<0, max\>\|false given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/ZoomSearchController.php
-
-		-
 			message: '#^Parameter \#2 \$signature of static method PhpMyAdmin\\Core\:\:checkSqlQuerySignature\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Table/ZoomSearchController.php
-
-		-
-			message: '#^Parameter \#3 \$selectedOperator of method PhpMyAdmin\\Types\:\:getTypeOperatorsHtml\(\) expects string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Table/ZoomSearchController.php
@@ -3554,36 +3428,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Controllers/Transformation/WrapperController.php
-
-		-
-			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
-			identifier: empty.notAllowed
-			count: 10
-			path: src/Controllers/Triggers/IndexController.php
-
-		-
-			message: '#^Parameter \#1 \$identifier of static method PhpMyAdmin\\Util\:\:backquote\(\) expects string\|Stringable\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Triggers/IndexController.php
-
-		-
-			message: '#^Parameter \#1 \$string of function mb_strtoupper expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Triggers/IndexController.php
-
-		-
-			message: '#^Parameter \#1 \$trigger of method PhpMyAdmin\\Controllers\\Triggers\\IndexController\:\:getDataFromTrigger\(\) expects PhpMyAdmin\\Triggers\\Trigger, PhpMyAdmin\\Triggers\\Trigger\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Controllers/Triggers/IndexController.php
-
-		-
-			message: '#^Parameter \#3 \$name of method PhpMyAdmin\\Triggers\\Triggers\:\:getTriggerByName\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Controllers/Triggers/IndexController.php
 
 		-
 			message: '#^Binary operation "\." between "\\r\\n \(" and mixed results in an error\.$#'
@@ -4762,12 +4606,6 @@ parameters:
 			path: src/Display/Results.php
 
 		-
-			message: '#^Cannot access offset int\<0, max\> on mixed\.$#'
-			identifier: offsetAccess.nonOffsetAccessible
-			count: 2
-			path: src/Display/Results.php
-
-		-
 			message: '#^Cannot access offset non\-falsy\-string on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 4
@@ -4822,37 +4660,19 @@ parameters:
 			path: src/Display/Results.php
 
 		-
-			message: '#^Only booleans are allowed in &&, array\<mixed\>\|bool given on the left side\.$#'
-			identifier: booleanAnd.leftNotBoolean
-			count: 1
-			path: src/Display/Results.php
-
-		-
 			message: '#^Only booleans are allowed in &&, mixed given on the left side\.$#'
 			identifier: booleanAnd.leftNotBoolean
-			count: 3
-			path: src/Display/Results.php
-
-		-
-			message: '#^Only booleans are allowed in a negated boolean, int\|string\|null given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 1
+			count: 2
 			path: src/Display/Results.php
 
 		-
 			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 5
+			count: 3
 			path: src/Display/Results.php
 
 		-
 			message: '#^Only booleans are allowed in a ternary operator condition, int\<0, max\>\|false given\.$#'
-			identifier: ternary.condNotBoolean
-			count: 1
-			path: src/Display/Results.php
-
-		-
-			message: '#^Only booleans are allowed in a ternary operator condition, mixed given\.$#'
 			identifier: ternary.condNotBoolean
 			count: 1
 			path: src/Display/Results.php
@@ -4948,31 +4768,7 @@ parameters:
 			path: src/Display/Results.php
 
 		-
-			message: '#^Parameter \#3 \$colOrder of method PhpMyAdmin\\Display\\Results\:\:getRowValues\(\) expects array\<mixed\>\|false, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Display/Results.php
-
-		-
 			message: '#^Parameter \#4 \$database of class PhpMyAdmin\\Display\\ForeignKeyRelatedTable constructor expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Display/Results.php
-
-		-
-			message: '#^Parameter \#6 \$colVisib of method PhpMyAdmin\\Display\\Results\:\:getOrderLinkAndSortedHeaderHtml\(\) expects array\<mixed\>\|bool, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Display/Results.php
-
-		-
-			message: '#^Parameter \#6 \$colVisib of method PhpMyAdmin\\Display\\Results\:\:getRowValues\(\) expects array\<mixed\>\|bool\|string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Display/Results.php
-
-		-
-			message: '#^Parameter \#7 \$colVisibElement of method PhpMyAdmin\\Display\\Results\:\:getOrderLinkAndSortedHeaderHtml\(\) expects int\|string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Display/Results.php
@@ -4980,7 +4776,7 @@ parameters:
 		-
 			message: '#^Possibly invalid array key type mixed\.$#'
 			identifier: offsetAccess.invalidOffset
-			count: 15
+			count: 1
 			path: src/Display/Results.php
 
 		-
@@ -5271,18 +5067,6 @@ parameters:
 		-
 			message: '#^Loose comparison via "\=\=" is not allowed\.$#'
 			identifier: equal.notAllowed
-			count: 1
-			path: src/Events/Events.php
-
-		-
-			message: '#^Parameter \#1 \$query of method PhpMyAdmin\\Dbal\\DatabaseInterface\:\:tryQuery\(\) expects string, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Events/Events.php
-
-		-
-			message: '#^Parameter \#1 \$string of function htmlspecialchars expects string, string\|null given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Events/Events.php
 
@@ -6165,7 +5949,7 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
 			identifier: booleanNot.exprNotBoolean
-			count: 2
+			count: 3
 			path: src/Gis/GisMultiPolygon.php
 
 		-
@@ -6919,12 +6703,6 @@ parameters:
 			path: src/Import/Ajax.php
 
 		-
-			message: '#^Cannot call static method getUploadStatus\(\) on mixed\.$#'
-			identifier: staticMethod.nonObject
-			count: 1
-			path: src/Import/Ajax.php
-
-		-
 			message: '#^Variable static method call on PhpMyAdmin\\Import\\Ajax\.$#'
 			identifier: staticMethod.dynamicName
 			count: 1
@@ -7204,7 +6982,7 @@ parameters:
 			path: src/InsertEdit.php
 
 		-
-			message: '#^Offset 2 might not exist on array\{\}\|array\{0\: non\-falsy\-string, 1\: ''''\|''\\'''', 2\: string, 3\?\: numeric\-string\}\.$#'
+			message: '#^Offset 2 might not exist on array\{\}\|array\{0\: string, 1\: ''''\|''\\'''', 2\: string, 3\?\: numeric\-string\}\.$#'
 			identifier: offsetAccess.notFound
 			count: 1
 			path: src/InsertEdit.php
@@ -9295,6 +9073,18 @@ parameters:
 			message: '#^Offset 0\|1\|2\|3\|4\|5\|6 might not exist on list\{0\: 90, 1\: 80, 2\: 40, 3\: 120, 4\?\: 120, 5\?\: 120, 6\?\: 120\}\.$#'
 			identifier: offsetAccess.notFound
 			count: 2
+			path: src/Plugins/Export/Helpers/Pdf.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Plugins/Export/Helpers/Pdf.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
 			path: src/Plugins/Export/Helpers/Pdf.php
 
 		-
@@ -12181,12 +11971,6 @@ parameters:
 			path: src/Sql.php
 
 		-
-			message: '#^Binary operation "\." between ''ORDER BY '' and \(array\<string\>\|string\) results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: src/Sql.php
-
-		-
 			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -12243,7 +12027,7 @@ parameters:
 		-
 			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
 			identifier: empty.notAllowed
-			count: 4
+			count: 3
 			path: src/Sql.php
 
 		-
@@ -12334,12 +12118,6 @@ parameters:
 			message: '#^Parameter \#2 \$list of static method PhpMyAdmin\\SqlParser\\Utils\\Query\:\:replaceClause\(\) expects PhpMyAdmin\\SqlParser\\TokensList, PhpMyAdmin\\SqlParser\\TokensList\|null given\.$#'
 			identifier: argument.type
 			count: 2
-			path: src/Sql.php
-
-		-
-			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
 			path: src/Sql.php
 
 		-
@@ -12754,12 +12532,6 @@ parameters:
 			path: src/Table/Table.php
 
 		-
-			message: '#^Method PhpMyAdmin\\Table\\Table\:\:getUiPrefsFromDb\(\) should return array\<mixed\> but returns mixed\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Table/Table.php
-
-		-
 			message: '#^Only booleans are allowed in &&, string given on the left side\.$#'
 			identifier: booleanAnd.leftNotBoolean
 			count: 2
@@ -12774,12 +12546,6 @@ parameters:
 		-
 			message: '#^Only booleans are allowed in an if condition, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
 			identifier: if.condNotBoolean
-			count: 1
-			path: src/Table/Table.php
-
-		-
-			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(array\|bool\|float\|GMP\|int\|resource\|SimpleXMLElement\|string\|null, int\=\)\: int given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Table/Table.php
 
@@ -12808,18 +12574,6 @@ parameters:
 			path: src/Table/Table.php
 
 		-
-			message: '#^Parameter \#2 \$array of function array_map expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Table/Table.php
-
-		-
-			message: '#^Parameter \#2 \$string of function explode expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Table/Table.php
-
-		-
 			message: '#^Parameter \#4 \$foreignTable of method PhpMyAdmin\\Table\\Table\:\:getSQLToCreateForeignKey\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -12835,12 +12589,6 @@ parameters:
 			message: '#^Possibly invalid array key type mixed\.$#'
 			identifier: offsetAccess.invalidOffset
 			count: 2
-			path: src/Table/Table.php
-
-		-
-			message: '#^Property PhpMyAdmin\\Table\\Table\:\:\$uiprefs \(array\<mixed\>\) does not accept mixed\.$#'
-			identifier: assign.propertyType
-			count: 1
 			path: src/Table/Table.php
 
 		-
@@ -13162,65 +12910,11 @@ parameters:
 			path: src/Transformations.php
 
 		-
-			message: '#^Binary operation "\.\=" between non\-falsy\-string and mixed results in an error\.$#'
-			identifier: assignOp.invalid
-			count: 1
-			path: src/Triggers/Triggers.php
-
-		-
 			message: '''
 				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Config\:
 				Use dependency injection instead\.$#
 			'''
 			identifier: staticMethod.deprecated
-			count: 1
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Cannot call method getCreateSql\(\) on PhpMyAdmin\\Triggers\\Trigger\|null\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Cannot call method getDropSql\(\) on PhpMyAdmin\\Triggers\\Trigger\|null\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
-			identifier: empty.notAllowed
-			count: 7
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Only booleans are allowed in a negated boolean, PhpMyAdmin\\Dbal\\ResultInterface\|false given\.$#'
-			identifier: booleanNot.exprNotBoolean
-			count: 4
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Parameter \#1 \$haystack of function str_contains expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Parameter \#1 \$identifier of static method PhpMyAdmin\\Util\:\:backquote\(\) expects string\|Stringable\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 3
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Parameter \#2 \$string of function explode expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Triggers/Triggers.php
-
-		-
-			message: '#^Parameter \#3 \$name of method PhpMyAdmin\\Triggers\\Triggers\:\:getTriggerByName\(\) expects string, mixed given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Triggers/Triggers.php
 
@@ -15112,12 +14806,6 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 1
-			path: tests/unit/Controllers/Server/VariablesControllerTest.php
-
-		-
-			message: '#^Cannot use array destructuring on mixed\.$#'
-			identifier: offsetAccess.nonArray
-			count: 7
 			path: tests/unit/Controllers/Server/VariablesControllerTest.php
 
 		-
@@ -17071,20 +16759,8 @@ parameters:
 			path: tests/unit/Table/TableTest.php
 
 		-
-			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertFalse\(\) with true will always evaluate to false\.$#'
-			identifier: staticMethod.impossibleType
-			count: 1
-			path: tests/unit/Table/TableTest.php
-
-		-
 			message: '#^Cannot access offset ''SCHEMA_TABLES'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
-			path: tests/unit/Table/TableTest.php
-
-		-
-			message: '#^Offset ''col_order'' on non\-empty\-array\<mixed\> in isset\(\) always exists and is not nullable\.$#'
-			identifier: isset.offset
 			count: 1
 			path: tests/unit/Table/TableTest.php
 
@@ -17152,15 +16828,6 @@ parameters:
 			'''
 			identifier: staticMethod.deprecated
 			count: 5
-			path: tests/unit/Triggers/TriggersTest.php
-
-		-
-			message: '''
-				#^Call to deprecated method getInstance\(\) of class PhpMyAdmin\\Dbal\\DatabaseInterface\:
-				Use dependency injection instead\.$#
-			'''
-			identifier: staticMethod.deprecated
-			count: 1
 			path: tests/unit/Triggers/TriggersTest.php
 
 		-
