@@ -23,6 +23,10 @@
   font-weight: normal;
   font-style: normal;
 }
+body {
+  --navigation-width: 0;
+}
+
 :root,
 [data-bs-theme=light] {
   --bs-blue: #0d6efd;
@@ -12507,7 +12511,7 @@ textarea {
 
 #pma_console {
   position: relative;
-  margin-left: 250px;
+  margin-left: var(--navigation-width);
 }
 #pma_console .templates {
   display: none;
@@ -13099,8 +13103,12 @@ p.enum_notice {
   bottom: 0.35em;
 }
 
+body {
+  margin-left: var(--navigation-width);
+}
+
 #pma_navigation {
-  width: 250px;
+  width: var(--navigation-width);
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -13449,7 +13457,7 @@ li.fast_filter.db_fast_filter {
   cursor: col-resize;
   position: fixed;
   top: 0;
-  left: 250px;
+  left: var(--navigation-width);
   z-index: 801;
 }
 
@@ -13463,7 +13471,7 @@ li.fast_filter.db_fast_filter {
   color: #fff;
   position: fixed;
   top: 0;
-  left: 250px;
+  left: var(--navigation-width);
   text-align: center;
   cursor: pointer;
   z-index: 801;
@@ -13473,6 +13481,30 @@ li.fast_filter.db_fast_filter {
   z-index: 99;
 }
 
+@media only screen and (width <= 768px) {
+  body {
+    margin-left: 0;
+  }
+  #pma_navigation {
+    width: 0;
+  }
+  #pma_navigation.show {
+    width: 100%;
+  }
+  #pma_navigation_resizer {
+    display: none;
+  }
+  #pma_navigation_collapser {
+    left: 0;
+  }
+  #pma_navigation.show #pma_navigation_collapser {
+    right: 0;
+    left: auto;
+  }
+  #pma_console {
+    margin-left: 0;
+  }
+}
 .input_tab {
   background-color: #efefef;
   color: #000;
@@ -13895,6 +13927,10 @@ a.active.trigger:hover {
   width: 100%;
   position: absolute;
   left: 0;
+}
+
+#designer_body #floating_menubar {
+  position: static;
 }
 
 .CodeMirror {
