@@ -365,10 +365,7 @@ const AJAX = {
   },
   handleMenu: {
     replace: function (content) {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').html(content)
-      // Remove duplicate wrapper
-      // TODO: don't send it in the response
-      .children().first().remove();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').replaceWith(content);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenu').menuResizer(_functions_mainMenuResizerCallback_ts__WEBPACK_IMPORTED_MODULE_10__["default"]);
     }
   },
@@ -943,7 +940,7 @@ const AJAX = {
    */
   loadEventHandler: function () {
     return function () {
-      const menuContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div></div>').append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#server-breadcrumb').clone()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenucontainer').clone()).html();
+      const menuContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').prop('outerHTML');
       // set initial state reload
       let initState = 'state' in window.history && window.history.state !== null;
       const initURL = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#selflink').find('> a').attr('href') || location.href;
@@ -1931,7 +1928,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   displayCopyStatus: function() { return /* binding */ displayCopyStatus; },
 /* harmony export */   displayPasswordGenerateButton: function() { return /* binding */ displayPasswordGenerateButton; },
 /* harmony export */   emptyCheckTheField: function() { return /* binding */ emptyCheckTheField; },
-/* harmony export */   floatingMenuBar: function() { return /* binding */ floatingMenuBar; },
 /* harmony export */   formatBytes: function() { return /* binding */ formatBytes; },
 /* harmony export */   getAddIndexEventHandler: function() { return /* binding */ getAddIndexEventHandler; },
 /* harmony export */   getAutoSubmitEventHandler: function() { return /* binding */ getAutoSubmitEventHandler; },
@@ -4794,24 +4790,6 @@ function onloadCreateView() {
   }
 }
 /**
- * Makes the breadcrumbs and the menu bar float at the top of the viewport.
- * @return {function}
- */
-function floatingMenuBar() {
-  return function () {
-    if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').length || jquery__WEBPACK_IMPORTED_MODULE_0___default()('#PMA_disable_floating_menubar').length !== 0) {
-      return;
-    }
-    const left = jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').attr('dir') === 'ltr' ? 'left' : 'right';
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').css('margin-' + left, jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width() + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer').width()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#server-breadcrumb')).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenucontainer'));
-    // Allow the DOM to render, then adjust the padding on the body
-    setTimeout(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('padding-top', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').outerHeight(true));
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenu').menuResizer('resize');
-    }, 4);
-  };
-}
-/**
  * Scrolls the page to the top if clicking the server-breadcrumb bar
  * If the user holds the Ctrl (or Meta on macOS) key, it prevents the scroll
  * so they can open the link in a new tab.
@@ -7172,9 +7150,17 @@ const ResizeHandler = function () {
    */
   this.panelWidth = 0;
   /**
+   * @var {number} width The current width of the panel on wide screens
+   */
+  this.width = 0;
+  /**
    * @var {string} left Used to provide support for RTL languages
    */
   this.left = jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').attr('dir') === 'ltr' ? 'left' : 'right';
+  /**
+   * @var {MediaQueryList} narrowScreen Matches when the themes show the panel as an overlay
+   */
+  this.narrowScreen = window.matchMedia('(width <= 768px)');
   /**
    * Adjusts the width of the navigation panel to the specified value
    *
@@ -7185,52 +7171,28 @@ const ResizeHandler = function () {
     if (typeof pos !== 'number') {
       pos = 240;
     }
-    const $resizer = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer');
-    const resizerWidth = $resizer.width();
-    const $collapser = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_collapser');
-    const windowWidth = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width();
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width(pos);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('margin-' + this.left, pos + 'px');
-    // Issue #15127 : Adding fixed positioning to menubar
-    // Issue #15570 : Panels on homescreen go underneath of floating menubar
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').css('margin-' + this.left, jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width() + jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer').width()).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#server-breadcrumb')).append(jquery__WEBPACK_IMPORTED_MODULE_0___default()('#topmenucontainer'));
-    // Allow the DOM to render, then adjust the padding on the body
-    setTimeout(function () {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('padding-top', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').outerHeight(true));
-    }, 2);
-    if (window.MutationObserver) {
-      const target = document.getElementById('floating_menubar');
-      if (target) {
-        const observer = new MutationObserver(function () {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('padding-top', jquery__WEBPACK_IMPORTED_MODULE_0___default()('#floating_menubar').outerHeight(true));
-        });
-        observer.observe(target, {
-          attributes: true,
-          childList: true,
-          subtree: true
-        });
-      }
-    }
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_console').css('margin-' + this.left, pos + resizerWidth + 'px');
-    $resizer.css(this.left, pos + 'px');
-    if (pos === 0) {
-      $collapser.css(this.left, pos + resizerWidth).html(this.getSymbol(pos)).prop('title', window.Messages.strShowPanel);
-    } else if (windowWidth > 768) {
-      $collapser.css(this.left, pos).html(this.getSymbol(pos)).prop('title', window.Messages.strHidePanel);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer').css({
-        'width': '3px'
-      });
-    } else {
-      $collapser.css(this.left, windowWidth - 22).html(this.getSymbol(100)).prop('title', window.Messages.strHidePanel);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width(windowWidth);
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').css('margin-' + this.left, '0px');
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_resizer').css({
-        'width': '0px'
-      });
-    }
+    this.width = pos;
+    document.body.style.setProperty('--navigation-width', pos + 'px');
+    this.updateCollapser();
     setTimeout(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).trigger('resize');
     }, 4);
+  };
+  /**
+   * @return {boolean} Whether the panel is hidden
+   */
+  this.isCollapsed = function () {
+    if (this.narrowScreen.matches) {
+      return !jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').hasClass('show');
+    }
+    return this.width === 0;
+  };
+  /**
+   * Updates the arrow symbol and the title of the collapser
+   */
+  this.updateCollapser = function () {
+    const isCollapsed = this.isCollapsed();
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_collapser').html(this.getSymbol(isCollapsed)).prop('title', isCollapsed ? window.Messages.strShowPanel : window.Messages.strHidePanel);
   };
   /**
    * Returns the horizontal position of the mouse,
@@ -7260,24 +7222,15 @@ const ResizeHandler = function () {
   /**
    * Returns the HTML code for the arrow symbol used in the collapser
    *
-   * @param {number} width The width of the panel
+   * @param {boolean} isCollapsed Whether the panel is hidden
    *
    * @return {string}
    */
-  this.getSymbol = function (width) {
+  this.getSymbol = function (isCollapsed) {
     if (this.left === 'left') {
-      if (width === 0) {
-        return '&rarr;';
-      } else {
-        return '&larr;';
-      }
-    } else {
-      if (width === 0) {
-        return '&larr;';
-      } else {
-        return '&rarr;';
-      }
+      return isCollapsed ? '&rarr;' : '&larr;';
     }
+    return isCollapsed ? '&larr;' : '&rarr;';
   };
   /**
    * Event handler for initiating a resize of the panel
@@ -7323,14 +7276,21 @@ const ResizeHandler = function () {
    */
   this.collapse = function (event) {
     event.preventDefault();
-    let panelWidth = event.data.resize_handler.panelWidth;
-    const width = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').width();
+    const resizeHandler = event.data.resize_handler;
+    // The overlay on narrow screens is opened per visit, so its state is not saved
+    if (resizeHandler.narrowScreen.matches) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation').toggleClass('show');
+      resizeHandler.updateCollapser();
+      return;
+    }
+    let panelWidth = resizeHandler.panelWidth;
+    const width = resizeHandler.width;
     if (width === 0 && panelWidth === 0) {
       panelWidth = 240;
     }
     ;(0,_navigation_updateNavigationWidthConfig_ts__WEBPACK_IMPORTED_MODULE_4__["default"])(panelWidth);
-    event.data.resize_handler.setWidth(panelWidth);
-    event.data.resize_handler.panelWidth = width;
+    resizeHandler.setWidth(panelWidth);
+    resizeHandler.panelWidth = width;
   };
   /**
    * Event handler for resizing the navigation tree height on window resize
@@ -7358,11 +7318,6 @@ const ResizeHandler = function () {
    * Init handlers for the tree resizers
    */
   this.treeInit = function () {
-    const isLoadedOnMobile = jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).width() < 768;
-    // Hide the pma_navigation initially when loaded on mobile
-    if (isLoadedOnMobile) {
-      this.setWidth(0);
-    }
     // Register the events for the resizer and the collapser
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('mousedown', '#pma_navigation_resizer', {
       'resize_handler': this
@@ -7371,8 +7326,8 @@ const ResizeHandler = function () {
       'resize_handler': this
     }, this.collapse);
     const navigationDiv = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation');
-    // Add the correct arrow symbol to the collapser
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#pma_navigation_collapser').html(this.getSymbol(navigationDiv.width()));
+    // The collapser state changes when the window crosses the narrow screen breakpoint
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('resize', this.updateCollapser.bind(this));
     // Fix navigation tree height
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('resize', this.treeResize);
     // need to call this now and then, browser might decide

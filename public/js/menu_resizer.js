@@ -35,12 +35,6 @@ __webpack_require__.r(__webpack_exports__);
     const self = this;
     self.$container = $container;
     self.widthCalculator = widthCalculator;
-    const windowWidth = $(window).width();
-    if (windowWidth < 768) {
-      $('#pma_navigation_resizer').css({
-        'width': '0px'
-      });
-    }
     // create submenu container
     const link = $('<a></a>', {
       'href': '#',

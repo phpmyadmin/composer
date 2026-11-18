@@ -48,7 +48,6 @@ _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('main.js', (
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerOnload('main.js', (0,_modules_functions_event_loader_ts__WEBPACK_IMPORTED_MODULE_10__.onloadFunctions)());
 jquery__WEBPACK_IMPORTED_MODULE_0___default()((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.dismissNotifications)());
 jquery__WEBPACK_IMPORTED_MODULE_0___default()((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.initializeMenuResizer)());
-jquery__WEBPACK_IMPORTED_MODULE_0___default()((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.floatingMenuBar)());
 jquery__WEBPACK_IMPORTED_MODULE_0___default()((0,_modules_functions_ts__WEBPACK_IMPORTED_MODULE_2__.breadcrumbScrollToTop)());
 jquery__WEBPACK_IMPORTED_MODULE_0___default()((0,_modules_navigation_event_loader_ts__WEBPACK_IMPORTED_MODULE_9__["default"])());
 _modules_ajax_ts__WEBPACK_IMPORTED_MODULE_1__.AJAX.registerTeardown('main.js', _modules_indexes_ts__WEBPACK_IMPORTED_MODULE_6__.Indexes.off());
