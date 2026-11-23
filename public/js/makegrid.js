@@ -689,9 +689,7 @@ const makeGrid = function (t) {
               $thisField.addClass('truncated');
               value = value.substring(0, g.maxTruncatedLen) + '...';
             }
-            // Add <br> before carriage return.
             let newHtml = (0,_modules_functions_escape_ts__WEBPACK_IMPORTED_MODULE_7__.escapeHtml)(value);
-            newHtml = newHtml.replace(/\n/g, '<br>\n');
             const decimals = parseInt($thisField.attr('data-decimals'));
             // remove decimal places if column type not supported
             if (decimals === 0 && $thisField.attr('data-type').indexOf('time') !== -1) {
