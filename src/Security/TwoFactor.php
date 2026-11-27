@@ -5,15 +5,14 @@
 
 declare(strict_types=1);
 
-namespace PhpMyAdmin;
+namespace PhpMyAdmin\Security;
 
 use BaconQrCode\Renderer\ImageRenderer;
 use CodeLts\U2F\U2FServer\U2FServer;
-use PhpMyAdmin\Clock\Clock;
+use PhpMyAdmin\Config;
 use PhpMyAdmin\Config\UserPreferences;
-use PhpMyAdmin\ConfigStorage\Relation;
-use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Http\ServerRequest;
+use PhpMyAdmin\Message;
 use PhpMyAdmin\Plugins\TwoFactor\Application;
 use PhpMyAdmin\Plugins\TwoFactor\Invalid;
 use PhpMyAdmin\Plugins\TwoFactor\Key;
@@ -44,25 +43,11 @@ class TwoFactor
 
     private TwoFactorPlugin $backend;
 
-    private UserPreferences $userPreferences;
-
-    /**
-     * Creates new TwoFactor object
-     *
-     * @param string $user User name
-     */
-    public function __construct(public string $user)
-    {
-        $dbi = DatabaseInterface::getInstance();
-        $config = Config::getInstance();
-
-        $this->userPreferences = new UserPreferences(
-            $dbi,
-            new Relation($dbi, $config),
-            new Template($config),
-            $config,
-            new Clock(),
-        );
+    public function __construct(
+        private readonly UserPreferences $userPreferences,
+        private readonly Config $pmaConfig,
+        public string $user,
+    ) {
         $this->config = $this->readConfig();
         $this->writable = $this->config['type'] === 'db';
         $this->backend = $this->getBackendForCurrentUser();
@@ -119,8 +104,7 @@ class TwoFactor
     private function getAvailableBackends(): array
     {
         $result = ['' => TwoFactorPlugin::class];
-        $config = Config::getInstance();
-        if ($config->config->debug->simple2fa) {
+        if ($this->pmaConfig->config->debug->simple2fa) {
             $result['simple'] = Simple::class;
         }
 

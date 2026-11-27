@@ -18,7 +18,7 @@ use PhpMyAdmin\Message;
 use PhpMyAdmin\Navigation\Navigation;
 use PhpMyAdmin\ResponseRenderer;
 use PhpMyAdmin\Routing\Route;
-use PhpMyAdmin\TwoFactor;
+use PhpMyAdmin\Security\TwoFactor;
 use PhpMyAdmin\Url;
 
 use function ltrim;
@@ -52,7 +52,7 @@ final readonly class MainPanelController implements InvocableController
         $result = null;
         if ($formDisplay->process(false) && ! $formDisplay->hasErrors()) {
             // Load 2FA settings
-            $twoFactor = new TwoFactor($this->config->selectedServer['user']);
+            $twoFactor = new TwoFactor($this->userPreferences, $this->config, $this->config->selectedServer['user']);
             // save settings
             $result = $this->userPreferences->save($configFile->getConfigArray());
             // save back the 2FA setting only

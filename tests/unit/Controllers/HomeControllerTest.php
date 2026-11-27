@@ -7,6 +7,7 @@ namespace PhpMyAdmin\Tests\Controllers;
 use Fig\Http\Message\StatusCodeInterface;
 use PhpMyAdmin\Config;
 use PhpMyAdmin\Controllers\HomeController;
+use PhpMyAdmin\Current;
 use PhpMyAdmin\Dbal\DatabaseInterface;
 use PhpMyAdmin\Http\Factory\ResponseFactory;
 use PhpMyAdmin\Http\Factory\ServerRequestFactory;
@@ -62,9 +63,11 @@ final class HomeControllerTest extends AbstractTestCase
 
     public function testHomeController(): void
     {
+        Current::$server = 1;
         $config = Config::$instance = new Config();
         $dbiDummy = $this->createDbiDummy();
         $dbiDummy->addSelectDb('mysql');
+        $dbiDummy->addResult("SET collation_connection = 'latin1_swedish_ci';", true);
         $dbiDummy->addResult(
             "SHOW SESSION VARIABLES LIKE 'character_set_server';",
             [['character_set_server', 'utf8mb4']],
@@ -72,6 +75,7 @@ final class HomeControllerTest extends AbstractTestCase
         );
         $dbiDummy->addResult('SELECT @@hostname;', [['test-hostname']]);
         $dbi = DatabaseInterface::$instance = $this->createDatabaseInterface($dbiDummy);
+        $dbi->setCollation('latin1_swedish_ci');
 
         $controller = new HomeController(
             new ResponseRenderer(),

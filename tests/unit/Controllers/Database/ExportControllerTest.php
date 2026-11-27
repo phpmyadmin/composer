@@ -14,6 +14,8 @@ use PhpMyAdmin\ConfigStorage\Relation;
 use PhpMyAdmin\Controllers\Database\ExportController;
 use PhpMyAdmin\Current;
 use PhpMyAdmin\DbTableExists;
+use PhpMyAdmin\Encoding;
+use PhpMyAdmin\Error\ErrorHandler;
 use PhpMyAdmin\Export\Export;
 use PhpMyAdmin\Export\Options;
 use PhpMyAdmin\Export\OutputHandler;
@@ -33,6 +35,7 @@ final class ExportControllerTest extends AbstractTestCase
 {
     public function testController(): void
     {
+        Current::$server = 1;
         $_SERVER['SCRIPT_NAME'] = 'index.php';
         Current::$database = 'test_db';
         Export::$singleTable = false;
@@ -57,7 +60,10 @@ final class ExportControllerTest extends AbstractTestCase
 
     private function getExportController(DbiDummy $dbiDummy): ExportController
     {
-        $config = new Config();
+        // Charsets known to every iconv implementation, so the rendered list doesn't depend on the host
+        Encoding::setEngine(Encoding::ENGINE_ICONV);
+        $config = Config::$instance = new Config();
+        $config->set('AvailableCharsets', ['iso-8859-1', 'windows-1252', 'utf-8']);
         $dbi = $this->createDatabaseInterface($dbiDummy, $config);
         $responseRenderer = new ResponseRenderer();
         $relation = new Relation($dbi, $config);
@@ -68,6 +74,7 @@ final class ExportControllerTest extends AbstractTestCase
             $userPreferences,
             new LanguageManager($config),
             new ThemeManager(),
+            new ErrorHandler(),
         );
 
         $pluginFactory = $this->createPluginFactory($dbi, $config);
